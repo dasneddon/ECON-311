@@ -1,0 +1,261 @@
+---
+title: "Homework 1.1"
+author: "David Sneddon"
+institute: "Old Dominion University"
+format: 
+  html:
+    theme: lux # Check here for more themes: https://quarto.org/docs/output-formats/html-themes.html
+    code-tools: true
+    code-fold: true
+    code-summary: "Code"
+    code-copy: hover
+    link-external-newwindow: true
+    tbl-cap-location: top
+    fig-cap-location: bottom
+self-contained: true
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+# DO NOT EDIT THIS
+
+knitr::opts_chunk$set(fig.align = 'center')
+knitr::opts_chunk$set(out.width = '90%')
+knitr::opts_chunk$set(results = 'hold')
+knitr::opts_chunk$set(fig.show = 'hold')
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+par(mar = c(4.1, 4.1, 1.1, 4.1))
+
+hooks = knitr::knit_hooks$get()
+hook_foldable = function(type) {
+  force(type)
+  function(x, options) {
+    res = hooks[[type]](x, options)
+    
+    if (is.na(as.logical(options[[paste0("fold.", type)]]))) {
+      
+      res
+    } else if (isFALSE(as.logical(options[[paste0("fold.", type)]]))){
+      
+      # return(res)
+      
+      paste0(
+      "<details open><summary>", gsub("^p", "P", gsub("^o", "O", type)), "</summary>\n\n",
+      res,
+      "\n\n</details>"
+      )
+    } else {
+      
+      paste0(
+      "<details><summary>", gsub("^p", "P", gsub("^o", "O", type)), "</summary>\n\n",
+      res,
+      "\n\n</details>"
+      )
+    }
+  }
+}
+
+knitr::knit_hooks$set(
+  output = hook_foldable("output"),
+  plot = hook_foldable("plot")
+)
+knitr::opts_chunk$set(fold.output=TRUE)
+knitr::opts_chunk$set(fold.plot=TRUE)
+
+Q <- 0
+```
+
+## Question `r Q <- Q+1; Q`
+
+```{r include=FALSE}
+q <- 0
+```
+
+Copy and paste the following vector into R: `vec <- sample(1:100, 10, FALSE)`. Use this vector for the following.
+
+`r q <- q+1; letters[q]`. Print `vec` to the console. (**2 Points**)
+
+```{r}
+vec <- sample(1:100, 10, FALSE)
+vec
+```
+
+`r q <- q+1; letters[q]`. Print the first 5 elements of `vec`. (**2 Points**)
+
+```{r}
+vec[1:5]
+```
+
+`r q <- q+1; letters[q]`. Print the last 3 elements of `vec`. (**2 Points**)
+
+```{r}
+vec[(length(vec)-2):length(vec)]
+```
+
+`r q <- q+1; letters[q]`. Print the 3rd and 8th elements of `vec`. (**3 Points**)
+
+```{r}
+vec[c(3,8)]
+```
+
+`r q <- q+1; letters[q]`. Print the elements of `vec` that are larger than 50. (**3 Points**)
+
+```{r}
+vec[vec>50]
+
+```
+
+`r q <- q+1; letters[q]`. Print the elements of `vec` that are odd (not divisible by two). (**3 Points**)
+
+```{r}
+vec[vec %% 2 == 0]
+```
+
+
+
+
+
+## Question `r Q <- Q+1; Q`
+
+```{r include=FALSE}
+q <- 0
+```
+
+Use these data on drinking and wages from Elderton and Pearson (1910) ([data]((https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv)); [documentation](https://vincentarelbundock.github.io/Rdatasets/doc/HistData/DrinksWages.html)) for the following.
+
+`r q <- q+1; letters[q]`. Read in the data using `read.csv()` and store it as `DrinksWages`.^[**Hint**: you can use either the hyperlink's URL *or* you can click on the hyperlink, download the file, and read it in via file path. Also, you might find it helpful to read through the data's documentation so you know what the different columns/variables mean.] (**1 Point**)
+
+```{r}
+DrinksWages <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv")
+```
+
+`r q <- q+1; letters[q]`. Print the column names of `DrinksWages`. (**1 Point**)
+
+```{r}
+colnames(DrinksWages)
+```
+
+`r q <- q+1; letters[q]`. What type of measurement (Nominal, Ordinal, Interval, or Ratio) is `sober`?  Explain why. (**2 Points**)
+
+This is a ratio measurement. It has a natural zero. If the value for a particular trade is zero, it means that everyone in the sample drinks alcohol for that trade. There is a also a meaningful difference in the ratio between two measurements. 
+
+`r q <- q+1; letters[q]`. What fraction (or as a percentage) of observations of the wage variable are larger than 30? (**2 Points**)
+
+```{r}
+#I know you haven't introduced paste0 yet, I may be showing off a little.
+sum(DrinksWages$wage>30) / nrow(DrinksWages)
+paste0(sum(DrinksWages$wage>30),"/", nrow(DrinksWages))
+paste0(round(sum(DrinksWages$wage>30) / nrow(DrinksWages)*100,2),"%")
+```
+
+`r q <- q+1; letters[q]`. Create a new variable inside `DrinksWages` called `total`. This variable should reflect the sum of the two variables `sober` and `drinks` for each observation. (**2 Points**)
+
+```{r}
+DrinksWages["total"] <- DrinksWages$sober + DrinksWages$drinks
+
+```
+
+`r q <- q+1; letters[q]`. Create a new variable inside `DrinksWages` called `x`. This variable should be `drinks` divided by `total`.  In words, how can we interpret what `x` represents? (**3 Points**)
+
+```{r}
+DrinksWages["x"] <- DrinksWages$drinks / DrinksWages$total
+```
+
+This is a ratio of drinkers to each sampled profession.
+
+`r q <- q+1; letters[q]`. Plot `x` on the $X$-axis and wages on the $Y$-axis. Each point should be colored based on their `class` value^[You are free to choose whatever colors you'd like, but please avoid using "yellow" for the sake of our eyes. It's blindly bright against the white background.]. Use `pch = 19`. Label your axes appropriately and include a legend. (**4 Points**)
+
+```{r}
+DrinksWages["point_color"] <- "black" #Set black as an initial placeholder
+DrinksWages$point_color[DrinksWages$class == 'A'] <- "blue"
+DrinksWages$point_color[DrinksWages$class == 'B'] <- "red"
+DrinksWages$point_color[DrinksWages$class == 'C'] <- "green"
+plot(DrinksWages$x,DrinksWages$wage,
+     pch = 19,
+     col = DrinksWages$point_color,
+     main = "Ratio of Drinkers vs Average Wage",
+     xlab = "% of Drinkers",
+     ylab = "Average Wage")
+legend("topright",
+       pch = 19,
+       bty = "o",
+       cex = 0.75,
+       horiz = FALSE,
+       legend = paste("Class", unique(DrinksWages$class)),
+       col = unique(DrinksWages$point_color))
+```
+
+
+
+
+
+## Question `r Q <- Q+1; Q`
+
+```{r include=FALSE}
+q <- 0
+```
+
+**This one is challenging.** [This `.pdf` file](https://www.erikthered.com/tutor/historical-average-SAT-scores.pdf) contains SAT scores over time for men and women.  Unfortunately, when I copied it into a `.csv`, the formatting got messed up.^[You'll run into this a lot when working with `.pdf` files, so avoid them!]
+
+`r q <- q+1; letters[q]`. Recreate the table format of the PDF with [`sat2.csv`](https://alexcardazzi.github.io/econ311/data/sat2.csv) as a `data.frame`.^[**Hint**: After you read in the data, try printing it to your console. You should see one long vector. Try reorganizing the vector into a matrix, and then the matrix into a `data.frame`.] Rename the year and total math columns (the first one) to `year` and `total_math`. (**6 Points**)
+
+```{r}
+sat2 <- read.csv("https://alexcardazzi.github.io/econ311/data/sat2.csv")
+sat2 <- unlist(sat2)
+sat2 <- matrix(sat2, nrow = length(sat2)/16, ncol = 16, byrow = TRUE )
+sat2 <- data.frame(year = sat2[,1],
+                     sat2[,2:4],
+                     total_math = sat2[,5],
+                     sat2[,6:ncol(sat2)])
+```
+
+`r q <- q+1; letters[q]`. Convert the total math variable into a numeric variable. This step will likely create some `NA` values in the variable, so remove the rows where total math is missing. (**4 Points**)
+
+```{r}
+sat2$total_math <- as.numeric(sat2$total_math)
+sat2 <- sat2[!is.na(sat2$total_math),]
+```
+
+
+`r q <- q+1; letters[q]`. Finally, remove all of the columns *except* `year` and `total_math` from the dataset. (**4 Points**)
+
+```{r}
+sat2 <- sat2[,c("year","total_math")]
+```
+
+`r q <- q+1; letters[q]`. Make a plot with two lines. On the $X$-axis should be year and on the $Y$-axis should be total math. The first line should be SAT scores from the beginning of the sample until 1999, and another from 2000 and onwards. The two lines should be different colors. Be sure to label the axes and include a legend. (**6 Points**)
+
+```{r}
+plot(sat2$year, sat2$total_math,
+     las = 1,
+     type = "n",
+     xlab = "Year",
+     ylab = "Total Math",
+     main = "SAT Total Math - Annual Averages")
+lines(sat2$year[as.numeric(sat2$year) <= 1999],
+      sat2$total_math[as.numeric(sat2$year) <= 1999],
+      col = 2)
+lines(sat2$year[as.numeric(sat2$year) > 1999],
+      sat2$total_math[as.numeric(sat2$year) > 1999],
+      col = 4)
+legend("bottomright", 
+       legend = c("Pre 2000","Post 2000"),
+       bty = "n",
+       col = c(2,4),
+       lty = 1,
+       cex = 0.75)
+```
+
+
+
+
+
+
+
+
+
+
