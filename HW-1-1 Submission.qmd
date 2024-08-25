@@ -12,7 +12,6 @@ format:
     link-external-newwindow: true
     tbl-cap-location: top
     fig-cap-location: bottom
-    embed_resources: true
 self-contained: true
 editor: source
 editor_options: 
