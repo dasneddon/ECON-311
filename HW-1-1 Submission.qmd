@@ -82,7 +82,7 @@ Copy and paste the following vector into R: `vec <- sample(1:100, 10, FALSE)`. U
 
 ```{r}
 vec <- sample(1:100, 10, FALSE) #saves a random 10 element vector
-vec <- outputs to console
+vec  #outputs to console
 ```
 
 `r q <- q+1; letters[q]`. Print the first 5 elements of `vec`. (**2 Points**)

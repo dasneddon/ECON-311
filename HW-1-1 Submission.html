@@ -3154,14 +3154,16 @@ window.Quarto = {
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>, <span class="cn">FALSE</span>) <span class="co">#saves a random 10 element vector</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> outputs to console</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vec  <span class="co">#outputs to console</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error: &lt;text&gt;:2:16: unexpected symbol
-1: vec &lt;- sample(1:100, 10, FALSE) #saves a random 10 element vector
-2: vec &lt;- outputs to
-                  ^</code></pre>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  6 18 28 19 75 51 26 48 46 34</code></pre>
 </div>
+</details>
 </div>
 <ol start="2" type="a">
 <li>Print the first 5 elements of <code>vec</code>. (<strong>2 Points</strong>)</li>
@@ -3171,9 +3173,14 @@ window.Quarto = {
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co">#outputs vector to console</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object &#39;vec&#39; not found</code></pre>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  6 18 28 19 75</code></pre>
 </div>
+</details>
 </div>
 <ol start="3" type="a">
 <li>Print the last 3 elements of <code>vec</code>. (<strong>2 Points</strong>)</li>
@@ -3183,9 +3190,14 @@ window.Quarto = {
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>vec[(<span class="fu">length</span>(vec)<span class="sc">-</span><span class="dv">2</span>)<span class="sc">:</span><span class="fu">length</span>(vec)] <span class="co">#finds the last three elements by taking the length of the vector then outputting from two positions to the left to the end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object &#39;vec&#39; not found</code></pre>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48 46 34</code></pre>
 </div>
+</details>
 </div>
 <ol start="4" type="a">
 <li>Print the 3rd and 8th elements of <code>vec</code>. (<strong>3 Points</strong>)</li>
@@ -3195,9 +3207,14 @@ window.Quarto = {
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">8</span>)] <span class="co">#prints the 3rd and 8th elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object &#39;vec&#39; not found</code></pre>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 28 48</code></pre>
 </div>
+</details>
 </div>
 <ol start="5" type="a">
 <li>Print the elements of <code>vec</code> that are larger than 50. (<strong>3 Points</strong>)</li>
@@ -3207,9 +3224,14 @@ window.Quarto = {
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>vec[vec<span class="sc">&gt;</span><span class="dv">50</span>] <span class="co">#outputs a subset of elements greater than 50</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object &#39;vec&#39; not found</code></pre>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 75 51</code></pre>
 </div>
+</details>
 </div>
 <ol start="6" type="a">
 <li>Print the elements of <code>vec</code> that are odd (not divisible by two). (<strong>3 Points</strong>)</li>
@@ -3219,9 +3241,14 @@ window.Quarto = {
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>vec[vec <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>] <span class="co">#uses the modulus operator &quot;%%&quot; and subsets all instances where the modulus (remainder) is not zero when divided by two  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object &#39;vec&#39; not found</code></pre>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19 75 51</code></pre>
 </div>
+</details>
 </div>
 </section>
 <section id="question-2" class="level2">
@@ -3982,7 +4009,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-82"><a href="#cb25-82" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>, <span class="cn">FALSE</span>) <span class="co">#saves a random 10 element vector</span></span>
-<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> outputs to console</span>
+<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a>vec  <span class="co">#outputs to console</span></span>
 <span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the first 5 elements of <span class="in">`vec`</span>. (**2 Points**)</span>
