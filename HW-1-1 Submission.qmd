@@ -16,7 +16,6 @@ self-contained: true
 editor: source
 editor_options: 
   chunk_output_type: console
-
 ---
 
 ```{r setup, include=FALSE}
@@ -119,13 +118,10 @@ vec[vec>50]
 `r q <- q+1; letters[q]`. Print the elements of `vec` that are odd (not divisible by two). (**3 Points**)
 
 ```{r}
-#uses the modulus operator "%%" and subsets all instances where the modulus (remainder) is not zero when divided by two 
+#uses the modulus operator "%%" and subsets all instances where the modulus (remainder) 
+#is not zero when divided by two 
 vec[vec %% 2 != 0] 
 ```
-
-
-
-
 
 ## Question `r Q <- Q+1; Q`
 
@@ -135,7 +131,9 @@ q <- 0
 
 Use these data on drinking and wages from Elderton and Pearson (1910) ([data]((https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv)); [documentation](https://vincentarelbundock.github.io/Rdatasets/doc/HistData/DrinksWages.html)) for the following.
 
-`r q <- q+1; letters[q]`. Read in the data using `read.csv()` and store it as `DrinksWages`.^[**Hint**: you can use either the hyperlink's URL *or* you can click on the hyperlink, download the file, and read it in via file path. Also, you might find it helpful to read through the data's documentation so you know what the different columns/variables mean.] (**1 Point**)
+`r q <- q+1; letters[q]`. Read in the data using `read.csv()` and store it as `DrinksWages`.[^1] (**1 Point**)
+
+[^1]: **Hint**: you can use either the hyperlink's URL *or* you can click on the hyperlink, download the file, and read it in via file path. Also, you might find it helpful to read through the data's documentation so you know what the different columns/variables mean.
 
 ```{r}
 #reads the data
@@ -149,9 +147,9 @@ DrinksWages <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/Hist
 colnames(DrinksWages) 
 ```
 
-`r q <- q+1; letters[q]`. What type of measurement (Nominal, Ordinal, Interval, or Ratio) is `sober`?  Explain why. (**2 Points**)
+`r q <- q+1; letters[q]`. What type of measurement (Nominal, Ordinal, Interval, or Ratio) is `sober`? Explain why. (**2 Points**)
 
-This is a ratio measurement. It has a natural zero. If the value for a particular trade is zero, it means that everyone in the sample drinks alcohol for that trade. There is a also a meaningful difference in the ratio between two measurements. 
+This is a ratio measurement. It has a natural zero. If the value for a particular trade is zero, it means that everyone in the sample drinks alcohol for that trade. There is a also a meaningful difference in the ratio between two measurements.
 
 `r q <- q+1; letters[q]`. What fraction (or as a percentage) of observations of the wage variable are larger than 30? (**2 Points**)
 
@@ -173,7 +171,7 @@ DrinksWages["total"] <- DrinksWages$sober + DrinksWages$drinks
 
 ```
 
-`r q <- q+1; letters[q]`. Create a new variable inside `DrinksWages` called `x`. This variable should be `drinks` divided by `total`.  In words, how can we interpret what `x` represents? (**3 Points**)
+`r q <- q+1; letters[q]`. Create a new variable inside `DrinksWages` called `x`. This variable should be `drinks` divided by `total`. In words, how can we interpret what `x` represents? (**3 Points**)
 
 ```{r}
 #divides the two columns
@@ -182,7 +180,9 @@ DrinksWages["x"] <- DrinksWages$drinks / DrinksWages$total
 
 This is a ratio of drinkers to each sampled profession.
 
-`r q <- q+1; letters[q]`. Plot `x` on the $X$-axis and wages on the $Y$-axis. Each point should be colored based on their `class` value^[You are free to choose whatever colors you'd like, but please avoid using "yellow" for the sake of our eyes. It's blindly bright against the white background.]. Use `pch = 19`. Label your axes appropriately and include a legend. (**4 Points**)
+`r q <- q+1; letters[q]`. Plot `x` on the $X$-axis and wages on the $Y$-axis. Each point should be colored based on their `class` value[^2]. Use `pch = 19`. Label your axes appropriately and include a legend. (**4 Points**)
+
+[^2]: You are free to choose whatever colors you'd like, but please avoid using "yellow" for the sake of our eyes. It's blindly bright against the white background.
 
 ```{r}
 #Set black as an initial placeholder helpful for error checking
@@ -210,19 +210,19 @@ legend("topright",
        col = unique(DrinksWages$point_color))
 ```
 
-
-
-
-
 ## Question `r Q <- Q+1; Q`
 
 ```{r include=FALSE}
 q <- 0
 ```
 
-**This one is challenging.** [This `.pdf` file](https://www.erikthered.com/tutor/historical-average-SAT-scores.pdf) contains SAT scores over time for men and women.  Unfortunately, when I copied it into a `.csv`, the formatting got messed up.^[You'll run into this a lot when working with `.pdf` files, so avoid them!]
+**This one is challenging.** [This `.pdf` file](https://www.erikthered.com/tutor/historical-average-SAT-scores.pdf) contains SAT scores over time for men and women. Unfortunately, when I copied it into a `.csv`, the formatting got messed up.[^3]
 
-`r q <- q+1; letters[q]`. Recreate the table format of the PDF with [`sat2.csv`](https://alexcardazzi.github.io/econ311/data/sat2.csv) as a `data.frame`.^[**Hint**: After you read in the data, try printing it to your console. You should see one long vector. Try reorganizing the vector into a matrix, and then the matrix into a `data.frame`.] Rename the year and total math columns (the first one) to `year` and `total_math`. (**6 Points**)
+[^3]: You'll run into this a lot when working with `.pdf` files, so avoid them!
+
+`r q <- q+1; letters[q]`. Recreate the table format of the PDF with [`sat2.csv`](https://alexcardazzi.github.io/econ311/data/sat2.csv) as a `data.frame`.[^4] Rename the year and total math columns (the first one) to `year` and `total_math`. (**6 Points**)
+
+[^4]: **Hint**: After you read in the data, try printing it to your console. You should see one long vector. Try reorganizing the vector into a matrix, and then the matrix into a `data.frame`.
 
 ```{r}
 #Reads the data
@@ -247,7 +247,6 @@ sat2$total_math <- as.numeric(sat2$total_math)
 #Removes the rows with NA
 sat2 <- sat2[!is.na(sat2$total_math),] 
 ```
-
 
 `r q <- q+1; letters[q]`. Finally, remove all of the columns *except* `year` and `total_math` from the dataset. (**4 Points**)
 
@@ -281,13 +280,3 @@ legend("bottomright",
        lty = 1,
        cex = 0.75)
 ```
-
-
-
-
-
-
-
-
-
-
