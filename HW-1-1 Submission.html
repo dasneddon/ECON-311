@@ -3153,15 +3153,17 @@ window.Quarto = {
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>, <span class="cn">FALSE</span>) <span class="co">#saves a random 10 element vector</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vec  <span class="co">#outputs to console</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#saves a random 10 element vector</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>, <span class="cn">FALSE</span>) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs to console</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
 Output
 </summary>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  6 18 28 19 75 51 26 48 46 34</code></pre>
+<pre><code> [1] 20 99 63 81 18 27 58 37 80 25</code></pre>
 </div>
 </details>
 </div>
@@ -3171,14 +3173,15 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co">#outputs vector to console</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs vector to console</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
 Output
 </summary>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  6 18 28 19 75</code></pre>
+<pre><code>[1] 20 99 63 81 18</code></pre>
 </div>
 </details>
 </div>
@@ -3188,14 +3191,16 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>vec[(<span class="fu">length</span>(vec)<span class="sc">-</span><span class="dv">2</span>)<span class="sc">:</span><span class="fu">length</span>(vec)] <span class="co">#finds the last three elements by taking the length of the vector then outputting from two positions to the left to the end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#finds the last three elements by taking the </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#length of the vector then outputting from two positions to the left to the end</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>vec[(<span class="fu">length</span>(vec)<span class="sc">-</span><span class="dv">2</span>)<span class="sc">:</span><span class="fu">length</span>(vec)] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
 Output
 </summary>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 48 46 34</code></pre>
+<pre><code>[1] 37 80 25</code></pre>
 </div>
 </details>
 </div>
@@ -3205,14 +3210,15 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">8</span>)] <span class="co">#prints the 3rd and 8th elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prints the 3rd and 8th elements</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">8</span>)] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
 Output
 </summary>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 28 48</code></pre>
+<pre><code>[1] 63 37</code></pre>
 </div>
 </details>
 </div>
@@ -3222,14 +3228,15 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>vec[vec<span class="sc">&gt;</span><span class="dv">50</span>] <span class="co">#outputs a subset of elements greater than 50</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs a subset of elements greater than 50</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>vec[vec<span class="sc">&gt;</span><span class="dv">50</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
 Output
 </summary>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 75 51</code></pre>
+<pre><code>[1] 99 63 81 58 80</code></pre>
 </div>
 </details>
 </div>
@@ -3239,14 +3246,15 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>vec[vec <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>] <span class="co">#uses the modulus operator &quot;%%&quot; and subsets all instances where the modulus (remainder) is not zero when divided by two  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#uses the modulus operator &quot;%%&quot; and subsets all instances where the modulus (remainder) is not zero when divided by two </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>vec[vec <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
 Output
 </summary>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 19 75 51</code></pre>
+<pre><code>[1] 99 63 81 27 37 25</code></pre>
 </div>
 </details>
 </div>
@@ -3260,7 +3268,8 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>DrinksWages <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv&quot;</span>) <span class="co">#reads the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#reads the data</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>DrinksWages <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv&quot;</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="2" type="a">
@@ -3269,7 +3278,8 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DrinksWages) <span class="co">#outputs the columnn names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs the columnn names</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DrinksWages) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
@@ -3290,9 +3300,13 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>) <span class="sc">/</span> <span class="fu">nrow</span>(DrinksWages) <span class="co">#outputs a decimal form of the percentage</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>),<span class="st">&quot;/&quot;</span>, <span class="fu">nrow</span>(DrinksWages)) <span class="co">#outputs a concatenated string of characters to express as a fraction</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">round</span>(<span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>) <span class="sc">/</span> <span class="fu">nrow</span>(DrinksWages)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>),<span class="st">&quot;%&quot;</span>) <span class="co">#outputs a concatenated string of characters to express as a percentage to two decimal places</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs a decimal form of the percentage</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>) <span class="sc">/</span> <span class="fu">nrow</span>(DrinksWages) </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs a concatenated string of characters to express as a fraction</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>),<span class="st">&quot;/&quot;</span>, <span class="fu">nrow</span>(DrinksWages)) </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs a concatenated string of characters to express as a percentage </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#to two decimal places</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">round</span>(<span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>) <span class="sc">/</span> <span class="fu">nrow</span>(DrinksWages)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>),<span class="st">&quot;%&quot;</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
@@ -3311,7 +3325,8 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;total&quot;</span>] <span class="ot">&lt;-</span> DrinksWages<span class="sc">$</span>sober <span class="sc">+</span> DrinksWages<span class="sc">$</span>drinks <span class="co">#adds the two columns &quot;total&quot; should == &quot;n&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#adds the two columns &quot;total&quot; should == &quot;n&quot;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;total&quot;</span>] <span class="ot">&lt;-</span> DrinksWages<span class="sc">$</span>sober <span class="sc">+</span> DrinksWages<span class="sc">$</span>drinks </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="6" type="a">
@@ -3320,7 +3335,8 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;x&quot;</span>] <span class="ot">&lt;-</span> DrinksWages<span class="sc">$</span>drinks <span class="sc">/</span> DrinksWages<span class="sc">$</span>total <span class="co">#divides the two columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#divides the two columns</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;x&quot;</span>] <span class="ot">&lt;-</span> DrinksWages<span class="sc">$</span>drinks <span class="sc">/</span> DrinksWages<span class="sc">$</span>total </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>This is a ratio of drinkers to each sampled profession.</p>
@@ -3330,28 +3346,29 @@ Output
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;point_color&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span> <span class="co">#Set black as an initial placeholder helpful for error checking</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Sets colors to each &quot;class&quot;</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;A&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;B&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;red&quot;</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;C&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;green&quot;</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DrinksWages<span class="sc">$</span>x,DrinksWages<span class="sc">$</span>wage,</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> DrinksWages<span class="sc">$</span>point_color,</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Ratio of Drinkers vs Average Wage&quot;</span>,</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;% of Drinkers&quot;</span>,</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Average Wage&quot;</span>)</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds a legend: Positioning was a bit difficult so I reduced the size of the legend by adjusting cex down.</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>,</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;o&quot;</span>,</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">horiz =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">&quot;Class&quot;</span>, <span class="fu">unique</span>(DrinksWages<span class="sc">$</span>class)),</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">unique</span>(DrinksWages<span class="sc">$</span>point_color))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Set black as an initial placeholder helpful for error checking</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;point_color&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Sets colors to each &quot;class&quot;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;A&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;B&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;red&quot;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;C&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;green&quot;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DrinksWages<span class="sc">$</span>x,DrinksWages<span class="sc">$</span>wage,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> DrinksWages<span class="sc">$</span>point_color,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Ratio of Drinkers vs Average Wage&quot;</span>,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;% of Drinkers&quot;</span>,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Average Wage&quot;</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds a legend: Positioning was a bit difficult so I reduced the size of the legend by adjusting cex down.</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;o&quot;</span>,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">horiz =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">&quot;Class&quot;</span>, <span class="fu">unique</span>(DrinksWages<span class="sc">$</span>class)),</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">unique</span>(DrinksWages<span class="sc">$</span>point_color))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
@@ -3376,13 +3393,18 @@ Plot
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://alexcardazzi.github.io/econ311/data/sat2.csv&quot;</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(sat2) <span class="co">#I couldn&#39;t find any other way to build the matrix without this line.</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(sat2, <span class="at">nrow =</span> <span class="fu">length</span>(sat2)<span class="sc">/</span><span class="dv">16</span>, <span class="at">ncol =</span> <span class="dv">16</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span> )</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> sat2[,<span class="dv">1</span>],</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                     sat2[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">total_math =</span> sat2[,<span class="dv">5</span>],</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                     sat2[,<span class="dv">6</span><span class="sc">:</span><span class="fu">ncol</span>(sat2)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reads the data</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://alexcardazzi.github.io/econ311/data/sat2.csv&quot;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#I couldn&#39;t find any other way to build the matrix without this line.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(sat2) </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Turns the data into a matrix </span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(sat2, <span class="at">nrow =</span> <span class="fu">length</span>(sat2)<span class="sc">/</span><span class="dv">16</span>, <span class="at">ncol =</span> <span class="dv">16</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Turns the data into a data frame, left the others unnamed, although simply</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#not adding them would have been sufficient as they will be removed later.</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> sat2[,<span class="dv">1</span>],</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                     sat2[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">total_math =</span> sat2[,<span class="dv">5</span>],</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>                     sat2[,<span class="dv">6</span><span class="sc">:</span><span class="fu">ncol</span>(sat2)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="2" type="a">
@@ -3391,8 +3413,10 @@ Plot
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sat2<span class="sc">$</span>total_math <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(sat2<span class="sc">$</span>total_math) <span class="co">#Changes the values to numeric</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> sat2[<span class="sc">!</span><span class="fu">is.na</span>(sat2<span class="sc">$</span>total_math),] <span class="co">#Removes the rows with NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Changes the values to numeric</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sat2<span class="sc">$</span>total_math <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(sat2<span class="sc">$</span>total_math) </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Removes the rows with NA</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> sat2[<span class="sc">!</span><span class="fu">is.na</span>(sat2<span class="sc">$</span>total_math),] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="3" type="a">
@@ -3401,7 +3425,8 @@ Plot
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> sat2[,<span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,<span class="st">&quot;total_math&quot;</span>)] <span class="co">#Keeps only the two named columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Keeps only the two named columns</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> sat2[,<span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,<span class="st">&quot;total_math&quot;</span>)] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="4" type="a">
@@ -4008,191 +4033,215 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print <span class="in">`vec`</span> to the console. (**2 Points**)</span>
 <span id="cb25-82"><a href="#cb25-82" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>, <span class="cn">FALSE</span>) <span class="co">#saves a random 10 element vector</span></span>
-<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a>vec  <span class="co">#outputs to console</span></span>
-<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the first 5 elements of <span class="in">`vec`</span>. (**2 Points**)</span>
+<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a><span class="co">#saves a random 10 element vector</span></span>
+<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>, <span class="cn">FALSE</span>) </span>
+<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs to console</span></span>
+<span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a>vec</span>
+<span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-94"><a href="#cb25-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-95"><a href="#cb25-95" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co">#outputs vector to console</span></span>
-<span id="cb25-96"><a href="#cb25-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the last 3 elements of <span class="in">`vec`</span>. (**2 Points**)</span>
-<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-102"><a href="#cb25-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a>vec[(<span class="fu">length</span>(vec)<span class="sc">-</span><span class="dv">2</span>)<span class="sc">:</span><span class="fu">length</span>(vec)] <span class="co">#finds the last three elements by taking the length of the vector then outputting from two positions to the left to the end</span></span>
-<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the 3rd and 8th elements of <span class="in">`vec`</span>. (**3 Points**)</span>
-<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">8</span>)] <span class="co">#prints the 3rd and 8th elements</span></span>
-<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the elements of <span class="in">`vec`</span> that are larger than 50. (**3 Points**)</span>
-<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a>vec[vec<span class="sc">&gt;</span><span class="dv">50</span>] <span class="co">#outputs a subset of elements greater than 50</span></span>
-<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-122"><a href="#cb25-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-123"><a href="#cb25-123" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the elements of <span class="in">`vec`</span> that are odd (not divisible by two). (**3 Points**)</span>
-<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a>vec[vec <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>] <span class="co">#uses the modulus operator &quot;%%&quot; and subsets all instances where the modulus (remainder) is not zero when divided by two  </span></span>
-<span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-92"><a href="#cb25-92" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the first 5 elements of <span class="in">`vec`</span>. (**2 Points**)</span>
+<span id="cb25-93"><a href="#cb25-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-96"><a href="#cb25-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs vector to console</span></span>
+<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] </span>
+<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the last 3 elements of <span class="in">`vec`</span>. (**2 Points**)</span>
+<span id="cb25-102"><a href="#cb25-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a><span class="co">#finds the last three elements by taking the </span></span>
+<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a><span class="co">#length of the vector then outputting from two positions to the left to the end</span></span>
+<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a>vec[(<span class="fu">length</span>(vec)<span class="sc">-</span><span class="dv">2</span>)<span class="sc">:</span><span class="fu">length</span>(vec)] </span>
+<span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the 3rd and 8th elements of <span class="in">`vec`</span>. (**3 Points**)</span>
+<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a><span class="co">#prints the 3rd and 8th elements</span></span>
+<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">8</span>)] </span>
+<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the elements of <span class="in">`vec`</span> that are larger than 50. (**3 Points**)</span>
+<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs a subset of elements greater than 50</span></span>
+<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a>vec[vec<span class="sc">&gt;</span><span class="dv">50</span>] </span>
+<span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the elements of <span class="in">`vec`</span> that are odd (not divisible by two). (**3 Points**)</span>
 <span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
-<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-137"><a href="#cb25-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
-<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
-<span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a><span class="co">#uses the modulus operator &quot;%%&quot; and subsets all instances where the modulus (remainder) is not zero when divided by two </span></span>
+<span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a>vec[vec <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>] </span>
+<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-137"><a href="#cb25-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-140"><a href="#cb25-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a>Use these data on drinking and wages from Elderton and Pearson (1910) (<span class="co">[</span><span class="ot">data</span><span class="co">]</span>((https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv)); <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://vincentarelbundock.github.io/Rdatasets/doc/HistData/DrinksWages.html)</span>) for the following.</span>
-<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Read in the data using <span class="in">`read.csv()`</span> and store it as <span class="in">`DrinksWages`</span>.^<span class="co">[</span><span class="ot">**Hint**: you can use either the hyperlink&#39;s URL *or* you can click on the hyperlink, download the file, and read it in via file path. Also, you might find it helpful to read through the data&#39;s documentation so you know what the different columns/variables mean.</span><span class="co">]</span> (**1 Point**)</span>
-<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a>DrinksWages <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv&quot;</span>) <span class="co">#reads the data</span></span>
-<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the column names of <span class="in">`DrinksWages`</span>. (**1 Point**)</span>
-<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DrinksWages) <span class="co">#outputs the columnn names</span></span>
+<span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
+<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
+<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
+<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a>Use these data on drinking and wages from Elderton and Pearson (1910) (<span class="co">[</span><span class="ot">data</span><span class="co">]</span>((https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv)); <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://vincentarelbundock.github.io/Rdatasets/doc/HistData/DrinksWages.html)</span>) for the following.</span>
+<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Read in the data using <span class="in">`read.csv()`</span> and store it as <span class="in">`DrinksWages`</span>.^<span class="co">[</span><span class="ot">**Hint**: you can use either the hyperlink&#39;s URL *or* you can click on the hyperlink, download the file, and read it in via file path. Also, you might find it helpful to read through the data&#39;s documentation so you know what the different columns/variables mean.</span><span class="co">]</span> (**1 Point**)</span>
+<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a><span class="co">#reads the data</span></span>
+<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a>DrinksWages <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv&quot;</span>) </span>
 <span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. What type of measurement (Nominal, Ordinal, Interval, or Ratio) is <span class="in">`sober`</span>?  Explain why. (**2 Points**)</span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the column names of <span class="in">`DrinksWages`</span>. (**1 Point**)</span>
 <span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a>This is a ratio measurement. It has a natural zero. If the value for a particular trade is zero, it means that everyone in the sample drinks alcohol for that trade. There is a also a meaningful difference in the ratio between two measurements. </span>
-<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. What fraction (or as a percentage) of observations of the wage variable are larger than 30? (**2 Points**)</span>
-<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>) <span class="sc">/</span> <span class="fu">nrow</span>(DrinksWages) <span class="co">#outputs a decimal form of the percentage</span></span>
-<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>),<span class="st">&quot;/&quot;</span>, <span class="fu">nrow</span>(DrinksWages)) <span class="co">#outputs a concatenated string of characters to express as a fraction</span></span>
-<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">round</span>(<span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>) <span class="sc">/</span> <span class="fu">nrow</span>(DrinksWages)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>),<span class="st">&quot;%&quot;</span>) <span class="co">#outputs a concatenated string of characters to express as a percentage to two decimal places</span></span>
-<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Create a new variable inside <span class="in">`DrinksWages`</span> called <span class="in">`total`</span>. This variable should reflect the sum of the two variables <span class="in">`sober`</span> and <span class="in">`drinks`</span> for each observation. (**2 Points**)</span>
-<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;total&quot;</span>] <span class="ot">&lt;-</span> DrinksWages<span class="sc">$</span>sober <span class="sc">+</span> DrinksWages<span class="sc">$</span>drinks <span class="co">#adds the two columns &quot;total&quot; should == &quot;n&quot;</span></span>
-<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Create a new variable inside <span class="in">`DrinksWages`</span> called <span class="in">`x`</span>. This variable should be <span class="in">`drinks`</span> divided by <span class="in">`total`</span>.  In words, how can we interpret what <span class="in">`x`</span> represents? (**3 Points**)</span>
-<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;x&quot;</span>] <span class="ot">&lt;-</span> DrinksWages<span class="sc">$</span>drinks <span class="sc">/</span> DrinksWages<span class="sc">$</span>total <span class="co">#divides the two columns</span></span>
-<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a>This is a ratio of drinkers to each sampled profession.</span>
-<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Plot <span class="in">`x`</span> on the $X$-axis and wages on the $Y$-axis. Each point should be colored based on their <span class="in">`class`</span> value^<span class="co">[</span><span class="ot">You are free to choose whatever colors you&#39;d like, but please avoid using &quot;yellow&quot; for the sake of our eyes. It&#39;s blindly bright against the white background.</span><span class="co">]</span>. Use <span class="in">`pch = 19`</span>. Label your axes appropriately and include a legend. (**4 Points**)</span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs the columnn names</span></span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DrinksWages) </span>
+<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. What type of measurement (Nominal, Ordinal, Interval, or Ratio) is <span class="in">`sober`</span>?  Explain why. (**2 Points**)</span>
+<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a>This is a ratio measurement. It has a natural zero. If the value for a particular trade is zero, it means that everyone in the sample drinks alcohol for that trade. There is a also a meaningful difference in the ratio between two measurements. </span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. What fraction (or as a percentage) of observations of the wage variable are larger than 30? (**2 Points**)</span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs a decimal form of the percentage</span></span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>) <span class="sc">/</span> <span class="fu">nrow</span>(DrinksWages) </span>
+<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs a concatenated string of characters to express as a fraction</span></span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>),<span class="st">&quot;/&quot;</span>, <span class="fu">nrow</span>(DrinksWages)) </span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a><span class="co">#outputs a concatenated string of characters to express as a percentage </span></span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a><span class="co">#to two decimal places</span></span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">round</span>(<span class="fu">sum</span>(DrinksWages<span class="sc">$</span>wage<span class="sc">&gt;</span><span class="dv">30</span>) <span class="sc">/</span> <span class="fu">nrow</span>(DrinksWages)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>),<span class="st">&quot;%&quot;</span>) </span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Create a new variable inside <span class="in">`DrinksWages`</span> called <span class="in">`total`</span>. This variable should reflect the sum of the two variables <span class="in">`sober`</span> and <span class="in">`drinks`</span> for each observation. (**2 Points**)</span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a><span class="co">#adds the two columns &quot;total&quot; should == &quot;n&quot;</span></span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;total&quot;</span>] <span class="ot">&lt;-</span> DrinksWages<span class="sc">$</span>sober <span class="sc">+</span> DrinksWages<span class="sc">$</span>drinks </span>
 <span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;point_color&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span> <span class="co">#Set black as an initial placeholder helpful for error checking</span></span>
-<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a><span class="co">#Sets colors to each &quot;class&quot;</span></span>
-<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;A&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span></span>
-<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;B&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;red&quot;</span></span>
-<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;C&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;green&quot;</span></span>
-<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
-<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DrinksWages<span class="sc">$</span>x,DrinksWages<span class="sc">$</span>wage,</span>
-<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> DrinksWages<span class="sc">$</span>point_color,</span>
-<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Ratio of Drinkers vs Average Wage&quot;</span>,</span>
-<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;% of Drinkers&quot;</span>,</span>
-<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Average Wage&quot;</span>)</span>
-<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds a legend: Positioning was a bit difficult so I reduced the size of the legend by adjusting cex down.</span></span>
-<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>,</span>
-<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;o&quot;</span>,</span>
-<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
-<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a>       <span class="at">horiz =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">&quot;Class&quot;</span>, <span class="fu">unique</span>(DrinksWages<span class="sc">$</span>class)),</span>
-<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">unique</span>(DrinksWages<span class="sc">$</span>point_color))</span>
-<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
-<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
-<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
-<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a>**This one is challenging.** <span class="co">[</span><span class="ot">This `.pdf` file</span><span class="co">](https://www.erikthered.com/tutor/historical-average-SAT-scores.pdf)</span> contains SAT scores over time for men and women.  Unfortunately, when I copied it into a <span class="in">`.csv`</span>, the formatting got messed up.^<span class="co">[</span><span class="ot">You&#39;ll run into this a lot when working with `.pdf` files, so avoid them!</span><span class="co">]</span></span>
-<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Recreate the table format of the PDF with <span class="co">[</span><span class="ot">`sat2.csv`</span><span class="co">](https://alexcardazzi.github.io/econ311/data/sat2.csv)</span> as a <span class="in">`data.frame`</span>.^<span class="co">[</span><span class="ot">**Hint**: After you read in the data, try printing it to your console. You should see one long vector. Try reorganizing the vector into a matrix, and then the matrix into a `data.frame`.</span><span class="co">]</span> Rename the year and total math columns (the first one) to <span class="in">`year`</span> and <span class="in">`total_math`</span>. (**6 Points**)</span>
-<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://alexcardazzi.github.io/econ311/data/sat2.csv&quot;</span>)</span>
-<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(sat2) <span class="co">#I couldn&#39;t find any other way to build the matrix without this line.</span></span>
-<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(sat2, <span class="at">nrow =</span> <span class="fu">length</span>(sat2)<span class="sc">/</span><span class="dv">16</span>, <span class="at">ncol =</span> <span class="dv">16</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span> )</span>
-<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> sat2[,<span class="dv">1</span>],</span>
-<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a>                     sat2[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a>                     <span class="at">total_math =</span> sat2[,<span class="dv">5</span>],</span>
-<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a>                     sat2[,<span class="dv">6</span><span class="sc">:</span><span class="fu">ncol</span>(sat2)])</span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Create a new variable inside <span class="in">`DrinksWages`</span> called <span class="in">`x`</span>. This variable should be <span class="in">`drinks`</span> divided by <span class="in">`total`</span>.  In words, how can we interpret what <span class="in">`x`</span> represents? (**3 Points**)</span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a><span class="co">#divides the two columns</span></span>
+<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;x&quot;</span>] <span class="ot">&lt;-</span> DrinksWages<span class="sc">$</span>drinks <span class="sc">/</span> DrinksWages<span class="sc">$</span>total </span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a>This is a ratio of drinkers to each sampled profession.</span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Plot <span class="in">`x`</span> on the $X$-axis and wages on the $Y$-axis. Each point should be colored based on their <span class="in">`class`</span> value^<span class="co">[</span><span class="ot">You are free to choose whatever colors you&#39;d like, but please avoid using &quot;yellow&quot; for the sake of our eyes. It&#39;s blindly bright against the white background.</span><span class="co">]</span>. Use <span class="in">`pch = 19`</span>. Label your axes appropriately and include a legend. (**4 Points**)</span>
+<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a><span class="co">#Set black as an initial placeholder helpful for error checking</span></span>
+<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a>DrinksWages[<span class="st">&quot;point_color&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span> </span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a><span class="co">#Sets colors to each &quot;class&quot;</span></span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;A&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span></span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;B&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;red&quot;</span></span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a>DrinksWages<span class="sc">$</span>point_color[DrinksWages<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&#39;C&#39;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;green&quot;</span></span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DrinksWages<span class="sc">$</span>x,DrinksWages<span class="sc">$</span>wage,</span>
+<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> DrinksWages<span class="sc">$</span>point_color,</span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Ratio of Drinkers vs Average Wage&quot;</span>,</span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;% of Drinkers&quot;</span>,</span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Average Wage&quot;</span>)</span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds a legend: Positioning was a bit difficult so I reduced the size of the legend by adjusting cex down.</span></span>
+<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>,</span>
+<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;o&quot;</span>,</span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a>       <span class="at">horiz =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">&quot;Class&quot;</span>, <span class="fu">unique</span>(DrinksWages<span class="sc">$</span>class)),</span>
+<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">unique</span>(DrinksWages<span class="sc">$</span>point_color))</span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
+<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
+<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
 <span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Convert the total math variable into a numeric variable. This step will likely create some <span class="in">`NA`</span> values in the variable, so remove the rows where total math is missing. (**4 Points**)</span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a>**This one is challenging.** <span class="co">[</span><span class="ot">This `.pdf` file</span><span class="co">](https://www.erikthered.com/tutor/historical-average-SAT-scores.pdf)</span> contains SAT scores over time for men and women.  Unfortunately, when I copied it into a <span class="in">`.csv`</span>, the formatting got messed up.^<span class="co">[</span><span class="ot">You&#39;ll run into this a lot when working with `.pdf` files, so avoid them!</span><span class="co">]</span></span>
 <span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a>sat2<span class="sc">$</span>total_math <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(sat2<span class="sc">$</span>total_math) <span class="co">#Changes the values to numeric</span></span>
-<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> sat2[<span class="sc">!</span><span class="fu">is.na</span>(sat2<span class="sc">$</span>total_math),] <span class="co">#Removes the rows with NA</span></span>
-<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Finally, remove all of the columns *except* `year` and `total_math` from the dataset. (**4 Points**)</span>
-<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> sat2[,<span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,<span class="st">&quot;total_math&quot;</span>)] <span class="co">#Keeps only the two named columns</span></span>
-<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Make a plot with two lines. On the $X$-axis should be year and on the $Y$-axis should be total math. The first line should be SAT scores from the beginning of the sample until 1999, and another from 2000 and onwards. The two lines should be different colors. Be sure to label the axes and include a legend. (**6 Points**)</span>
-<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
-<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sat2<span class="sc">$</span>year, sat2<span class="sc">$</span>total_math,</span>
-<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,</span>
-<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;n&quot;</span>, <span class="co">#Makes the points invisible</span></span>
-<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Total Math&quot;</span>,</span>
-<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;SAT Total Math - Annual Averages&quot;</span>)</span>
-<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates lines for Pre 2000 and Post 2000 (inclusive)</span></span>
-<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(sat2<span class="sc">$</span>year[<span class="fu">as.numeric</span>(sat2<span class="sc">$</span>year) <span class="sc">&lt;=</span> <span class="dv">1999</span>],</span>
-<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a>      sat2<span class="sc">$</span>total_math[<span class="fu">as.numeric</span>(sat2<span class="sc">$</span>year) <span class="sc">&lt;=</span> <span class="dv">1999</span>],</span>
-<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="dv">2</span>)</span>
-<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(sat2<span class="sc">$</span>year[<span class="fu">as.numeric</span>(sat2<span class="sc">$</span>year) <span class="sc">&gt;</span> <span class="dv">1999</span>],</span>
-<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a>      sat2<span class="sc">$</span>total_math[<span class="fu">as.numeric</span>(sat2<span class="sc">$</span>year) <span class="sc">&gt;</span> <span class="dv">1999</span>],</span>
-<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="dv">4</span>)</span>
-<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates the legend</span></span>
-<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, </span>
-<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Pre 2000&quot;</span>,<span class="st">&quot;Post 2000&quot;</span>),</span>
-<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>),</span>
-<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>,</span>
-<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>)</span>
-<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Recreate the table format of the PDF with <span class="co">[</span><span class="ot">`sat2.csv`</span><span class="co">](https://alexcardazzi.github.io/econ311/data/sat2.csv)</span> as a <span class="in">`data.frame`</span>.^<span class="co">[</span><span class="ot">**Hint**: After you read in the data, try printing it to your console. You should see one long vector. Try reorganizing the vector into a matrix, and then the matrix into a `data.frame`.</span><span class="co">]</span> Rename the year and total math columns (the first one) to <span class="in">`year`</span> and <span class="in">`total_math`</span>. (**6 Points**)</span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a><span class="co">#Reads the data</span></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://alexcardazzi.github.io/econ311/data/sat2.csv&quot;</span>)</span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a><span class="co">#I couldn&#39;t find any other way to build the matrix without this line.</span></span>
+<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(sat2) </span>
+<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a><span class="co">#Turns the data into a matrix </span></span>
+<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(sat2, <span class="at">nrow =</span> <span class="fu">length</span>(sat2)<span class="sc">/</span><span class="dv">16</span>, <span class="at">ncol =</span> <span class="dv">16</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a><span class="co">#Turns the data into a data frame, left the others unnamed, although simply</span></span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a><span class="co">#not adding them would have been sufficient as they will be removed later.</span></span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> sat2[,<span class="dv">1</span>],</span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a>                     sat2[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a>                     <span class="at">total_math =</span> sat2[,<span class="dv">5</span>],</span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a>                     sat2[,<span class="dv">6</span><span class="sc">:</span><span class="fu">ncol</span>(sat2)])</span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Convert the total math variable into a numeric variable. This step will likely create some <span class="in">`NA`</span> values in the variable, so remove the rows where total math is missing. (**4 Points**)</span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a><span class="co">#Changes the values to numeric</span></span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a>sat2<span class="sc">$</span>total_math <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(sat2<span class="sc">$</span>total_math) </span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a><span class="co">#Removes the rows with NA</span></span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> sat2[<span class="sc">!</span><span class="fu">is.na</span>(sat2<span class="sc">$</span>total_math),] </span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Finally, remove all of the columns *except* `year` and `total_math` from the dataset. (**4 Points**)</span>
+<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a><span class="co">#Keeps only the two named columns</span></span>
+<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a>sat2 <span class="ot">&lt;-</span> sat2[,<span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,<span class="st">&quot;total_math&quot;</span>)] </span>
+<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Make a plot with two lines. On the $X$-axis should be year and on the $Y$-axis should be total math. The first line should be SAT scores from the beginning of the sample until 1999, and another from 2000 and onwards. The two lines should be different colors. Be sure to label the axes and include a legend. (**6 Points**)</span>
+<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
+<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sat2<span class="sc">$</span>year, sat2<span class="sc">$</span>total_math,</span>
+<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;n&quot;</span>, <span class="co">#Makes the points invisible</span></span>
+<span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Total Math&quot;</span>,</span>
+<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;SAT Total Math - Annual Averages&quot;</span>)</span>
+<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates lines for Pre 2000 and Post 2000 (inclusive)</span></span>
+<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(sat2<span class="sc">$</span>year[<span class="fu">as.numeric</span>(sat2<span class="sc">$</span>year) <span class="sc">&lt;=</span> <span class="dv">1999</span>],</span>
+<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a>      sat2<span class="sc">$</span>total_math[<span class="fu">as.numeric</span>(sat2<span class="sc">$</span>year) <span class="sc">&lt;=</span> <span class="dv">1999</span>],</span>
+<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(sat2<span class="sc">$</span>year[<span class="fu">as.numeric</span>(sat2<span class="sc">$</span>year) <span class="sc">&gt;</span> <span class="dv">1999</span>],</span>
+<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a>      sat2<span class="sc">$</span>total_math[<span class="fu">as.numeric</span>(sat2<span class="sc">$</span>year) <span class="sc">&gt;</span> <span class="dv">1999</span>],</span>
+<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="dv">4</span>)</span>
+<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates the legend</span></span>
+<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, </span>
+<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Pre 2000&quot;</span>,<span class="st">&quot;Post 2000&quot;</span>),</span>
+<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>),</span>
+<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>,</span>
+<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>)</span>
+<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-322"><a href="#cb25-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -81,39 +81,46 @@ Copy and paste the following vector into R: `vec <- sample(1:100, 10, FALSE)`. U
 `r q <- q+1; letters[q]`. Print `vec` to the console. (**2 Points**)
 
 ```{r}
-vec <- sample(1:100, 10, FALSE) #saves a random 10 element vector
-vec  #outputs to console
+#saves a random 10 element vector
+vec <- sample(1:100, 10, FALSE) 
+#outputs to console
+vec
 ```
 
 `r q <- q+1; letters[q]`. Print the first 5 elements of `vec`. (**2 Points**)
 
 ```{r}
-vec[1:5] #outputs vector to console
+#outputs vector to console
+vec[1:5] 
 ```
 
 `r q <- q+1; letters[q]`. Print the last 3 elements of `vec`. (**2 Points**)
 
 ```{r}
-vec[(length(vec)-2):length(vec)] #finds the last three elements by taking the length of the vector then outputting from two positions to the left to the end
+#finds the last three elements by taking the 
+#length of the vector then outputting from two positions to the left to the end
+vec[(length(vec)-2):length(vec)] 
 ```
 
 `r q <- q+1; letters[q]`. Print the 3rd and 8th elements of `vec`. (**3 Points**)
 
 ```{r}
-vec[c(3,8)] #prints the 3rd and 8th elements
+#prints the 3rd and 8th elements
+vec[c(3,8)] 
 ```
 
 `r q <- q+1; letters[q]`. Print the elements of `vec` that are larger than 50. (**3 Points**)
 
 ```{r}
-vec[vec>50] #outputs a subset of elements greater than 50
-
+#outputs a subset of elements greater than 50
+vec[vec>50] 
 ```
 
 `r q <- q+1; letters[q]`. Print the elements of `vec` that are odd (not divisible by two). (**3 Points**)
 
 ```{r}
-vec[vec %% 2 != 0] #uses the modulus operator "%%" and subsets all instances where the modulus (remainder) is not zero when divided by two  
+#uses the modulus operator "%%" and subsets all instances where the modulus (remainder) is not zero when divided by two 
+vec[vec %% 2 != 0] 
 ```
 
 
@@ -131,13 +138,15 @@ Use these data on drinking and wages from Elderton and Pearson (1910) ([data]((h
 `r q <- q+1; letters[q]`. Read in the data using `read.csv()` and store it as `DrinksWages`.^[**Hint**: you can use either the hyperlink's URL *or* you can click on the hyperlink, download the file, and read it in via file path. Also, you might find it helpful to read through the data's documentation so you know what the different columns/variables mean.] (**1 Point**)
 
 ```{r}
-DrinksWages <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv") #reads the data
+#reads the data
+DrinksWages <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/HistData/DrinksWages.csv") 
 ```
 
 `r q <- q+1; letters[q]`. Print the column names of `DrinksWages`. (**1 Point**)
 
 ```{r}
-colnames(DrinksWages) #outputs the columnn names
+#outputs the columnn names
+colnames(DrinksWages) 
 ```
 
 `r q <- q+1; letters[q]`. What type of measurement (Nominal, Ordinal, Interval, or Ratio) is `sober`?  Explain why. (**2 Points**)
@@ -147,22 +156,28 @@ This is a ratio measurement. It has a natural zero. If the value for a particula
 `r q <- q+1; letters[q]`. What fraction (or as a percentage) of observations of the wage variable are larger than 30? (**2 Points**)
 
 ```{r}
-sum(DrinksWages$wage>30) / nrow(DrinksWages) #outputs a decimal form of the percentage
-paste0(sum(DrinksWages$wage>30),"/", nrow(DrinksWages)) #outputs a concatenated string of characters to express as a fraction
-paste0(round(sum(DrinksWages$wage>30) / nrow(DrinksWages)*100,2),"%") #outputs a concatenated string of characters to express as a percentage to two decimal places
+#outputs a decimal form of the percentage
+sum(DrinksWages$wage>30) / nrow(DrinksWages) 
+#outputs a concatenated string of characters to express as a fraction
+paste0(sum(DrinksWages$wage>30),"/", nrow(DrinksWages)) 
+#outputs a concatenated string of characters to express as a percentage 
+#to two decimal places
+paste0(round(sum(DrinksWages$wage>30) / nrow(DrinksWages)*100,2),"%") 
 ```
 
 `r q <- q+1; letters[q]`. Create a new variable inside `DrinksWages` called `total`. This variable should reflect the sum of the two variables `sober` and `drinks` for each observation. (**2 Points**)
 
 ```{r}
-DrinksWages["total"] <- DrinksWages$sober + DrinksWages$drinks #adds the two columns "total" should == "n"
+#adds the two columns "total" should == "n"
+DrinksWages["total"] <- DrinksWages$sober + DrinksWages$drinks 
 
 ```
 
 `r q <- q+1; letters[q]`. Create a new variable inside `DrinksWages` called `x`. This variable should be `drinks` divided by `total`.  In words, how can we interpret what `x` represents? (**3 Points**)
 
 ```{r}
-DrinksWages["x"] <- DrinksWages$drinks / DrinksWages$total #divides the two columns
+#divides the two columns
+DrinksWages["x"] <- DrinksWages$drinks / DrinksWages$total 
 ```
 
 This is a ratio of drinkers to each sampled profession.
@@ -170,7 +185,8 @@ This is a ratio of drinkers to each sampled profession.
 `r q <- q+1; letters[q]`. Plot `x` on the $X$-axis and wages on the $Y$-axis. Each point should be colored based on their `class` value^[You are free to choose whatever colors you'd like, but please avoid using "yellow" for the sake of our eyes. It's blindly bright against the white background.]. Use `pch = 19`. Label your axes appropriately and include a legend. (**4 Points**)
 
 ```{r}
-DrinksWages["point_color"] <- "black" #Set black as an initial placeholder helpful for error checking
+#Set black as an initial placeholder helpful for error checking
+DrinksWages["point_color"] <- "black" 
 
 #Sets colors to each "class"
 DrinksWages$point_color[DrinksWages$class == 'A'] <- "blue"
@@ -209,9 +225,14 @@ q <- 0
 `r q <- q+1; letters[q]`. Recreate the table format of the PDF with [`sat2.csv`](https://alexcardazzi.github.io/econ311/data/sat2.csv) as a `data.frame`.^[**Hint**: After you read in the data, try printing it to your console. You should see one long vector. Try reorganizing the vector into a matrix, and then the matrix into a `data.frame`.] Rename the year and total math columns (the first one) to `year` and `total_math`. (**6 Points**)
 
 ```{r}
+#Reads the data
 sat2 <- read.csv("https://alexcardazzi.github.io/econ311/data/sat2.csv")
-sat2 <- unlist(sat2) #I couldn't find any other way to build the matrix without this line.
+#I couldn't find any other way to build the matrix without this line.
+sat2 <- unlist(sat2) 
+#Turns the data into a matrix 
 sat2 <- matrix(sat2, nrow = length(sat2)/16, ncol = 16, byrow = TRUE )
+#Turns the data into a data frame, left the others unnamed, although simply
+#not adding them would have been sufficient as they will be removed later.
 sat2 <- data.frame(year = sat2[,1],
                      sat2[,2:4],
                      total_math = sat2[,5],
@@ -221,15 +242,18 @@ sat2 <- data.frame(year = sat2[,1],
 `r q <- q+1; letters[q]`. Convert the total math variable into a numeric variable. This step will likely create some `NA` values in the variable, so remove the rows where total math is missing. (**4 Points**)
 
 ```{r}
-sat2$total_math <- as.numeric(sat2$total_math) #Changes the values to numeric
-sat2 <- sat2[!is.na(sat2$total_math),] #Removes the rows with NA
+#Changes the values to numeric
+sat2$total_math <- as.numeric(sat2$total_math) 
+#Removes the rows with NA
+sat2 <- sat2[!is.na(sat2$total_math),] 
 ```
 
 
 `r q <- q+1; letters[q]`. Finally, remove all of the columns *except* `year` and `total_math` from the dataset. (**4 Points**)
 
 ```{r}
-sat2 <- sat2[,c("year","total_math")] #Keeps only the two named columns
+#Keeps only the two named columns
+sat2 <- sat2[,c("year","total_math")] 
 ```
 
 `r q <- q+1; letters[q]`. Make a plot with two lines. On the $X$-axis should be year and on the $Y$-axis should be total math. The first line should be SAT scores from the beginning of the sample until 1999, and another from 2000 and onwards. The two lines should be different colors. Be sure to label the axes and include a legend. (**6 Points**)
