@@ -16,6 +16,7 @@ self-contained: true
 editor: source
 editor_options: 
   chunk_output_type: console
+  embed_resources: true
 ---
 
 ```{r setup, include=FALSE}
