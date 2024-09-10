@@ -103,21 +103,27 @@ Use the state-year cigarette panel data from the previous module ([data](https:/
 `r q <- q+1; letters[q]`. Read in the data, and present summary statistics for price, population, cpi, disposable income, and cigarette sales. Include the number of observations, mean, standard deviation, minimum and maximum. Use the package(s) from the course notes.  (**8 Points**)
 
 ```{r, message = F, warning = F}
+##I copy pasted this from course notes
 # use this every time you want to use 'modelsummary'
 library("modelsummary")
 # add this line when loading 'modelsummary', too
 options("modelsummary_factory_default" = "kableExtra")
+####################################################
+#Read in the data
 cig_data <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Cigar.csv")
+#Formatting
 title <- "Cigarette Data - Summary Statistics"
 frmla <- (`Price` = price) + (`CPI` = cpi) + (`Disposable Income per captia` = ndi) + (`Cigarette Sales` = sales) ~ (`N` = length) + Mean + (`St. Dev.` = sd) + (`Min` = min) + (`Max` = max)
+#Output a table
 datasummary(frmla, data = cig_data, title = title, fmt = fmt_significant(2))
 ```
 
 `r q <- q+1; letters[q]`. Write your own function to calculate a weighted average. As a hint, your function should accept two arguments: one for values and one for weights. (**4 Points**)
 
 ```{r}
+#Declares a function that accepts a value vector and a weight vector and returns a weigthed average
 wtdmean <- function(val,wt){
-  valwt <- val
+    valwt <- val
   for (i in 1:length(val)){
     valwt[i] <- as.numeric(valwt[i]) * as.numeric(wt[i])
     }
@@ -129,35 +135,99 @@ wtdmean <- function(val,wt){
 `r q <- q+1; letters[q]`. Use your function to find the population-weighted average of income. Aside from the formulas being different, provide an intuitive explanation for the difference you observe between the weighted average and the simple average. (**4 Points**)
 
 ```{r}
+#In this implementation the function multiplies income per capita times the population sums all elements then divides by total population.
 wtdmean(cig_data$ndi, cig_data$pop)
 ```
 
-This produces and average where higher populations have a higher impact on the mean income. As the income measure is per capita, this gives a closer approximation of the average income of the sample.
+This produces an average where higher populations have a higher impact on the mean income. As the income measure is per capita, this gives a closer approximation of the average income of the sample.
 
 
 `r q <- q+1; letters[q]`. Produce a visualization of the distribution of cigarette pack prices. Include a vertical, dashed, and colored (you may choose the color) line representing the mean price. Be sure to label the axes, etc. Provide a short description of what you see. (**5 Points**)
 
 ```{r}
-# Your code here...
+#Plots the distribution but rounds of by 10's 
+plot(table(round(cig_data$price/10)*10),
+       main="Distribution of Cigarette Prices",
+       xlab="Price",
+       ylab="Frequency",
+       las=1)
+#Draws a vertical red dotted line that represents the mean of the sample
+abline(v=mean(cig_data$price), 
+       lwd=3, 
+       col="red", 
+       lty=2)
+#Labels the mean
+text(x=mean(cig_data$price)-2.5,
+     y=250,
+     srt=90,
+     col="red",
+     bquote(bar(X) * " = " *.(round(mean(cig_data$price),digits=1))),
+     cex=0.75)
 ```
 
-*Your answer here...*
+Prices are showing a left skewed distribution. Prices are more heteroscedatic as $Price \uparrow$ particularly when $Price > \bar{X}$.
 
 `r q <- q+1; letters[q]`. Produce a scatterplot of price ($X$) vs minimum price of adjoining states ($Y$). Use filled in circles as the point type. Color the points based on whether price is greater than the minimum price of adjoining states. Be sure to label the axes, etc. (**5 Points**)
 
 ```{r}
-# Your code here...
+#Creates a column in cig_data that assigns a color for the point based on the conditions
+for (i in 1:length(cig_data$price)){
+  ifelse(cig_data$price[i] >= cig_data$pimin[i],
+         cig_data$color[i] <- "blue",
+         cig_data$color[i] <- "green")
+  }
+#Plots the data
+plot(cig_data$price, cig_data$pimin,
+     col = cig_data$color,
+     pch = 20,
+     cex = 0.5,
+     main = "Cigarette Prices vs Adjoining State Minimum Prices",
+     xlab = "Price",
+     ylab = "Adjoining State Mininmum")
+#Adds a legend
+legend("bottomright",
+       pch = 19,
+       bty = "o",
+       cex = 0.75,
+       horiz = FALSE,
+       legend = c("At or above adjoining state min.","Below adjoining state min."),
+       col = c("blue","green"))
 ```
 
 
 `r q <- q+1; letters[q]`. Below is a time series of the pack sales by state over time. Recreate this plot to the best of your ability. Regardless of whether you were able to perfectly recreate the picture, what was the hardest part? (**8 Points**)
 
 ```{r}
-# Your code here...
+#Creates a column for a four digit year, luckily the data is all from the 20th century
+cig_data$yyyyear <- as.numeric(paste0("19",cig_data$year))
+#Creates an invisible plot of the data
+plot(cig_data$yyyyear, cig_data$sales,
+     las = 1,
+     type = "n",
+     xlab = "Year",
+     ylab = "Per Capita Cigarette Sales"
+     )
+#Adds time series lines for each state with different colors. Willing to bet this is the exact implementation in the prompt, or at least close to it since the colors even match.
+for (i in unique(cig_data$state)){
+  lines(cig_data$yyyyear[cig_data$state==i], 
+        cig_data$sales[cig_data$state==i],
+        col = i)
+}
+#Not really a legend, more of a title
+ legend("topright",
+       legend = "State by Year",
+       cex = 0.75,
+       bty = "n")
+ abline(v=1980, 
+       lwd=1, 
+       lty=2)
+#Nailed it.
+
+
 ```
 
 
-*Your answer here...*
+It really wasn't that hard. I was subsetting by year in the for loop instead of state for a bit, and wondering why it was going so wrong. Then I changed it to state and everything came out OK!
 
 
 
