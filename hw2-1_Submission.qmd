@@ -165,7 +165,13 @@ text(x=mean(cig_data$price)-2.5,
      cex=0.75)
 ```
 
-Prices are showing a left skewed distribution. Prices are more heteroscedatic as $Price \uparrow$ particularly when $Price > \bar{X}$.
+Prices are showing a left skewed distribution. Frequencies are more heteroscedatic as $Price \uparrow$ particularly when $Price > \bar{X}$. As shown below: $$s_{>\bar{X}} >s_{<\bar{X}}$$
+
+```{r}
+cat("Standard Deviation above the Mean: ",sd(cig_data$price[cig_data$price>mean(cig_data$price)]),"\n")
+cat("Standard Deviation below the Mean: ",sd(cig_data$price[cig_data$price<mean(cig_data$price)]))
+```
+
 
 `r q <- q+1; letters[q]`. Produce a scatterplot of price ($X$) vs minimum price of adjoining states ($Y$). Use filled in circles as the point type. Color the points based on whether price is greater than the minimum price of adjoining states. Be sure to label the axes, etc. (**5 Points**)
 

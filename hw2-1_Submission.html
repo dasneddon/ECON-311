@@ -3645,35 +3645,51 @@ Plot
 </div>
 </details>
 </div>
-<p>Prices are showing a left skewed distribution. Prices are more heteroscedatic as <span class="math inline">\(Price \uparrow\)</span> particularly when <span class="math inline">\(Price &gt; \bar{X}\)</span>.</p>
+<p>Prices are showing a left skewed distribution. Frequencies are more heteroscedatic as <span class="math inline">\(Price \uparrow\)</span> particularly when <span class="math inline">\(Price &gt; \bar{X}\)</span>. As shown below: <span class="math display">\[s_{&gt;\bar{X}} &gt;s_{&lt;\bar{X}}\]</span></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Standard Deviation above the Mean: &quot;</span>,<span class="fu">sd</span>(cig_data<span class="sc">$</span>price[cig_data<span class="sc">$</span>price<span class="sc">&gt;</span><span class="fu">mean</span>(cig_data<span class="sc">$</span>price)]),<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Standard Deviation below the Mean: &quot;</span>,<span class="fu">sd</span>(cig_data<span class="sc">$</span>price[cig_data<span class="sc">$</span>price<span class="sc">&lt;</span><span class="fu">mean</span>(cig_data<span class="sc">$</span>price)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell-output cell-output-stdout">
+<pre><code>Standard Deviation above the Mean:  30.86711 
+Standard Deviation below the Mean:  11.93916</code></pre>
+</div>
+</details>
+</div>
 <ol start="5" type="a">
 <li>Produce a scatterplot of price (<span class="math inline">\(X\)</span>) vs minimum price of adjoining states (<span class="math inline">\(Y\)</span>). Use filled in circles as the point type. Color the points based on whether price is greater than the minimum price of adjoining states. Be sure to label the axes, etc. (<strong>5 Points</strong>)</li>
 </ol>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates a column in cig_data that assigns a color for the point based on the conditions</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cig_data<span class="sc">$</span>price)){</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(cig_data<span class="sc">$</span>price[i] <span class="sc">&gt;=</span> cig_data<span class="sc">$</span>pimin[i],</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>         cig_data<span class="sc">$</span>color[i] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>         cig_data<span class="sc">$</span>color[i] <span class="ot">&lt;-</span> <span class="st">&quot;green&quot;</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cig_data<span class="sc">$</span>price, cig_data<span class="sc">$</span>pimin,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> cig_data<span class="sc">$</span>color,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Cigarette Prices vs Adjoining State Minimum Prices&quot;</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Price&quot;</span>,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Adjoining State Mininmum&quot;</span>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds a legend</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;o&quot;</span>,</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">horiz =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;At or above adjoining state min.&quot;</span>,<span class="st">&quot;Below adjoining state min.&quot;</span>),</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;green&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates a column in cig_data that assigns a color for the point based on the conditions</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cig_data<span class="sc">$</span>price)){</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(cig_data<span class="sc">$</span>price[i] <span class="sc">&gt;=</span> cig_data<span class="sc">$</span>pimin[i],</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>         cig_data<span class="sc">$</span>color[i] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>         cig_data<span class="sc">$</span>color[i] <span class="ot">&lt;-</span> <span class="st">&quot;green&quot;</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cig_data<span class="sc">$</span>price, cig_data<span class="sc">$</span>pimin,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> cig_data<span class="sc">$</span>color,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Cigarette Prices vs Adjoining State Minimum Prices&quot;</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Price&quot;</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Adjoining State Mininmum&quot;</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds a legend</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;o&quot;</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">horiz =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;At or above adjoining state min.&quot;</span>,<span class="st">&quot;Below adjoining state min.&quot;</span>),</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;green&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
@@ -3694,30 +3710,30 @@ Plot
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates a column for a four digit year, luckily the data is all from the 20th century</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cig_data<span class="sc">$</span>yyyyear <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">paste0</span>(<span class="st">&quot;19&quot;</span>,cig_data<span class="sc">$</span>year))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates an invisible plot of the data</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cig_data<span class="sc">$</span>yyyyear, cig_data<span class="sc">$</span>sales,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Per Capita Cigarette Sales&quot;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>     )</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds time series lines for each state with different colors. Willing to bet this is the exact implementation in the prompt, or at least close to it since the colors even match.</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(cig_data<span class="sc">$</span>state)){</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(cig_data<span class="sc">$</span>yyyyear[cig_data<span class="sc">$</span>state<span class="sc">==</span>i], </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        cig_data<span class="sc">$</span>sales[cig_data<span class="sc">$</span>state<span class="sc">==</span>i],</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> i)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Not really a legend, more of a title</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>,</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="st">&quot;State by Year&quot;</span>,</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="at">v=</span><span class="dv">1980</span>, </span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">1</span>, </span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">2</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#Nailed it.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates a column for a four digit year, luckily the data is all from the 20th century</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cig_data<span class="sc">$</span>yyyyear <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">paste0</span>(<span class="st">&quot;19&quot;</span>,cig_data<span class="sc">$</span>year))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates an invisible plot of the data</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cig_data<span class="sc">$</span>yyyyear, cig_data<span class="sc">$</span>sales,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Per Capita Cigarette Sales&quot;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds time series lines for each state with different colors. Willing to bet this is the exact implementation in the prompt, or at least close to it since the colors even match.</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(cig_data<span class="sc">$</span>state)){</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(cig_data<span class="sc">$</span>yyyyear[cig_data<span class="sc">$</span>state<span class="sc">==</span>i], </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        cig_data<span class="sc">$</span>sales[cig_data<span class="sc">$</span>state<span class="sc">==</span>i],</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> i)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Not really a legend, more of a title</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="st">&quot;State by Year&quot;</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="at">v=</span><span class="dv">1980</span>, </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">1</span>, </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#Nailed it.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
@@ -4215,249 +4231,255 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
-<div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Homework 2.1&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;David Sneddon&quot;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> &quot;Old Dominion University&quot;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: lux # Check here for more themes: https://quarto.org/docs/output-formats/html-themes.html</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: &quot;Code&quot;</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: hover</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">    link-external-newwindow: true</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">    tbl-cap-location: top</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-cap-location: bottom</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="an">self-contained:</span><span class="co"> true</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> source</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="in"># DO NOT EDIT THIS</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fig.align = &#39;center&#39;)</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(out.width = &#39;90%&#39;)</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(results = &#39;hold&#39;)</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fig.show = &#39;hold&#39;)</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(error = TRUE)</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(warning = FALSE)</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(message = FALSE)</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="in">par(mar = c(4.1, 4.1, 1.1, 4.1))</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="in">hooks = knitr::knit_hooks$get()</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="in">hook_foldable = function(type) {</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="in">  force(type)</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="in">  function(x, options) {</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="in">    res = hooks[[type]](x, options)</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="in">    if (is.na(as.logical(options[[paste0(&quot;fold.&quot;, type)]]))) {</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="in">      res</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="in">    } else if (isFALSE(as.logical(options[[paste0(&quot;fold.&quot;, type)]]))){</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="in">      # return(res)</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="in">      paste0(</span></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;&lt;details open&gt;&lt;summary&gt;&quot;, gsub(&quot;^p&quot;, &quot;P&quot;, gsub(&quot;^o&quot;, &quot;O&quot;, type)), &quot;&lt;/summary&gt;\n\n&quot;,</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="in">      res,</span></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;\n\n&lt;/details&gt;&quot;</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="in">      paste0(</span></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;&lt;details&gt;&lt;summary&gt;&quot;, gsub(&quot;^p&quot;, &quot;P&quot;, gsub(&quot;^o&quot;, &quot;O&quot;, type)), &quot;&lt;/summary&gt;\n\n&quot;,</span></span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="in">      res,</span></span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;\n\n&lt;/details&gt;&quot;</span></span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::knit_hooks$set(</span></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="in">  output = hook_foldable(&quot;output&quot;),</span></span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="in">  plot = hook_foldable(&quot;plot&quot;)</span></span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fold.output=TRUE)</span></span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fold.plot=TRUE)</span></span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="in">Q &lt;- 0</span></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
-<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. I send out a survey to individuals who graduated from ODU. I ask them to report their salary.  Most people fill out the salary question, but some people leave it blank. Can I fill in zero for these blanks? Explain why or why not. (**4 Points**)</span>
-<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>This would be a faulty assumption. Salary is a ratio measurement which has a natural zero. Since a zero entered for salary would mean the person has a salary of zero. This is different than no value for salary, the actual value of which could be anything. Arbitrarily entering &quot;0&quot; for an NA value would skew the sample.</span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Suppose I decided to pick students with ID numbers that end in an 8 to survey.  I calculate the mean salary of those who submitted salaries.  Will this average salary be representative of all ODU students?  Explain why or why not. (**4 Points**)</span>
-<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>This sample would be representative of all ODU students assuming the final digit in ODU student numbers is random and &quot;all ODU students&quot; is meant as &quot;all ODU graduates&quot;. By design we are collecting data for ODU graduates, so ODU students that do not go on to graduate from ODU due to transfer or otherwise would not be represented. </span>
-<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Continuing from above, if you think think the salary will be representative, explain a way one could survey students where the resulting average *would not* be representative.  If you think the above salary will not be representative, explain a way one could survey students where the resulting average *would* be representative. (**4 Points**)</span>
-<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>To make the the result not representative of all ODU (bachelor&#39;s graduates?) you could choose to only survey Strome graduates. Or only survey graduates that graduated within a short time frame, as time since graduation would be endogenous to salary. On the other hand, by not limiting to a time frame there is the possibility of heteroscedacity being introduced.</span>
-<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Why do we use the sum of squared differences when calculating dispersion? (**4 Points**)</span>
-<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>The sum of deviations from the mean is always zero. The square of the deviation increases exponentially as the deviation increases thereby making dispersion measurable.</span>
-<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
-<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
-<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
-<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>Use the state-year cigarette panel data from the previous module (<span class="co">[</span><span class="ot">data</span><span class="co">](https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Cigar.csv)</span>; <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://vincentarelbundock.github.io/Rdatasets/doc/Ecdat/Cigar.html)</span>) for this question.</span>
-<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Read in the data, and present summary statistics for price, population, cpi, disposable income, and cigarette sales. Include the number of observations, mean, standard deviation, minimum and maximum. Use the package(s) from the course notes.  (**8 Points**)</span>
-<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F, warning = F}</span></span>
-<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a><span class="in">##I copy pasted this from course notes</span></span>
-<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="in"># use this every time you want to use &#39;modelsummary&#39;</span></span>
-<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="in">library(&quot;modelsummary&quot;)</span></span>
-<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="in"># add this line when loading &#39;modelsummary&#39;, too</span></span>
-<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="in">options(&quot;modelsummary_factory_default&quot; = &quot;kableExtra&quot;)</span></span>
-<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a><span class="in">####################################################</span></span>
-<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="in">#Read in the data</span></span>
-<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a><span class="in">cig_data &lt;- read.csv(&quot;https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Cigar.csv&quot;)</span></span>
-<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="in">#Formatting</span></span>
-<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a><span class="in">title &lt;- &quot;Cigarette Data - Summary Statistics&quot;</span></span>
-<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a><span class="in">frmla &lt;- (`Price` = price) + (`CPI` = cpi) + (`Disposable Income per captia` = ndi) + (`Cigarette Sales` = sales) ~ (`N` = length) + Mean + (`St. Dev.` = sd) + (`Min` = min) + (`Max` = max)</span></span>
-<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a><span class="in">#Output a table</span></span>
-<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a><span class="in">datasummary(frmla, data = cig_data, title = title, fmt = fmt_significant(2))</span></span>
-<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Write your own function to calculate a weighted average. As a hint, your function should accept two arguments: one for values and one for weights. (**4 Points**)</span>
-<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a><span class="co">#Declares a function that accepts a value vector and a weight vector and returns a weigthed average</span></span>
-<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>wtdmean <span class="ot">&lt;-</span> <span class="cf">function</span>(val,wt){</span>
-<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a>    valwt <span class="ot">&lt;-</span> val</span>
-<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(val)){</span>
-<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>    valwt[i] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(valwt[i]) <span class="sc">*</span> <span class="fu">as.numeric</span>(wt[i])</span>
-<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>((<span class="fu">sum</span>(valwt))<span class="sc">/</span>(<span class="fu">sum</span>(wt)))</span>
-<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Use your function to find the population-weighted average of income. Aside from the formulas being different, provide an intuitive explanation for the difference you observe between the weighted average and the simple average. (**4 Points**)</span>
-<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a><span class="co">#In this implementation the function multiplies income per capita times the population sums all elements then divides by total population.</span></span>
-<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a><span class="fu">wtdmean</span>(cig_data<span class="sc">$</span>ndi, cig_data<span class="sc">$</span>pop)</span>
-<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>This produces an average where higher populations have a higher impact on the mean income. As the income measure is per capita, this gives a closer approximation of the average income of the sample.</span>
-<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Produce a visualization of the distribution of cigarette pack prices. Include a vertical, dashed, and colored (you may choose the color) line representing the mean price. Be sure to label the axes, etc. Provide a short description of what you see. (**5 Points**)</span>
-<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the distribution but rounds of by 10&#39;s </span></span>
-<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">table</span>(<span class="fu">round</span>(cig_data<span class="sc">$</span>price<span class="sc">/</span><span class="dv">10</span>)<span class="sc">*</span><span class="dv">10</span>),</span>
-<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a>       <span class="at">main=</span><span class="st">&quot;Distribution of Cigarette Prices&quot;</span>,</span>
-<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab=</span><span class="st">&quot;Price&quot;</span>,</span>
-<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab=</span><span class="st">&quot;Frequency&quot;</span>,</span>
-<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a>       <span class="at">las=</span><span class="dv">1</span>)</span>
-<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a><span class="co">#Draws a vertical red dotted line that represents the mean of the sample</span></span>
-<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(cig_data<span class="sc">$</span>price), </span>
-<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">3</span>, </span>
-<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a>       <span class="at">col=</span><span class="st">&quot;red&quot;</span>, </span>
-<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">2</span>)</span>
-<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a><span class="co">#Labels the mean</span></span>
-<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">mean</span>(cig_data<span class="sc">$</span>price)<span class="sc">-</span><span class="fl">2.5</span>,</span>
-<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span><span class="dv">250</span>,</span>
-<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a>     <span class="at">srt=</span><span class="dv">90</span>,</span>
-<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="st">&quot;red&quot;</span>,</span>
-<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a>     <span class="fu">bquote</span>(<span class="fu">bar</span>(X) <span class="sc">*</span> <span class="st">&quot; = &quot;</span> <span class="sc">*</span>.(<span class="fu">round</span>(<span class="fu">mean</span>(cig_data<span class="sc">$</span>price),<span class="at">digits=</span><span class="dv">1</span>))),</span>
-<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">0.75</span>)</span>
-<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a>Prices are showing a left skewed distribution. Prices are more heteroscedatic as $Price \uparrow$ particularly when $Price &gt; \bar{X}$.</span>
-<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Produce a scatterplot of price ($X$) vs minimum price of adjoining states ($Y$). Use filled in circles as the point type. Color the points based on whether price is greater than the minimum price of adjoining states. Be sure to label the axes, etc. (**5 Points**)</span>
-<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates a column in cig_data that assigns a color for the point based on the conditions</span></span>
-<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cig_data<span class="sc">$</span>price)){</span>
-<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(cig_data<span class="sc">$</span>price[i] <span class="sc">&gt;=</span> cig_data<span class="sc">$</span>pimin[i],</span>
-<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a>         cig_data<span class="sc">$</span>color[i] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a>         cig_data<span class="sc">$</span>color[i] <span class="ot">&lt;-</span> <span class="st">&quot;green&quot;</span>)</span>
-<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
-<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cig_data<span class="sc">$</span>price, cig_data<span class="sc">$</span>pimin,</span>
-<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> cig_data<span class="sc">$</span>color,</span>
-<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
-<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
-<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Cigarette Prices vs Adjoining State Minimum Prices&quot;</span>,</span>
-<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Price&quot;</span>,</span>
-<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Adjoining State Mininmum&quot;</span>)</span>
-<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds a legend</span></span>
-<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>,</span>
-<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;o&quot;</span>,</span>
-<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
-<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a>       <span class="at">horiz =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;At or above adjoining state min.&quot;</span>,<span class="st">&quot;Below adjoining state min.&quot;</span>),</span>
-<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;green&quot;</span>))</span>
-<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Below is a time series of the pack sales by state over time. Recreate this plot to the best of your ability. Regardless of whether you were able to perfectly recreate the picture, what was the hardest part? (**8 Points**)</span>
-<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates a column for a four digit year, luckily the data is all from the 20th century</span></span>
-<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a>cig_data<span class="sc">$</span>yyyyear <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">paste0</span>(<span class="st">&quot;19&quot;</span>,cig_data<span class="sc">$</span>year))</span>
-<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates an invisible plot of the data</span></span>
-<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cig_data<span class="sc">$</span>yyyyear, cig_data<span class="sc">$</span>sales,</span>
-<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,</span>
-<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Per Capita Cigarette Sales&quot;</span></span>
-<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a>     )</span>
-<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds time series lines for each state with different colors. Willing to bet this is the exact implementation in the prompt, or at least close to it since the colors even match.</span></span>
-<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(cig_data<span class="sc">$</span>state)){</span>
-<span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(cig_data<span class="sc">$</span>yyyyear[cig_data<span class="sc">$</span>state<span class="sc">==</span>i], </span>
-<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a>        cig_data<span class="sc">$</span>sales[cig_data<span class="sc">$</span>state<span class="sc">==</span>i],</span>
-<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> i)</span>
-<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a><span class="co">#Not really a legend, more of a title</span></span>
-<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a> <span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>,</span>
-<span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="st">&quot;State by Year&quot;</span>,</span>
-<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
-<span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span>
-<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="at">v=</span><span class="dv">1980</span>, </span>
-<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">1</span>, </span>
-<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">2</span>)</span>
-<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a><span class="co">#Nailed it.</span></span>
-<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a>It really wasn&#39;t that hard. I was subsetting by year in the for loop instead of state for a bit, and wondering why it was going so wrong. Then I changed it to state and everything came out OK!</span>
-<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-245"><a href="#cb8-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-247"><a href="#cb8-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-248"><a href="#cb8-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-251"><a href="#cb8-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-252"><a href="#cb8-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-253"><a href="#cb8-253" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Homework 2.1&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;David Sneddon&quot;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> &quot;Old Dominion University&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: lux # Check here for more themes: https://quarto.org/docs/output-formats/html-themes.html</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: &quot;Code&quot;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: hover</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">    link-external-newwindow: true</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">    tbl-cap-location: top</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-cap-location: bottom</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="an">self-contained:</span><span class="co"> true</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> source</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="in"># DO NOT EDIT THIS</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fig.align = &#39;center&#39;)</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(out.width = &#39;90%&#39;)</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(results = &#39;hold&#39;)</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fig.show = &#39;hold&#39;)</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(error = TRUE)</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(warning = FALSE)</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(message = FALSE)</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="in">par(mar = c(4.1, 4.1, 1.1, 4.1))</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="in">hooks = knitr::knit_hooks$get()</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="in">hook_foldable = function(type) {</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="in">  force(type)</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="in">  function(x, options) {</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="in">    res = hooks[[type]](x, options)</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="in">    if (is.na(as.logical(options[[paste0(&quot;fold.&quot;, type)]]))) {</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="in">      res</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="in">    } else if (isFALSE(as.logical(options[[paste0(&quot;fold.&quot;, type)]]))){</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="in">      # return(res)</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="in">      paste0(</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;&lt;details open&gt;&lt;summary&gt;&quot;, gsub(&quot;^p&quot;, &quot;P&quot;, gsub(&quot;^o&quot;, &quot;O&quot;, type)), &quot;&lt;/summary&gt;\n\n&quot;,</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="in">      res,</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;\n\n&lt;/details&gt;&quot;</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="in">      paste0(</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;&lt;details&gt;&lt;summary&gt;&quot;, gsub(&quot;^p&quot;, &quot;P&quot;, gsub(&quot;^o&quot;, &quot;O&quot;, type)), &quot;&lt;/summary&gt;\n\n&quot;,</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="in">      res,</span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;\n\n&lt;/details&gt;&quot;</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::knit_hooks$set(</span></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="in">  output = hook_foldable(&quot;output&quot;),</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="in">  plot = hook_foldable(&quot;plot&quot;)</span></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fold.output=TRUE)</span></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fold.plot=TRUE)</span></span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="in">Q &lt;- 0</span></span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. I send out a survey to individuals who graduated from ODU. I ask them to report their salary.  Most people fill out the salary question, but some people leave it blank. Can I fill in zero for these blanks? Explain why or why not. (**4 Points**)</span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>This would be a faulty assumption. Salary is a ratio measurement which has a natural zero. Since a zero entered for salary would mean the person has a salary of zero. This is different than no value for salary, the actual value of which could be anything. Arbitrarily entering &quot;0&quot; for an NA value would skew the sample.</span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Suppose I decided to pick students with ID numbers that end in an 8 to survey.  I calculate the mean salary of those who submitted salaries.  Will this average salary be representative of all ODU students?  Explain why or why not. (**4 Points**)</span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>This sample would be representative of all ODU students assuming the final digit in ODU student numbers is random and &quot;all ODU students&quot; is meant as &quot;all ODU graduates&quot;. By design we are collecting data for ODU graduates, so ODU students that do not go on to graduate from ODU due to transfer or otherwise would not be represented. </span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Continuing from above, if you think think the salary will be representative, explain a way one could survey students where the resulting average *would not* be representative.  If you think the above salary will not be representative, explain a way one could survey students where the resulting average *would* be representative. (**4 Points**)</span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>To make the the result not representative of all ODU (bachelor&#39;s graduates?) you could choose to only survey Strome graduates. Or only survey graduates that graduated within a short time frame, as time since graduation would be endogenous to salary. On the other hand, by not limiting to a time frame there is the possibility of heteroscedacity being introduced.</span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Why do we use the sum of squared differences when calculating dispersion? (**4 Points**)</span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>The sum of deviations from the mean is always zero. The square of the deviation increases exponentially as the deviation increases thereby making dispersion measurable.</span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>Use the state-year cigarette panel data from the previous module (<span class="co">[</span><span class="ot">data</span><span class="co">](https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Cigar.csv)</span>; <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://vincentarelbundock.github.io/Rdatasets/doc/Ecdat/Cigar.html)</span>) for this question.</span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Read in the data, and present summary statistics for price, population, cpi, disposable income, and cigarette sales. Include the number of observations, mean, standard deviation, minimum and maximum. Use the package(s) from the course notes.  (**8 Points**)</span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F, warning = F}</span></span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a><span class="in">##I copy pasted this from course notes</span></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="in"># use this every time you want to use &#39;modelsummary&#39;</span></span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="in">library(&quot;modelsummary&quot;)</span></span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a><span class="in"># add this line when loading &#39;modelsummary&#39;, too</span></span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a><span class="in">options(&quot;modelsummary_factory_default&quot; = &quot;kableExtra&quot;)</span></span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a><span class="in">####################################################</span></span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a><span class="in">#Read in the data</span></span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a><span class="in">cig_data &lt;- read.csv(&quot;https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Cigar.csv&quot;)</span></span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="in">#Formatting</span></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="in">title &lt;- &quot;Cigarette Data - Summary Statistics&quot;</span></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a><span class="in">frmla &lt;- (`Price` = price) + (`CPI` = cpi) + (`Disposable Income per captia` = ndi) + (`Cigarette Sales` = sales) ~ (`N` = length) + Mean + (`St. Dev.` = sd) + (`Min` = min) + (`Max` = max)</span></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="in">#Output a table</span></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a><span class="in">datasummary(frmla, data = cig_data, title = title, fmt = fmt_significant(2))</span></span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Write your own function to calculate a weighted average. As a hint, your function should accept two arguments: one for values and one for weights. (**4 Points**)</span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a><span class="co">#Declares a function that accepts a value vector and a weight vector and returns a weigthed average</span></span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>wtdmean <span class="ot">&lt;-</span> <span class="cf">function</span>(val,wt){</span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a>    valwt <span class="ot">&lt;-</span> val</span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(val)){</span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>    valwt[i] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(valwt[i]) <span class="sc">*</span> <span class="fu">as.numeric</span>(wt[i])</span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>((<span class="fu">sum</span>(valwt))<span class="sc">/</span>(<span class="fu">sum</span>(wt)))</span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Use your function to find the population-weighted average of income. Aside from the formulas being different, provide an intuitive explanation for the difference you observe between the weighted average and the simple average. (**4 Points**)</span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a><span class="co">#In this implementation the function multiplies income per capita times the population sums all elements then divides by total population.</span></span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a><span class="fu">wtdmean</span>(cig_data<span class="sc">$</span>ndi, cig_data<span class="sc">$</span>pop)</span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>This produces an average where higher populations have a higher impact on the mean income. As the income measure is per capita, this gives a closer approximation of the average income of the sample.</span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Produce a visualization of the distribution of cigarette pack prices. Include a vertical, dashed, and colored (you may choose the color) line representing the mean price. Be sure to label the axes, etc. Provide a short description of what you see. (**5 Points**)</span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the distribution but rounds of by 10&#39;s </span></span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">table</span>(<span class="fu">round</span>(cig_data<span class="sc">$</span>price<span class="sc">/</span><span class="dv">10</span>)<span class="sc">*</span><span class="dv">10</span>),</span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a>       <span class="at">main=</span><span class="st">&quot;Distribution of Cigarette Prices&quot;</span>,</span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab=</span><span class="st">&quot;Price&quot;</span>,</span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab=</span><span class="st">&quot;Frequency&quot;</span>,</span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a>       <span class="at">las=</span><span class="dv">1</span>)</span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a><span class="co">#Draws a vertical red dotted line that represents the mean of the sample</span></span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(cig_data<span class="sc">$</span>price), </span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">3</span>, </span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a>       <span class="at">col=</span><span class="st">&quot;red&quot;</span>, </span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a><span class="co">#Labels the mean</span></span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">mean</span>(cig_data<span class="sc">$</span>price)<span class="sc">-</span><span class="fl">2.5</span>,</span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span><span class="dv">250</span>,</span>
+<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a>     <span class="at">srt=</span><span class="dv">90</span>,</span>
+<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>     <span class="fu">bquote</span>(<span class="fu">bar</span>(X) <span class="sc">*</span> <span class="st">&quot; = &quot;</span> <span class="sc">*</span>.(<span class="fu">round</span>(<span class="fu">mean</span>(cig_data<span class="sc">$</span>price),<span class="at">digits=</span><span class="dv">1</span>))),</span>
+<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a>Prices are showing a left skewed distribution. Frequencies are more heteroscedatic as $Price \uparrow$ particularly when $Price &gt; \bar{X}$. As shown below: $$s_{&gt;\bar{X}} &gt;s_{&lt;\bar{X}}$$</span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Standard Deviation above the Mean: &quot;</span>,<span class="fu">sd</span>(cig_data<span class="sc">$</span>price[cig_data<span class="sc">$</span>price<span class="sc">&gt;</span><span class="fu">mean</span>(cig_data<span class="sc">$</span>price)]),<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Standard Deviation below the Mean: &quot;</span>,<span class="fu">sd</span>(cig_data<span class="sc">$</span>price[cig_data<span class="sc">$</span>price<span class="sc">&lt;</span><span class="fu">mean</span>(cig_data<span class="sc">$</span>price)]))</span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Produce a scatterplot of price ($X$) vs minimum price of adjoining states ($Y$). Use filled in circles as the point type. Color the points based on whether price is greater than the minimum price of adjoining states. Be sure to label the axes, etc. (**5 Points**)</span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates a column in cig_data that assigns a color for the point based on the conditions</span></span>
+<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cig_data<span class="sc">$</span>price)){</span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(cig_data<span class="sc">$</span>price[i] <span class="sc">&gt;=</span> cig_data<span class="sc">$</span>pimin[i],</span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>         cig_data<span class="sc">$</span>color[i] <span class="ot">&lt;-</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a>         cig_data<span class="sc">$</span>color[i] <span class="ot">&lt;-</span> <span class="st">&quot;green&quot;</span>)</span>
+<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a><span class="co">#Plots the data</span></span>
+<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cig_data<span class="sc">$</span>price, cig_data<span class="sc">$</span>pimin,</span>
+<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> cig_data<span class="sc">$</span>color,</span>
+<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Cigarette Prices vs Adjoining State Minimum Prices&quot;</span>,</span>
+<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Price&quot;</span>,</span>
+<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Adjoining State Mininmum&quot;</span>)</span>
+<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds a legend</span></span>
+<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>,</span>
+<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;o&quot;</span>,</span>
+<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
+<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a>       <span class="at">horiz =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;At or above adjoining state min.&quot;</span>,<span class="st">&quot;Below adjoining state min.&quot;</span>),</span>
+<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;green&quot;</span>))</span>
+<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Below is a time series of the pack sales by state over time. Recreate this plot to the best of your ability. Regardless of whether you were able to perfectly recreate the picture, what was the hardest part? (**8 Points**)</span>
+<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates a column for a four digit year, luckily the data is all from the 20th century</span></span>
+<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a>cig_data<span class="sc">$</span>yyyyear <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">paste0</span>(<span class="st">&quot;19&quot;</span>,cig_data<span class="sc">$</span>year))</span>
+<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a><span class="co">#Creates an invisible plot of the data</span></span>
+<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cig_data<span class="sc">$</span>yyyyear, cig_data<span class="sc">$</span>sales,</span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Per Capita Cigarette Sales&quot;</span></span>
+<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a><span class="co">#Adds time series lines for each state with different colors. Willing to bet this is the exact implementation in the prompt, or at least close to it since the colors even match.</span></span>
+<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(cig_data<span class="sc">$</span>state)){</span>
+<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(cig_data<span class="sc">$</span>yyyyear[cig_data<span class="sc">$</span>state<span class="sc">==</span>i], </span>
+<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a>        cig_data<span class="sc">$</span>sales[cig_data<span class="sc">$</span>state<span class="sc">==</span>i],</span>
+<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> i)</span>
+<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a><span class="co">#Not really a legend, more of a title</span></span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a> <span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>,</span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="st">&quot;State by Year&quot;</span>,</span>
+<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.75</span>,</span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="at">v=</span><span class="dv">1980</span>, </span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">1</span>, </span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a><span class="co">#Nailed it.</span></span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a>It really wasn&#39;t that hard. I was subsetting by year in the for loop instead of state for a bit, and wondering why it was going so wrong. Then I changed it to state and everything came out OK!</span>
+<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
