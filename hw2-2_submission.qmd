@@ -1,6 +1,6 @@
 ---
 title: "Homework 2.2"
-author: "Your Name Here"
+author: "David Sneddon"
 institute: "Old Dominion University"
 format: 
   html:
@@ -76,11 +76,43 @@ q <- 0
 
 `r q <- q+1; letters[q]`. How are hypothesis testing and confidence intervals related? (**4 Points**)
 
-*Your answer here...*
+Confidence intervals, is how likely a true population parameter falls within a range near the sample parameter.
 
-`r q <- q+1; letters[q]`. Suppose I calculate a p-value of 0.08.  What is there an 8\% probability of? (**4 Points**)
+The formula is:
 
-*Your answer here...*
+$$
+CI = \bar{X} \pm Z \left(\frac{s}{\sqrt{n}}\right) 
+$$
+
+Where $CI$ is the confidence interval, $\bar{X}$ is the sample mean, $Z$ is the Z-Score, $s$ is the standard deviation of the sample, and $n$ is the number of observations in the sample.
+
+So if
+
+
+
+$\mu \in \mathbb{R}$\
+$H_0: \mu=0$\
+$H_1: \mu \ne 0$\
+$\alpha/2=0.25\therefore Z= 1.96$\
+$n=30$\
+$s=1.0$\
+$\bar{X}=5.0$\
+
+
+
+...then the confidence interval is:
+
+$$
+\begin{equation}
+CI = 5.0 \pm 1.96 \left(\frac{1}{\sqrt{30}}\right) = 5.0 \pm 0.358
+\end{equation}
+$$
+
+Since $0$ does not fall within the confidence interval then we can reject $H_0$ since there is evidence that $\mu \ne 0$.
+
+`r q <- q+1; letters[q]`. Suppose I calculate a p-value of 0.08. What is there an 8% probability of? (**4 Points**)
+
+There is an $8\%$ probability that the result was random chance and $H_0$ is correct.
 
 ## Question `r Q <- Q+1; Q`
 
@@ -90,67 +122,139 @@ q <- 0
 
 For the following question, use [data on the heights and weights of the 2022-23 NBA and WNBA all-stars](https://alexcardazzi.github.io/econ311/data/bball_allstars.csv).
 
-`r q <- q+1; letters[q]`. Read data into R.  Call the dataset `bball`. (**2 Points**)
+`r q <- q+1; letters[q]`. Read data into R. Call the dataset `bball`. (**2 Points**)
 
 ```{r}
-# Your code here...
+bball <- read.csv("https://alexcardazzi.github.io/econ311/data/bball_allstars.csv")
 ```
 
 `r q <- q+1; letters[q]`. Remove any columns with missing data. (**2 Points**)
 
 ```{r}
-# Your code here...
+for (i in ncol(bball):1){
+  if(sum(is.na(bball[,i]))>0){
+    bball[,i] <- NULL
+  }
+}
 ```
 
 `r q <- q+1; letters[q]`. Print the row of the youngest player. (**2 Points**)
 
 ```{r}
-# Your code here...
+bball[bball$AGE==min(bball$AGE),]
 ```
 
 `r q <- q+1; letters[q]`. Create two summary statistics tables -- one for the NBA players, and one for the WNBA players. Include only variables for age, height, and weight. Comment on the differences. (**4 Points**)
 
 ```{r results='hold'}
-# Your code here...
+##I copy pasted this from course notes
+# use this every time you want to use 'modelsummary'
+library("modelsummary")
+# add this line when loading 'modelsummary', too
+options("modelsummary_factory_default" = "kableExtra")
+####################################################
+
+outputtr <- function(i){
+ title <- paste("Summary Statistics -",i)
+  frmla <- AGE + HEIGHT + WEIGHT ~ (`N` = length) + Mean + (`St. Dev.` = sd) + (`Min` = min) + (`Max` = max)
+  return(datasummary(frmla, data=bball[bball$LEAGUE==i,], title=title, fmt = fmt_significant(2)))
+}
+###This is what I wanted to do, it should work, at least in theory. The output html file won't
+###render the the html on the template, just outputs raw html code.
+###Slightly better using {r results='asis'} but puts the title at the bottom for each table. 
+# }
+# for (x in unique(bball$LEAGUE)){
+#   print(outputtr(x))
+# }
+outputtr("NBA")
+outputtr("WNBA")
 ```
 
-*Your answer here...*
+The average age is higher in the WNBA, while average height and weight is higher in the NBA. The heights and weights are also more varied in the NBA.
 
 `r q <- q+1; letters[q]`. Which player(s) is taller relative to their respective league: the tallest NBA player(s) or the tallest WNBA player(s)? *Hint*: use Z-Scores! It might even be helpful to write a function to calculate Z-Scores to minimize the total amount of code you need to write. (**4 Points**)
 
-::: {.aside}
-Do not manually type the player names / heights, use code to select the player's info. 
+::: aside
+Do not manually type the player names / heights, use code to select the player's info.
 :::
 
 ```{r results='hold'}
-# Your code here...
+zscr <- function(x, mu, std){
+  return((x-mu)/std)
+}
+
+for (c in unique(bball$LEAGUE)){
+  for (i in 1:nrow(bball)){
+    if(bball$LEAGUE[i]==c){
+      bball$ZSCORE_LEAGUE[i] <- zscr(bball$HEIGHT[i], mean(bball$HEIGHT[bball$LEAGUE==c]),
+                                     sd(bball$HEIGHT[bball$LEAGUE==c]))
+    }
+  }
+}
+bball$HIGHEST <- 0
+for (c in unique(bball$LEAGUE)){
+  for (i in 1:nrow(bball)){
+    if(bball$ZSCORE_LEAGUE[i]==max(bball$ZSCORE_LEAGUE[bball$LEAGUE==c]) &
+       bball$LEAGUE[i]==c){
+      bball$HIGHEST[i] <- 1
+    }
+  }
+}
+
+print(bball[bball$HIGHEST==1,])
 ```
 
-*Your answer here...*
+The tallest players relative to their leagues are shown above, with the NBA having the relatively even taller players with the highest z-scores overall.
 
-`r q <- q+1; letters[q]`. Create and print a 95\% confidence interval for WNBA heights. (**4 Points**)
+
+`r q <- q+1; letters[q]`. Create and print a 95% confidence interval for WNBA heights. (**4 Points**)
 
 ```{r results='hold'}
-# Your code here...
+bballw <- bball[bball$LEAGUE=="WNBA",]
+wnba_summy <- c(mean(bballw$HEIGHT),1.96,sd(bballw$HEIGHT),sqrt(nrow(bballw)))
+ci <- function(summy){
+  upr <- wnba_summy[1] + wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])
+  lowr <- wnba_summy[1] - wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])
+  return(paste0("(",round(lowr,digits=2),", ",round(upr,digits=2),")"))
+}
+
+paste0("CI=",ci(wnba_summy))
 ```
 
 `r q <- q+1; letters[q]`. What percentage of WNBA observations fall inside this confidence interval? Is there a percentage of observations we should *expect* to fall inside this interval? (**4 Points**)
 
 ```{r}
-# Your code here...
+ci_2 <- function(summy){
+  upr <- wnba_summy[1] + wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])
+  lowr <- wnba_summy[1] - wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])
+  return(c(lowr,upr))
+}
+ci_w <- ci_2(wnba_summy)
+bballw$inconf <- 0
+for (i in 1:nrow(bballw)){
+  if(bballw$HEIGHT[i]>=ci_w[1] & bballw$HEIGHT[i]<=ci_w[2])
+    bballw$inconf[i] <- 1
+}
+paste0("Percentage of Observations in CI = ",round(sum(bballw$inconf)/nrow(bballw)*100,digits=2),"%")
 ```
 
-*Your answer here...*
+There is no percentage of observations that we can expect to be inside the CI. The CI is how confident we are that the true population mean falls within that interval. 
 
-`r q <- q+1; letters[q]`. I have a hypothesis that older players are heavier than younger players.^[Define "young" as 25 or younger.] Use `t.test()` to preform a hypothesis test comparing weights of young and old players. What is the conclusion of the test? Interpret the test's p-value *in words*. (**4 Points**)
+`r q <- q+1; letters[q]`. I have a hypothesis that older players are heavier than younger players.[^1] Use `t.test()` to preform a hypothesis test comparing weights of young and old players. What is the conclusion of the test? Interpret the test's p-value *in words*. (**4 Points**)
+
+[^1]: Define "young" as 25 or younger.
 
 ```{r}
-# Your code here...
+t.test(bball$WEIGHT[bball$AGE>25], bball$WEIGHT[bball$AGE<=25], "greater")
 ```
+Let $W$ be player weight:\
+$\bar{W} \in \mathbb{R}^+$\
+$H_0: \bar{W}_{old} \le \bar{W}_{young}$\
+$H_1: \bar{W}_{old} > \bar{W}_{young}$\
+$P=0.1644$\
+$\alpha=0.05$\
 
-*Your answer here...*
-
-
+$P>\alpha$ therefore we fail to reject $H_0$ and there is a $16.44\%$ probability that this result is random chance.
 
 ## Question `r Q <- Q+1; Q`
 
@@ -158,16 +262,18 @@ Do not manually type the player names / heights, use code to select the player's
 q <- 0
 ```
 
-Navigate to the following website: [https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/](https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/) On this website, you should see the following options:
+Navigate to the following website: <https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/> On this website, you should see the following options:
 
 <ol>
-- Parameter: keep this as "Average Temperature".
-- Time Scale: keep this as "1-Month".
-- Month: set this to your birth month.
-- Start Year: set this to your birth year.
-- End Year: set this to "2024".
-- State: set this to the state you were born in.  If you were not born in the United States, choose the first state in which you lived.
-- County: set this to the county you were born in (or the first county you lived in).
+
+-   Parameter: keep this as "Average Temperature".
+-   Time Scale: keep this as "1-Month".
+-   Month: set this to your birth month.
+-   Start Year: set this to your birth year.
+-   End Year: set this to "2024".
+-   State: set this to the state you were born in. If you were not born in the United States, choose the first state in which you lived.
+-   County: set this to the county you were born in (or the first county you lived in).
+
 </ol>
 
 `r q <- q+1; letters[q]`. Once these options are set, click the "Plot" button, scroll down below the generated plot, and right-click on the "CSV" download button. Copy the hyperlink address, and read it into R using `read.csv()`. (**2 Points**)
@@ -182,7 +288,7 @@ Navigate to the following website: [https://www.ncei.noaa.gov/access/monitoring/
 # Your code here...
 ```
 
-`r q <- q+1; letters[q]`. Recreate the plot on the website.  You may ignore the right-hand celsius axis, the "&deg; F" on the left-hand axis, the background grid, the "NOAA" logo, and the shaded area beneath the time series. (**4 Points**) However, **extra credit** (**5 *Bonus* Points**) will be given to the person who can get the closest to an exact replication.
+`r q <- q+1; letters[q]`. Recreate the plot on the website. You may ignore the right-hand celsius axis, the "° F" on the left-hand axis, the background grid, the "NOAA" logo, and the shaded area beneath the time series. (**4 Points**) However, **extra credit** (**5 *Bonus* Points**) will be given to the person who can get the closest to an exact replication.
 
 ```{r}
 # Your code here...
