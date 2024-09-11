@@ -247,11 +247,11 @@ There is no percentage of observations that we can expect to be inside the CI. T
 ```{r}
 t.test(bball$WEIGHT[bball$AGE>25], bball$WEIGHT[bball$AGE<=25], "greater")
 ```
-Let $W$ be player weight:\
+Let $\bar{W}$ be average player weight in the sample:\
 $\bar{W} \in \mathbb{R}^+$\
 $H_0: \bar{W}_{old} \le \bar{W}_{young}$\
 $H_1: \bar{W}_{old} > \bar{W}_{young}$\
-$P=0.1644$\
+$p=0.1644$\
 $\alpha=0.05$\
 
 $P>\alpha$ therefore we fail to reject $H_0$ and there is a $16.44\%$ probability that this result is random chance.
