@@ -318,12 +318,8 @@ celcius <- function(x){
 #removed the extra digits.
 temp$Date <- substr(temp$Date,1 ,4)
 
-<<<<<<< HEAD
-#This reads the image into R
-=======
 #This reads the image into R, the image itself is the NOAA logo on the
 #website's plot, pulled from the page source.
->>>>>>> 644ef42 (new update)
 img <- readPNG("noaa-logo.png", native = FALSE)
 
 #This converts the image into a matrix which was the most straightforward 
@@ -346,11 +342,7 @@ ggplot(temp, aes(x=Date,
   theme(panel.grid.minor = element_blank()) +
   labs(title = "Kanawha County, West Virginia Average Temperature", 
        subtitle = "July") +
-<<<<<<< HEAD
-  #the axes aren't labeled on the website, so the aren't here either
-=======
   #the axes aren't labeled on the website, so they aren't here either
->>>>>>> 644ef42 (new update)
   xlab(NULL) +
   ylab(NULL) +
   #used Mac's Digital Color Meter to get the colors
