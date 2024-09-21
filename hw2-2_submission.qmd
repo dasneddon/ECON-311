@@ -88,8 +88,6 @@ Where $CI$ is the confidence interval, $\bar{X}$ is the sample mean, $Z$ is the 
 
 So if
 
-
-
 $\mu \in \mathbb{R}$\
 $H_0: \mu=0$\
 $H_1: \mu \ne 0$\
@@ -97,8 +95,6 @@ $\alpha/2=0.25\therefore Z= 1.96$\
 $n=30$\
 $s=1.0$\
 $\bar{X}=5.0$\
-
-
 
 ...then the confidence interval is:
 
@@ -206,7 +202,6 @@ print(bball[bball$HIGHEST==1,])
 
 The tallest players relative to their leagues are shown above, with the NBA having the relatively even taller players with the highest z-scores overall.
 
-
 `r q <- q+1; letters[q]`. Create and print a 95% confidence interval for WNBA heights. (**4 Points**)
 
 ```{r results='hold'}
@@ -238,7 +233,7 @@ for (i in 1:nrow(bballw)){
 paste0("Percentage of Observations in CI = ",round(sum(bballw$inconf)/nrow(bballw)*100,digits=2),"%")
 ```
 
-There is no percentage of observations that we can expect to be inside the CI. The CI is how confident we are that the true population mean falls within that interval. 
+There is no percentage of observations that we can expect to be inside the CI. The CI is how confident we are that the true population mean falls within that interval.
 
 `r q <- q+1; letters[q]`. I have a hypothesis that older players are heavier than younger players.[^1] Use `t.test()` to preform a hypothesis test comparing weights of young and old players. What is the conclusion of the test? Interpret the test's p-value *in words*. (**4 Points**)
 
@@ -247,6 +242,7 @@ There is no percentage of observations that we can expect to be inside the CI. T
 ```{r}
 t.test(bball$WEIGHT[bball$AGE>25], bball$WEIGHT[bball$AGE<=25], "greater")
 ```
+
 Let $\bar{W}$ be average player weight in the sample:\
 $\bar{W} \in \mathbb{R}^+$\
 $H_0: \bar{W}_{old} \le \bar{W}_{young}$\
@@ -279,19 +275,122 @@ Navigate to the following website: <https://www.ncei.noaa.gov/access/monitoring/
 `r q <- q+1; letters[q]`. Once these options are set, click the "Plot" button, scroll down below the generated plot, and right-click on the "CSV" download button. Copy the hyperlink address, and read it into R using `read.csv()`. (**2 Points**)
 
 ```{r}
-# Your code here...
+temp <- read.csv("https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/WV-039/tavg/1/7/1986-2024.csv?base_prd=true&begbaseyear=1901&endbaseyear=2000")
 ```
 
 `r q <- q+1; letters[q]`. Clean the data so it appears more like a "normal" `data.frame`. (**4 Points**) For example, using `head(temp)`, the output is:
 
 ```{r}
-# Your code here...
+temp <- cbind(rownames(temp),temp)
+rownames(temp) <- NULL
+temp <- temp[-1:-3,] 
+colnames(temp) <- temp[1,]
+temp <- temp[-1,]
 ```
 
 `r q <- q+1; letters[q]`. Recreate the plot on the website. You may ignore the right-hand celsius axis, the "° F" on the left-hand axis, the background grid, the "NOAA" logo, and the shaded area beneath the time series. (**4 Points**) However, **extra credit** (**5 *Bonus* Points**) will be given to the person who can get the closest to an exact replication.
 
 ```{r}
-# Your code here...
+#In order to attempt a close replication I needed to relearn how to plot by
+#using some libraries I previously had no experience with. I'll try to document 
+#this heavily to show what I was doing, and why I did it. Using ggplot2, I
+#got a lot more disciplined with indentation. Without it, the code
+#gets hard to follow very quickly. 
+
+library(ggplot2) #I chose to use this package because it seemed to allow for 
+#more control (at the expense of user friendliness), I did, however, find a 
+#great deal more resources online for doing the more complicated graphics  
+#manipulation that I wanted to implement.
+
+#This library was needed to scale the axes properly and add units to the axes
+library(scales)
+
+#These were needed to add the NOAA image to the plot.
+library(ggimage)
+library(png)
+library(grid)
+
+#Function to convert F to C for the right x-axis
+celcius <- function(x){
+  return ((5/9)*(x-32))
+}
+#The data came with extra digits for the month. Since they are all July, I 
+#removed the extra digits.
+temp$Date <- substr(temp$Date,1 ,4)
+
+#This reads the image into R
+img <- readPNG("noaa-logo.png", native = FALSE)
+
+#This converts the image into a matrix which was the most straightforward 
+#implementation to add transparency to the NOAA image by multiplying it by 0.3.
+noaaimg <- matrix(rgb(img[,,1],img[,,2],img[,,3], img[,,4] * 0.3), 
+                  nrow=dim(img)[1])
+temp$Value <- as.numeric(temp$Value)
+temp$Date <- as.numeric(temp$Date)
+
+#Using ggplot as opposed to base R. There may some redundant code in here, 
+#but honestly, I'm afraid to change anything.
+ggplot(temp, aes(x=Date, 
+                 y=Value, 
+                 ymin=70, 
+                 ymax=temp$Value, 
+                 group = 1)) +
+  #ggplot2 comes with some nice themes, but some of the elements needed to be
+  #removed for a decent reproduction
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  labs(title = "Kanawha County, West Virginia Average Temperature", 
+       subtitle = "July") +
+  #the axes aren't labeled on the website, so the aren't here either
+  xlab(NULL) +
+  ylab(NULL) +
+  #used Mac's Digital Color Meter to get the colors
+  geom_line(color = "#FF8109") + #The line
+  geom_ribbon(fill = "#FF8109", alpha = 0.4) + #The shaded area under the curve
+  geom_point(color = "#FF8109") + #The points
+  
+  geom_hline(yintercept = mean(temp$Value)) + #the mean line
+  #labeling the mean line
+  annotate("text", 
+           x=1992, 
+           y=mean(temp$Value)+0.25, 
+           label="1901-2000 Mean: 74.6 \u00B0F",
+           size = 3
+           ) +
+  #scales the x axis
+  scale_x_discrete(breaks = seq(min(temp$Date), 
+                                max(temp$Date), 
+                                2), 
+                   limits=1986:2024, 
+                   expand = c(0, 0)) + #ggplot2 puts some white space between
+                                       #the axes and the data, this removes it
+  scale_y_continuous(limits=c(70,79), 
+                     expand = c(0,0), 
+                     breaks = 70:79,
+                     sec.axis = sec_axis(~celcius(.), 
+                                         breaks = celcius(70:79),
+                                         #This adds labels to the right axis
+                                         labels = unit_format(unit = "\u00B0C",
+                                                              accuracy = 0.1)
+                                         ),
+                     #This adds labels to the left axis
+                     labels = unit_format(unit = "\u00B0F",
+                                          accuracy = 0.1)) +
+  
+  #this adds the NOAA graphic to the plot
+  annotation_custom(rasterGrob(noaaimg), 
+                    xmin = 1988, 
+                    ymin = 77, 
+                    ymax = 79, 
+                    xmax = 1992)
+
+# I'm reasonably happy with how this turned out, I would have liked to
+# make the x axis a bit shorter, and perhaps get into correcting the fonts to
+# a more faithful recreation but if someone else earned the five bonus points, 
+# they earned it. This was far more work than I had anticipated just learning
+# the package, but ggplot2 is a nice tool to have knowledge of. 
+
+
 ```
 
 `r q <- q+1; letters[q]`. Make a new column that is the z-score for each observation. Use the 1901-2000 average as the mean in the calculation. (**2 Points**)
