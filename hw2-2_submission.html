@@ -3743,7 +3743,9 @@ Plot
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(temp)){</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>temp[i,<span class="st">&quot;Z&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">zscr</span>(temp<span class="sc">$</span>Value[i], <span class="fu">mean</span>(temp<span class="sc">$</span>Value), <span class="fu">sd</span>(temp<span class="sc">$</span>Value))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="5" type="a">
@@ -3752,7 +3754,20 @@ Plot
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Largest z-score &gt;0:&quot;</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(temp[temp<span class="sc">$</span>Z<span class="sc">==</span><span class="fu">max</span>(temp<span class="sc">$</span>Z),])</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#print(&quot;Largest absolute value of z-score:&quot;)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#print(temp[abs(temp$Z)==max(abs(temp$Z)),])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;Largest z-score &gt;0:&quot;
+   Date Value Anomaly        Z
+39 2020  78.6     4.0 1.797338</code></pre>
+</div>
 </details>
 </div>
 <ol start="6" type="a">
@@ -3761,7 +3776,24 @@ Plot
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;Probability of temperature greater than or equal to &quot;</span>,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>       temp<span class="sc">$</span>Value[<span class="fu">max</span>(temp<span class="sc">$</span>Z)<span class="sc">==</span>temp<span class="sc">$</span>Z],</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;\u00B0F: &quot;</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">round</span>((<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">max</span>(temp<span class="sc">$</span>Z)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>              )<span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">digits =</span> <span class="dv">2</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>             ),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;%&quot;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary>
+Output
+</summary>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;Probability of temperature greater than or equal to 78.6°F: 3.61%&quot;</code></pre>
+</div>
 </details>
 </div>
 <!-- -->
@@ -4252,419 +4284,433 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
-<div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Homework 2.2&quot;</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;David Sneddon&quot;</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> &quot;Old Dominion University&quot;</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: lux # Check here for more themes: https://quarto.org/docs/output-formats/html-themes.html</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: &quot;Code&quot;</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: hover</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">    link-external-newwindow: true</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">    tbl-cap-location: top</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-cap-location: bottom</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="an">self-contained:</span><span class="co"> true</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> source</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="in"># DO NOT EDIT THIS</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fig.align = &#39;center&#39;)</span></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(out.width = &#39;90%&#39;)</span></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(results = &#39;hold&#39;)</span></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fig.show = &#39;hold&#39;)</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(error = TRUE)</span></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(warning = FALSE)</span></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(message = FALSE)</span></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="in">par(mar = c(4.1, 4.1, 1.1, 4.1))</span></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="in">hooks = knitr::knit_hooks$get()</span></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="in">hook_foldable = function(type) {</span></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="in">  force(type)</span></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="in">  function(x, options) {</span></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="in">    res = hooks[[type]](x, options)</span></span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="in">    if (is.na(as.logical(options[[paste0(&quot;fold.&quot;, type)]]))) {</span></span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="in">      res</span></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="in">    } else if (isFALSE(as.logical(options[[paste0(&quot;fold.&quot;, type)]]))){</span></span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="in">      # return(res)</span></span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="in">      paste0(</span></span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;&lt;details open&gt;&lt;summary&gt;&quot;, gsub(&quot;^p&quot;, &quot;P&quot;, gsub(&quot;^o&quot;, &quot;O&quot;, type)), &quot;&lt;/summary&gt;\n\n&quot;,</span></span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="in">      res,</span></span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;\n\n&lt;/details&gt;&quot;</span></span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a><span class="in">      paste0(</span></span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;&lt;details&gt;&lt;summary&gt;&quot;, gsub(&quot;^p&quot;, &quot;P&quot;, gsub(&quot;^o&quot;, &quot;O&quot;, type)), &quot;&lt;/summary&gt;\n\n&quot;,</span></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a><span class="in">      res,</span></span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;\n\n&lt;/details&gt;&quot;</span></span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::knit_hooks$set(</span></span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a><span class="in">  output = hook_foldable(&quot;output&quot;),</span></span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a><span class="in">  plot = hook_foldable(&quot;plot&quot;)</span></span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fold.output=TRUE)</span></span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fold.plot=TRUE)</span></span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a><span class="in">Q &lt;- 0</span></span>
-<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
-<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
-<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. How are hypothesis testing and confidence intervals related? (**4 Points**)</span>
-<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>Confidence intervals, is how likely a true population parameter falls within a range near the sample parameter.</span>
-<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a>The formula is:</span>
-<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>CI = \bar{X} \pm Z \left(\frac{s}{\sqrt{n}}\right) </span>
-<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a>Where $CI$ is the confidence interval, $\bar{X}$ is the sample mean, $Z$ is the Z-Score, $s$ is the standard deviation of the sample, and $n$ is the number of observations in the sample.</span>
-<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a>So if</span>
-<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a>$\mu \in \mathbb{R}$\</span>
-<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a>$H_0: \mu=0$\</span>
-<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a>$H_1: \mu \ne 0$\</span>
-<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a>$\alpha/2=0.25\therefore Z= 1.96$\</span>
-<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a>$n=30$\</span>
-<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a>$s=1.0$\</span>
-<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a>$\bar{X}=5.0$\</span>
-<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a>...then the confidence interval is:</span>
-<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a>\begin{equation}</span>
-<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a>CI = 5.0 \pm 1.96 \left(\frac{1}{\sqrt{30}}\right) = 5.0 \pm 0.358</span>
-<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a>\end{equation}</span>
-<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a>Since $0$ does not fall within the confidence interval then we can reject $H_0$ since there is evidence that $\mu \ne 0$.</span>
-<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Suppose I calculate a p-value of 0.08. What is there an 8% probability of? (**4 Points**)</span>
-<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a>There is an $8\%$ probability that the result was random chance and $H_0$ is correct.</span>
-<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
-<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
-<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
-<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a>For the following question, use <span class="co">[</span><span class="ot">data on the heights and weights of the 2022-23 NBA and WNBA all-stars</span><span class="co">](https://alexcardazzi.github.io/econ311/data/bball_allstars.csv)</span>.</span>
-<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Read data into R. Call the dataset <span class="in">`bball`</span>. (**2 Points**)</span>
-<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a>bball <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://alexcardazzi.github.io/econ311/data/bball_allstars.csv&quot;</span>)</span>
-<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Remove any columns with missing data. (**2 Points**)</span>
-<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">ncol</span>(bball)<span class="sc">:</span><span class="dv">1</span>){</span>
-<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">sum</span>(<span class="fu">is.na</span>(bball[,i]))<span class="sc">&gt;</span><span class="dv">0</span>){</span>
-<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a>    bball[,i] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the row of the youngest player. (**2 Points**)</span>
-<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a>bball[bball<span class="sc">$</span>AGE<span class="sc">==</span><span class="fu">min</span>(bball<span class="sc">$</span>AGE),]</span>
-<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Create two summary statistics tables -- one for the NBA players, and one for the WNBA players. Include only variables for age, height, and weight. Comment on the differences. (**4 Points**)</span>
-<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r results=&#39;hold&#39;}</span></span>
-<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a><span class="in">##I copy pasted this from course notes</span></span>
-<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a><span class="in"># use this every time you want to use &#39;modelsummary&#39;</span></span>
-<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a><span class="in">library(&quot;modelsummary&quot;)</span></span>
-<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a><span class="in"># add this line when loading &#39;modelsummary&#39;, too</span></span>
-<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a><span class="in">options(&quot;modelsummary_factory_default&quot; = &quot;kableExtra&quot;)</span></span>
-<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a><span class="in">####################################################</span></span>
-<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a><span class="in">outputtr &lt;- function(i){</span></span>
-<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a><span class="in"> title &lt;- paste(&quot;Summary Statistics -&quot;,i)</span></span>
-<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a><span class="in">  frmla &lt;- AGE + HEIGHT + WEIGHT ~ (`N` = length) + Mean + (`St. Dev.` = sd) + (`Min` = min) + (`Max` = max)</span></span>
-<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a><span class="in">  return(datasummary(frmla, data=bball[bball$LEAGUE==i,], title=title, fmt = fmt_significant(2)))</span></span>
-<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a><span class="in">###This is what I wanted to do, it should work, at least in theory. The output html file won&#39;t</span></span>
-<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a><span class="in">###render the the html on the template, just outputs raw html code.</span></span>
-<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a><span class="in">###Slightly better using {r results=&#39;asis&#39;} but puts the title at the bottom for each table. </span></span>
-<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a><span class="in"># }</span></span>
-<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a><span class="in"># for (x in unique(bball$LEAGUE)){</span></span>
-<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a><span class="in">#   print(outputtr(x))</span></span>
-<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a><span class="in"># }</span></span>
-<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a><span class="in">outputtr(&quot;NBA&quot;)</span></span>
-<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a><span class="in">outputtr(&quot;WNBA&quot;)</span></span>
-<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a>The average age is higher in the WNBA, while average height and weight is higher in the NBA. The heights and weights are also more varied in the NBA.</span>
-<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Which player(s) is taller relative to their respective league: the tallest NBA player(s) or the tallest WNBA player(s)? *Hint*: use Z-Scores! It might even be helpful to write a function to calculate Z-Scores to minimize the total amount of code you need to write. (**4 Points**)</span>
-<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a>::: aside</span>
-<span id="cb20-180"><a href="#cb20-180" aria-hidden="true" tabindex="-1"></a>Do not manually type the player names / heights, use code to select the player&#39;s info.</span>
-<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r results=&#39;hold&#39;}</span></span>
-<span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a><span class="in">zscr &lt;- function(x, mu, std){</span></span>
-<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a><span class="in">  return((x-mu)/std)</span></span>
-<span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a><span class="in">for (c in unique(bball$LEAGUE)){</span></span>
-<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a><span class="in">  for (i in 1:nrow(bball)){</span></span>
-<span id="cb20-190"><a href="#cb20-190" aria-hidden="true" tabindex="-1"></a><span class="in">    if(bball$LEAGUE[i]==c){</span></span>
-<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a><span class="in">      bball$ZSCORE_LEAGUE[i] &lt;- zscr(bball$HEIGHT[i], mean(bball$HEIGHT[bball$LEAGUE==c]),</span></span>
-<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a><span class="in">                                     sd(bball$HEIGHT[bball$LEAGUE==c]))</span></span>
-<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a><span class="in">bball$HIGHEST &lt;- 0</span></span>
-<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a><span class="in">for (c in unique(bball$LEAGUE)){</span></span>
-<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a><span class="in">  for (i in 1:nrow(bball)){</span></span>
-<span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a><span class="in">    if(bball$ZSCORE_LEAGUE[i]==max(bball$ZSCORE_LEAGUE[bball$LEAGUE==c]) &amp;</span></span>
-<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a><span class="in">       bball$LEAGUE[i]==c){</span></span>
-<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a><span class="in">      bball$HIGHEST[i] &lt;- 1</span></span>
-<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a><span class="in">print(bball[bball$HIGHEST==1,])</span></span>
-<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a>The tallest players relative to their leagues are shown above, with the NBA having the relatively even taller players with the highest z-scores overall.</span>
-<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Create and print a 95% confidence interval for WNBA heights. (**4 Points**)</span>
-<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r results=&#39;hold&#39;}</span></span>
-<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a><span class="in">bballw &lt;- bball[bball$LEAGUE==&quot;WNBA&quot;,]</span></span>
-<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a><span class="in">wnba_summy &lt;- c(mean(bballw$HEIGHT),1.96,sd(bballw$HEIGHT),sqrt(nrow(bballw)))</span></span>
-<span id="cb20-216"><a href="#cb20-216" aria-hidden="true" tabindex="-1"></a><span class="in">ci &lt;- function(summy){</span></span>
-<span id="cb20-217"><a href="#cb20-217" aria-hidden="true" tabindex="-1"></a><span class="in">  upr &lt;- wnba_summy[1] + wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])</span></span>
-<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a><span class="in">  lowr &lt;- wnba_summy[1] - wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])</span></span>
-<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a><span class="in">  return(paste0(&quot;(&quot;,round(lowr,digits=2),&quot;, &quot;,round(upr,digits=2),&quot;)&quot;))</span></span>
-<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb20-221"><a href="#cb20-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-222"><a href="#cb20-222" aria-hidden="true" tabindex="-1"></a><span class="in">paste0(&quot;CI=&quot;,ci(wnba_summy))</span></span>
-<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. What percentage of WNBA observations fall inside this confidence interval? Is there a percentage of observations we should *expect* to fall inside this interval? (**4 Points**)</span>
-<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a>ci_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(summy){</span>
-<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a>  upr <span class="ot">&lt;-</span> wnba_summy[<span class="dv">1</span>] <span class="sc">+</span> wnba_summy[<span class="dv">2</span>]<span class="sc">*</span>(wnba_summy[<span class="dv">3</span>]<span class="sc">/</span>wnba_summy[<span class="dv">4</span>])</span>
-<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a>  lowr <span class="ot">&lt;-</span> wnba_summy[<span class="dv">1</span>] <span class="sc">-</span> wnba_summy[<span class="dv">2</span>]<span class="sc">*</span>(wnba_summy[<span class="dv">3</span>]<span class="sc">/</span>wnba_summy[<span class="dv">4</span>])</span>
-<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(lowr,upr))</span>
-<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a>ci_w <span class="ot">&lt;-</span> <span class="fu">ci_2</span>(wnba_summy)</span>
-<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a>bballw<span class="sc">$</span>inconf <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb20-237"><a href="#cb20-237" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(bballw)){</span>
-<span id="cb20-238"><a href="#cb20-238" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(bballw<span class="sc">$</span>HEIGHT[i]<span class="sc">&gt;=</span>ci_w[<span class="dv">1</span>] <span class="sc">&amp;</span> bballw<span class="sc">$</span>HEIGHT[i]<span class="sc">&lt;=</span>ci_w[<span class="dv">2</span>])</span>
-<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a>    bballw<span class="sc">$</span>inconf[i] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;Percentage of Observations in CI = &quot;</span>,<span class="fu">round</span>(<span class="fu">sum</span>(bballw<span class="sc">$</span>inconf)<span class="sc">/</span><span class="fu">nrow</span>(bballw)<span class="sc">*</span><span class="dv">100</span>,<span class="at">digits=</span><span class="dv">2</span>),<span class="st">&quot;%&quot;</span>)</span>
-<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a>There is no percentage of observations that we can expect to be inside the CI. The CI is how confident we are that the true population mean falls within that interval.</span>
-<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-246"><a href="#cb20-246" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. I have a hypothesis that older players are heavier than younger players.<span class="ot">[^1]</span> Use <span class="in">`t.test()`</span> to preform a hypothesis test comparing weights of young and old players. What is the conclusion of the test? Interpret the test&#39;s p-value *in words*. (**4 Points**)</span>
-<span id="cb20-247"><a href="#cb20-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>Define &quot;young&quot; as 25 or younger.</span>
-<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(bball<span class="sc">$</span>WEIGHT[bball<span class="sc">$</span>AGE<span class="sc">&gt;</span><span class="dv">25</span>], bball<span class="sc">$</span>WEIGHT[bball<span class="sc">$</span>AGE<span class="sc">&lt;=</span><span class="dv">25</span>], <span class="st">&quot;greater&quot;</span>)</span>
-<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a>Let $\bar{W}$ be average player weight in the sample:\</span>
-<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a>$\bar{W} \in \mathbb{R}^+$\</span>
-<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a>$H_0: \bar{W}_{old} \le \bar{W}_{young}$\</span>
-<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a>$H_1: \bar{W}_{old} &gt; \bar{W}_{young}$\</span>
-<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a>$p=0.1644$\</span>
-<span id="cb20-261"><a href="#cb20-261" aria-hidden="true" tabindex="-1"></a>$\alpha=0.05$\</span>
-<span id="cb20-262"><a href="#cb20-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a>$P&gt;\alpha$ therefore we fail to reject $H_0$ and there is a $16.44\%$ probability that this result is random chance.</span>
-<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
-<span id="cb20-266"><a href="#cb20-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-267"><a href="#cb20-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
-<span id="cb20-268"><a href="#cb20-268" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
-<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-271"><a href="#cb20-271" aria-hidden="true" tabindex="-1"></a>Navigate to the following website: <span class="ot">&lt;https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/&gt;</span> On this website, you should see the following options:</span>
-<span id="cb20-272"><a href="#cb20-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-273"><a href="#cb20-273" aria-hidden="true" tabindex="-1"></a>&lt;ol&gt;</span>
-<span id="cb20-274"><a href="#cb20-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Parameter: keep this as &quot;Average Temperature&quot;.</span>
-<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Time Scale: keep this as &quot;1-Month&quot;.</span>
-<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Month: set this to your birth month.</span>
-<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Start Year: set this to your birth year.</span>
-<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>End Year: set this to &quot;2024&quot;.</span>
-<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>State: set this to the state you were born in. If you were not born in the United States, choose the first state in which you lived.</span>
-<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>County: set this to the county you were born in (or the first county you lived in).</span>
-<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a>&lt;/ol&gt;</span>
-<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Once these options are set, click the &quot;Plot&quot; button, scroll down below the generated plot, and right-click on the &quot;CSV&quot; download button. Copy the hyperlink address, and read it into R using <span class="in">`read.csv()`</span>. (**2 Points**)</span>
-<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-290"><a href="#cb20-290" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/WV-039/tavg/1/7/1986-2024.csv?base_prd=true&amp;begbaseyear=1901&amp;endbaseyear=2000&quot;</span>)</span>
-<span id="cb20-291"><a href="#cb20-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Clean the data so it appears more like a &quot;normal&quot; <span class="in">`data.frame`</span>. (**4 Points**) For example, using <span class="in">`head(temp)`</span>, the output is:</span>
-<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rownames</span>(temp),temp)</span>
-<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(temp) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> temp[<span class="sc">-</span><span class="dv">1</span><span class="sc">:-</span><span class="dv">3</span>,] </span>
-<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(temp) <span class="ot">&lt;-</span> temp[<span class="dv">1</span>,]</span>
-<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> temp[<span class="sc">-</span><span class="dv">1</span>,]</span>
-<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Recreate the plot on the website. You may ignore the right-hand celsius axis, the &quot;° F&quot; on the left-hand axis, the background grid, the &quot;NOAA&quot; logo, and the shaded area beneath the time series. (**4 Points**) However, **extra credit** (**5 *Bonus* Points**) will be given to the person who can get the closest to an exact replication.</span>
-<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-309"><a href="#cb20-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a><span class="co">#In order to attempt a close replication I needed to relearn how to plot by</span></span>
-<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a><span class="co">#using some libraries I previously had no experience with. I&#39;ll try to document </span></span>
-<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a><span class="co">#this heavily to show what I was doing, and why I did it. Using ggplot2, I</span></span>
-<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a><span class="co">#got a lot more disciplined with indentation. Without it, the code</span></span>
-<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a><span class="co">#gets hard to follow very quickly. </span></span>
-<span id="cb20-315"><a href="#cb20-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-316"><a href="#cb20-316" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#I chose to use this package because it seemed to allow for </span></span>
-<span id="cb20-317"><a href="#cb20-317" aria-hidden="true" tabindex="-1"></a><span class="co">#more control (at the expense of user friendliness), I did, however, find a </span></span>
-<span id="cb20-318"><a href="#cb20-318" aria-hidden="true" tabindex="-1"></a><span class="co">#great deal more resources online for doing the more complicated graphics  </span></span>
-<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a><span class="co">#manipulation that I wanted to implement.</span></span>
-<span id="cb20-320"><a href="#cb20-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-321"><a href="#cb20-321" aria-hidden="true" tabindex="-1"></a><span class="co">#This library was needed to scale the axes properly and add units to the axes</span></span>
-<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb20-323"><a href="#cb20-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-324"><a href="#cb20-324" aria-hidden="true" tabindex="-1"></a><span class="co">#These were needed to add the NOAA image to the plot.</span></span>
-<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggimage)</span>
-<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(png)</span>
-<span id="cb20-327"><a href="#cb20-327" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span>
-<span id="cb20-328"><a href="#cb20-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-329"><a href="#cb20-329" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to convert F to C for the right x-axis</span></span>
-<span id="cb20-330"><a href="#cb20-330" aria-hidden="true" tabindex="-1"></a>celcius <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> ((<span class="dv">5</span><span class="sc">/</span><span class="dv">9</span>)<span class="sc">*</span>(x<span class="dv">-32</span>))</span>
-<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a><span class="co">#The data came with extra digits for the month. Since they are all July, I </span></span>
-<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a><span class="co">#removed the extra digits.</span></span>
-<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">substr</span>(temp<span class="sc">$</span>Date,<span class="dv">1</span> ,<span class="dv">4</span>)</span>
-<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a><span class="co">#This reads the image into R, the image itself is the NOAA logo on the</span></span>
-<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a><span class="co">#website&#39;s plot, pulled from the page source.</span></span>
-<span id="cb20-339"><a href="#cb20-339" aria-hidden="true" tabindex="-1"></a>img <span class="ot">&lt;-</span> <span class="fu">readPNG</span>(<span class="st">&quot;noaa-logo.png&quot;</span>, <span class="at">native =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb20-340"><a href="#cb20-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-341"><a href="#cb20-341" aria-hidden="true" tabindex="-1"></a><span class="co">#This converts the image into a matrix which was the most straightforward </span></span>
-<span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a><span class="co">#implementation to add transparency to the NOAA image by multiplying it by 0.3.</span></span>
-<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a>noaaimg <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rgb</span>(img[,,<span class="dv">1</span>],img[,,<span class="dv">2</span>],img[,,<span class="dv">3</span>], img[,,<span class="dv">4</span>] <span class="sc">*</span> <span class="fl">0.3</span>), </span>
-<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nrow=</span><span class="fu">dim</span>(img)[<span class="dv">1</span>])</span>
-<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>Value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(temp<span class="sc">$</span>Value)</span>
-<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(temp<span class="sc">$</span>Date)</span>
-<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a><span class="co">#Using ggplot as opposed to base R. There may some redundant code in here, </span></span>
-<span id="cb20-349"><a href="#cb20-349" aria-hidden="true" tabindex="-1"></a><span class="co">#but honestly, I&#39;m afraid to change anything.</span></span>
-<span id="cb20-350"><a href="#cb20-350" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temp, <span class="fu">aes</span>(<span class="at">x=</span>Date, </span>
-<span id="cb20-351"><a href="#cb20-351" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y=</span>Value, </span>
-<span id="cb20-352"><a href="#cb20-352" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ymin=</span><span class="dv">70</span>, </span>
-<span id="cb20-353"><a href="#cb20-353" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ymax=</span>temp<span class="sc">$</span>Value, </span>
-<span id="cb20-354"><a href="#cb20-354" aria-hidden="true" tabindex="-1"></a>                 <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb20-355"><a href="#cb20-355" aria-hidden="true" tabindex="-1"></a>  <span class="co">#ggplot2 comes with some nice themes, but some of the elements needed to be</span></span>
-<span id="cb20-356"><a href="#cb20-356" aria-hidden="true" tabindex="-1"></a>  <span class="co">#removed for a decent reproduction</span></span>
-<span id="cb20-357"><a href="#cb20-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb20-358"><a href="#cb20-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb20-359"><a href="#cb20-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Kanawha County, West Virginia Average Temperature&quot;</span>, </span>
-<span id="cb20-360"><a href="#cb20-360" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;July&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-361"><a href="#cb20-361" aria-hidden="true" tabindex="-1"></a>  <span class="co">#the axes aren&#39;t labeled on the website, so they aren&#39;t here either</span></span>
-<span id="cb20-362"><a href="#cb20-362" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb20-363"><a href="#cb20-363" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb20-364"><a href="#cb20-364" aria-hidden="true" tabindex="-1"></a>  <span class="co">#used Mac&#39;s Digital Color Meter to get the colors</span></span>
-<span id="cb20-365"><a href="#cb20-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;#FF8109&quot;</span>) <span class="sc">+</span> <span class="co">#The line</span></span>
-<span id="cb20-366"><a href="#cb20-366" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">fill =</span> <span class="st">&quot;#FF8109&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span> <span class="co">#The shaded area under the curve</span></span>
-<span id="cb20-367"><a href="#cb20-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#FF8109&quot;</span>) <span class="sc">+</span> <span class="co">#The points</span></span>
-<span id="cb20-368"><a href="#cb20-368" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-369"><a href="#cb20-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(temp<span class="sc">$</span>Value)) <span class="sc">+</span> <span class="co">#the mean line</span></span>
-<span id="cb20-370"><a href="#cb20-370" aria-hidden="true" tabindex="-1"></a>  <span class="co">#labeling the mean line</span></span>
-<span id="cb20-371"><a href="#cb20-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, </span>
-<span id="cb20-372"><a href="#cb20-372" aria-hidden="true" tabindex="-1"></a>           <span class="at">x=</span><span class="dv">1992</span>, </span>
-<span id="cb20-373"><a href="#cb20-373" aria-hidden="true" tabindex="-1"></a>           <span class="at">y=</span><span class="fu">mean</span>(temp<span class="sc">$</span>Value)<span class="sc">+</span><span class="fl">0.25</span>, </span>
-<span id="cb20-374"><a href="#cb20-374" aria-hidden="true" tabindex="-1"></a>           <span class="at">label=</span><span class="st">&quot;1901-2000 Mean: 74.6 \u00B0F&quot;</span>,</span>
-<span id="cb20-375"><a href="#cb20-375" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">3</span></span>
-<span id="cb20-376"><a href="#cb20-376" aria-hidden="true" tabindex="-1"></a>           ) <span class="sc">+</span></span>
-<span id="cb20-377"><a href="#cb20-377" aria-hidden="true" tabindex="-1"></a>  <span class="co">#scales the x axis</span></span>
-<span id="cb20-378"><a href="#cb20-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(temp<span class="sc">$</span>Date), </span>
-<span id="cb20-379"><a href="#cb20-379" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">max</span>(temp<span class="sc">$</span>Date), </span>
-<span id="cb20-380"><a href="#cb20-380" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">2</span>), </span>
-<span id="cb20-381"><a href="#cb20-381" aria-hidden="true" tabindex="-1"></a>                   <span class="at">limits=</span><span class="dv">1986</span><span class="sc">:</span><span class="dv">2024</span>, </span>
-<span id="cb20-382"><a href="#cb20-382" aria-hidden="true" tabindex="-1"></a>                   <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> <span class="co">#ggplot2 puts some white space between</span></span>
-<span id="cb20-383"><a href="#cb20-383" aria-hidden="true" tabindex="-1"></a>                                       <span class="co">#the axes and the data, this removes it</span></span>
-<span id="cb20-384"><a href="#cb20-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">70</span>,<span class="dv">79</span>), </span>
-<span id="cb20-385"><a href="#cb20-385" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), </span>
-<span id="cb20-386"><a href="#cb20-386" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="dv">70</span><span class="sc">:</span><span class="dv">79</span>,</span>
-<span id="cb20-387"><a href="#cb20-387" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span><span class="fu">celcius</span>(.), </span>
-<span id="cb20-388"><a href="#cb20-388" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">breaks =</span> <span class="fu">celcius</span>(<span class="dv">70</span><span class="sc">:</span><span class="dv">79</span>),</span>
-<span id="cb20-389"><a href="#cb20-389" aria-hidden="true" tabindex="-1"></a>                                         <span class="co">#This adds labels to the right axis</span></span>
-<span id="cb20-390"><a href="#cb20-390" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">labels =</span> <span class="fu">unit_format</span>(<span class="at">unit =</span> <span class="st">&quot;\u00B0C&quot;</span>,</span>
-<span id="cb20-391"><a href="#cb20-391" aria-hidden="true" tabindex="-1"></a>                                                              <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
-<span id="cb20-392"><a href="#cb20-392" aria-hidden="true" tabindex="-1"></a>                                         ),</span>
-<span id="cb20-393"><a href="#cb20-393" aria-hidden="true" tabindex="-1"></a>                     <span class="co">#This adds labels to the left axis</span></span>
-<span id="cb20-394"><a href="#cb20-394" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">unit_format</span>(<span class="at">unit =</span> <span class="st">&quot;\u00B0F&quot;</span>,</span>
-<span id="cb20-395"><a href="#cb20-395" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">accuracy =</span> <span class="fl">0.1</span>)) <span class="sc">+</span></span>
-<span id="cb20-396"><a href="#cb20-396" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-397"><a href="#cb20-397" aria-hidden="true" tabindex="-1"></a>  <span class="co">#this adds the NOAA graphic to the plot</span></span>
-<span id="cb20-398"><a href="#cb20-398" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_custom</span>(<span class="fu">rasterGrob</span>(noaaimg), </span>
-<span id="cb20-399"><a href="#cb20-399" aria-hidden="true" tabindex="-1"></a>                    <span class="at">xmin =</span> <span class="dv">1988</span>, </span>
-<span id="cb20-400"><a href="#cb20-400" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymin =</span> <span class="dv">77</span>, </span>
-<span id="cb20-401"><a href="#cb20-401" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> <span class="dv">79</span>, </span>
-<span id="cb20-402"><a href="#cb20-402" aria-hidden="true" tabindex="-1"></a>                    <span class="at">xmax =</span> <span class="dv">1992</span>)</span>
-<span id="cb20-403"><a href="#cb20-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-404"><a href="#cb20-404" aria-hidden="true" tabindex="-1"></a><span class="co"># I&#39;m reasonably happy with how this turned out, I would have liked to</span></span>
-<span id="cb20-405"><a href="#cb20-405" aria-hidden="true" tabindex="-1"></a><span class="co"># make the x axis a bit shorter, and perhaps get into correcting the fonts to</span></span>
-<span id="cb20-406"><a href="#cb20-406" aria-hidden="true" tabindex="-1"></a><span class="co"># a more faithful recreation but if someone else earned the five bonus points, </span></span>
-<span id="cb20-407"><a href="#cb20-407" aria-hidden="true" tabindex="-1"></a><span class="co"># they earned it. This was far more work than I had anticipated just learning</span></span>
-<span id="cb20-408"><a href="#cb20-408" aria-hidden="true" tabindex="-1"></a><span class="co"># the package, but ggplot2 is a nice tool to have knowledge of. </span></span>
-<span id="cb20-409"><a href="#cb20-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-410"><a href="#cb20-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-411"><a href="#cb20-411" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-412"><a href="#cb20-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-413"><a href="#cb20-413" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Make a new column that is the z-score for each observation. Use the 1901-2000 average as the mean in the calculation. (**2 Points**)</span>
-<span id="cb20-414"><a href="#cb20-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-417"><a href="#cb20-417" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-418"><a href="#cb20-418" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here...</span></span>
-<span id="cb20-419"><a href="#cb20-419" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-420"><a href="#cb20-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-421"><a href="#cb20-421" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the row with the largest z-score. (**2 Points**)</span>
-<span id="cb20-422"><a href="#cb20-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-425"><a href="#cb20-425" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-426"><a href="#cb20-426" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here...</span></span>
-<span id="cb20-427"><a href="#cb20-427" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-428"><a href="#cb20-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-429"><a href="#cb20-429" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Assuming temperatures come from a normal distribution, what is the probability of observing a temperature this high (or higher)? (**2 Points**)</span>
-<span id="cb20-430"><a href="#cb20-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-433"><a href="#cb20-433" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-434"><a href="#cb20-434" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here...</span></span>
-<span id="cb20-435"><a href="#cb20-435" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Homework 2.2&quot;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;David Sneddon&quot;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="an">institute:</span><span class="co"> &quot;Old Dominion University&quot;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: lux # Check here for more themes: https://quarto.org/docs/output-formats/html-themes.html</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: &quot;Code&quot;</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: hover</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">    link-external-newwindow: true</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">    tbl-cap-location: top</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-cap-location: bottom</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="an">self-contained:</span><span class="co"> true</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> source</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="in"># DO NOT EDIT THIS</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fig.align = &#39;center&#39;)</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(out.width = &#39;90%&#39;)</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(results = &#39;hold&#39;)</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fig.show = &#39;hold&#39;)</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(error = TRUE)</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(warning = FALSE)</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(message = FALSE)</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="in">par(mar = c(4.1, 4.1, 1.1, 4.1))</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a><span class="in">hooks = knitr::knit_hooks$get()</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="in">hook_foldable = function(type) {</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="in">  force(type)</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="in">  function(x, options) {</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="in">    res = hooks[[type]](x, options)</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="in">    if (is.na(as.logical(options[[paste0(&quot;fold.&quot;, type)]]))) {</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a><span class="in">      res</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="in">    } else if (isFALSE(as.logical(options[[paste0(&quot;fold.&quot;, type)]]))){</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a><span class="in">      # return(res)</span></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a><span class="in">      paste0(</span></span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;&lt;details open&gt;&lt;summary&gt;&quot;, gsub(&quot;^p&quot;, &quot;P&quot;, gsub(&quot;^o&quot;, &quot;O&quot;, type)), &quot;&lt;/summary&gt;\n\n&quot;,</span></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a><span class="in">      res,</span></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;\n\n&lt;/details&gt;&quot;</span></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="in">      paste0(</span></span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;&lt;details&gt;&lt;summary&gt;&quot;, gsub(&quot;^p&quot;, &quot;P&quot;, gsub(&quot;^o&quot;, &quot;O&quot;, type)), &quot;&lt;/summary&gt;\n\n&quot;,</span></span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a><span class="in">      res,</span></span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a><span class="in">      &quot;\n\n&lt;/details&gt;&quot;</span></span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::knit_hooks$set(</span></span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a><span class="in">  output = hook_foldable(&quot;output&quot;),</span></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a><span class="in">  plot = hook_foldable(&quot;plot&quot;)</span></span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fold.output=TRUE)</span></span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(fold.plot=TRUE)</span></span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a><span class="in">Q &lt;- 0</span></span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. How are hypothesis testing and confidence intervals related? (**4 Points**)</span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>Confidence intervals, is how likely a true population parameter falls within a range near the sample parameter.</span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a>The formula is:</span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a>CI = \bar{X} \pm Z \left(\frac{s}{\sqrt{n}}\right) </span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a>Where $CI$ is the confidence interval, $\bar{X}$ is the sample mean, $Z$ is the Z-Score, $s$ is the standard deviation of the sample, and $n$ is the number of observations in the sample.</span>
+<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a>So if</span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a>$\mu \in \mathbb{R}$\</span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a>$H_0: \mu=0$\</span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a>$H_1: \mu \ne 0$\</span>
+<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a>$\alpha/2=0.25\therefore Z= 1.96$\</span>
+<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a>$n=30$\</span>
+<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a>$s=1.0$\</span>
+<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a>$\bar{X}=5.0$\</span>
+<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a>...then the confidence interval is:</span>
+<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a>\begin{equation}</span>
+<span id="cb22-103"><a href="#cb22-103" aria-hidden="true" tabindex="-1"></a>CI = 5.0 \pm 1.96 \left(\frac{1}{\sqrt{30}}\right) = 5.0 \pm 0.358</span>
+<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a>\end{equation}</span>
+<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a>Since $0$ does not fall within the confidence interval then we can reject $H_0$ since there is evidence that $\mu \ne 0$.</span>
+<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Suppose I calculate a p-value of 0.08. What is there an 8% probability of? (**4 Points**)</span>
+<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a>There is an $8\%$ probability that the result was random chance and $H_0$ is correct.</span>
+<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-113"><a href="#cb22-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
+<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
+<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
+<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a>For the following question, use <span class="co">[</span><span class="ot">data on the heights and weights of the 2022-23 NBA and WNBA all-stars</span><span class="co">](https://alexcardazzi.github.io/econ311/data/bball_allstars.csv)</span>.</span>
+<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Read data into R. Call the dataset <span class="in">`bball`</span>. (**2 Points**)</span>
+<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a>bball <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://alexcardazzi.github.io/econ311/data/bball_allstars.csv&quot;</span>)</span>
+<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-128"><a href="#cb22-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-129"><a href="#cb22-129" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Remove any columns with missing data. (**2 Points**)</span>
+<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">ncol</span>(bball)<span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">sum</span>(<span class="fu">is.na</span>(bball[,i]))<span class="sc">&gt;</span><span class="dv">0</span>){</span>
+<span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a>    bball[,i] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-141"><a href="#cb22-141" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the row of the youngest player. (**2 Points**)</span>
+<span id="cb22-142"><a href="#cb22-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a>bball[bball<span class="sc">$</span>AGE<span class="sc">==</span><span class="fu">min</span>(bball<span class="sc">$</span>AGE),]</span>
+<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Create two summary statistics tables -- one for the NBA players, and one for the WNBA players. Include only variables for age, height, and weight. Comment on the differences. (**4 Points**)</span>
+<span id="cb22-150"><a href="#cb22-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-151"><a href="#cb22-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r results=&#39;hold&#39;}</span></span>
+<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a><span class="in">##I copy pasted this from course notes</span></span>
+<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a><span class="in"># use this every time you want to use &#39;modelsummary&#39;</span></span>
+<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a><span class="in">library(&quot;modelsummary&quot;)</span></span>
+<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a><span class="in"># add this line when loading &#39;modelsummary&#39;, too</span></span>
+<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a><span class="in">options(&quot;modelsummary_factory_default&quot; = &quot;kableExtra&quot;)</span></span>
+<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a><span class="in">####################################################</span></span>
+<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a><span class="in">outputtr &lt;- function(i){</span></span>
+<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a><span class="in"> title &lt;- paste(&quot;Summary Statistics -&quot;,i)</span></span>
+<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a><span class="in">  frmla &lt;- AGE + HEIGHT + WEIGHT ~ (`N` = length) + Mean + (`St. Dev.` = sd) + (`Min` = min) + (`Max` = max)</span></span>
+<span id="cb22-162"><a href="#cb22-162" aria-hidden="true" tabindex="-1"></a><span class="in">  return(datasummary(frmla, data=bball[bball$LEAGUE==i,], title=title, fmt = fmt_significant(2)))</span></span>
+<span id="cb22-163"><a href="#cb22-163" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a><span class="in">###This is what I wanted to do, it should work, at least in theory. The output html file won&#39;t</span></span>
+<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a><span class="in">###render the the html on the template, just outputs raw html code.</span></span>
+<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a><span class="in">###Slightly better using {r results=&#39;asis&#39;} but puts the title at the bottom for each table. </span></span>
+<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a><span class="in"># }</span></span>
+<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a><span class="in"># for (x in unique(bball$LEAGUE)){</span></span>
+<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a><span class="in">#   print(outputtr(x))</span></span>
+<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a><span class="in"># }</span></span>
+<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a><span class="in">outputtr(&quot;NBA&quot;)</span></span>
+<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a><span class="in">outputtr(&quot;WNBA&quot;)</span></span>
+<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a>The average age is higher in the WNBA, while average height and weight is higher in the NBA. The heights and weights are also more varied in the NBA.</span>
+<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Which player(s) is taller relative to their respective league: the tallest NBA player(s) or the tallest WNBA player(s)? *Hint*: use Z-Scores! It might even be helpful to write a function to calculate Z-Scores to minimize the total amount of code you need to write. (**4 Points**)</span>
+<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a>::: aside</span>
+<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a>Do not manually type the player names / heights, use code to select the player&#39;s info.</span>
+<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r results=&#39;hold&#39;}</span></span>
+<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a><span class="in">zscr &lt;- function(x, mu, std){</span></span>
+<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a><span class="in">  return((x-mu)/std)</span></span>
+<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a><span class="in">for (c in unique(bball$LEAGUE)){</span></span>
+<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a><span class="in">  for (i in 1:nrow(bball)){</span></span>
+<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a><span class="in">    if(bball$LEAGUE[i]==c){</span></span>
+<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a><span class="in">      bball$ZSCORE_LEAGUE[i] &lt;- zscr(bball$HEIGHT[i], mean(bball$HEIGHT[bball$LEAGUE==c]),</span></span>
+<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a><span class="in">                                     sd(bball$HEIGHT[bball$LEAGUE==c]))</span></span>
+<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a><span class="in">bball$HIGHEST &lt;- 0</span></span>
+<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a><span class="in">for (c in unique(bball$LEAGUE)){</span></span>
+<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a><span class="in">  for (i in 1:nrow(bball)){</span></span>
+<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a><span class="in">    if(bball$ZSCORE_LEAGUE[i]==max(bball$ZSCORE_LEAGUE[bball$LEAGUE==c]) &amp;</span></span>
+<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a><span class="in">       bball$LEAGUE[i]==c){</span></span>
+<span id="cb22-201"><a href="#cb22-201" aria-hidden="true" tabindex="-1"></a><span class="in">      bball$HIGHEST[i] &lt;- 1</span></span>
+<span id="cb22-202"><a href="#cb22-202" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb22-203"><a href="#cb22-203" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb22-204"><a href="#cb22-204" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-205"><a href="#cb22-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-206"><a href="#cb22-206" aria-hidden="true" tabindex="-1"></a><span class="in">print(bball[bball$HIGHEST==1,])</span></span>
+<span id="cb22-207"><a href="#cb22-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-208"><a href="#cb22-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-209"><a href="#cb22-209" aria-hidden="true" tabindex="-1"></a>The tallest players relative to their leagues are shown above, with the NBA having the relatively even taller players with the highest z-scores overall.</span>
+<span id="cb22-210"><a href="#cb22-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-211"><a href="#cb22-211" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Create and print a 95% confidence interval for WNBA heights. (**4 Points**)</span>
+<span id="cb22-212"><a href="#cb22-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-213"><a href="#cb22-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r results=&#39;hold&#39;}</span></span>
+<span id="cb22-214"><a href="#cb22-214" aria-hidden="true" tabindex="-1"></a><span class="in">bballw &lt;- bball[bball$LEAGUE==&quot;WNBA&quot;,]</span></span>
+<span id="cb22-215"><a href="#cb22-215" aria-hidden="true" tabindex="-1"></a><span class="in">wnba_summy &lt;- c(mean(bballw$HEIGHT),1.96,sd(bballw$HEIGHT),sqrt(nrow(bballw)))</span></span>
+<span id="cb22-216"><a href="#cb22-216" aria-hidden="true" tabindex="-1"></a><span class="in">ci &lt;- function(summy){</span></span>
+<span id="cb22-217"><a href="#cb22-217" aria-hidden="true" tabindex="-1"></a><span class="in">  upr &lt;- wnba_summy[1] + wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])</span></span>
+<span id="cb22-218"><a href="#cb22-218" aria-hidden="true" tabindex="-1"></a><span class="in">  lowr &lt;- wnba_summy[1] - wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])</span></span>
+<span id="cb22-219"><a href="#cb22-219" aria-hidden="true" tabindex="-1"></a><span class="in">  return(paste0(&quot;(&quot;,round(lowr,digits=2),&quot;, &quot;,round(upr,digits=2),&quot;)&quot;))</span></span>
+<span id="cb22-220"><a href="#cb22-220" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-221"><a href="#cb22-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-222"><a href="#cb22-222" aria-hidden="true" tabindex="-1"></a><span class="in">paste0(&quot;CI=&quot;,ci(wnba_summy))</span></span>
+<span id="cb22-223"><a href="#cb22-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-224"><a href="#cb22-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-225"><a href="#cb22-225" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. What percentage of WNBA observations fall inside this confidence interval? Is there a percentage of observations we should *expect* to fall inside this interval? (**4 Points**)</span>
+<span id="cb22-226"><a href="#cb22-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-229"><a href="#cb22-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-230"><a href="#cb22-230" aria-hidden="true" tabindex="-1"></a>ci_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(summy){</span>
+<span id="cb22-231"><a href="#cb22-231" aria-hidden="true" tabindex="-1"></a>  upr <span class="ot">&lt;-</span> wnba_summy[<span class="dv">1</span>] <span class="sc">+</span> wnba_summy[<span class="dv">2</span>]<span class="sc">*</span>(wnba_summy[<span class="dv">3</span>]<span class="sc">/</span>wnba_summy[<span class="dv">4</span>])</span>
+<span id="cb22-232"><a href="#cb22-232" aria-hidden="true" tabindex="-1"></a>  lowr <span class="ot">&lt;-</span> wnba_summy[<span class="dv">1</span>] <span class="sc">-</span> wnba_summy[<span class="dv">2</span>]<span class="sc">*</span>(wnba_summy[<span class="dv">3</span>]<span class="sc">/</span>wnba_summy[<span class="dv">4</span>])</span>
+<span id="cb22-233"><a href="#cb22-233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(lowr,upr))</span>
+<span id="cb22-234"><a href="#cb22-234" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-235"><a href="#cb22-235" aria-hidden="true" tabindex="-1"></a>ci_w <span class="ot">&lt;-</span> <span class="fu">ci_2</span>(wnba_summy)</span>
+<span id="cb22-236"><a href="#cb22-236" aria-hidden="true" tabindex="-1"></a>bballw<span class="sc">$</span>inconf <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb22-237"><a href="#cb22-237" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(bballw)){</span>
+<span id="cb22-238"><a href="#cb22-238" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(bballw<span class="sc">$</span>HEIGHT[i]<span class="sc">&gt;=</span>ci_w[<span class="dv">1</span>] <span class="sc">&amp;</span> bballw<span class="sc">$</span>HEIGHT[i]<span class="sc">&lt;=</span>ci_w[<span class="dv">2</span>])</span>
+<span id="cb22-239"><a href="#cb22-239" aria-hidden="true" tabindex="-1"></a>    bballw<span class="sc">$</span>inconf[i] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb22-240"><a href="#cb22-240" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-241"><a href="#cb22-241" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;Percentage of Observations in CI = &quot;</span>,<span class="fu">round</span>(<span class="fu">sum</span>(bballw<span class="sc">$</span>inconf)<span class="sc">/</span><span class="fu">nrow</span>(bballw)<span class="sc">*</span><span class="dv">100</span>,<span class="at">digits=</span><span class="dv">2</span>),<span class="st">&quot;%&quot;</span>)</span>
+<span id="cb22-242"><a href="#cb22-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-243"><a href="#cb22-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-244"><a href="#cb22-244" aria-hidden="true" tabindex="-1"></a>There is no percentage of observations that we can expect to be inside the CI. The CI is how confident we are that the true population mean falls within that interval.</span>
+<span id="cb22-245"><a href="#cb22-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-246"><a href="#cb22-246" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. I have a hypothesis that older players are heavier than younger players.<span class="ot">[^1]</span> Use <span class="in">`t.test()`</span> to preform a hypothesis test comparing weights of young and old players. What is the conclusion of the test? Interpret the test&#39;s p-value *in words*. (**4 Points**)</span>
+<span id="cb22-247"><a href="#cb22-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-248"><a href="#cb22-248" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>Define &quot;young&quot; as 25 or younger.</span>
+<span id="cb22-249"><a href="#cb22-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-253"><a href="#cb22-253" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(bball<span class="sc">$</span>WEIGHT[bball<span class="sc">$</span>AGE<span class="sc">&gt;</span><span class="dv">25</span>], bball<span class="sc">$</span>WEIGHT[bball<span class="sc">$</span>AGE<span class="sc">&lt;=</span><span class="dv">25</span>], <span class="st">&quot;greater&quot;</span>)</span>
+<span id="cb22-254"><a href="#cb22-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-255"><a href="#cb22-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a>Let $\bar{W}$ be average player weight in the sample:\</span>
+<span id="cb22-257"><a href="#cb22-257" aria-hidden="true" tabindex="-1"></a>$\bar{W} \in \mathbb{R}^+$\</span>
+<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a>$H_0: \bar{W}_{old} \le \bar{W}_{young}$\</span>
+<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a>$H_1: \bar{W}_{old} &gt; \bar{W}_{young}$\</span>
+<span id="cb22-260"><a href="#cb22-260" aria-hidden="true" tabindex="-1"></a>$p=0.1644$\</span>
+<span id="cb22-261"><a href="#cb22-261" aria-hidden="true" tabindex="-1"></a>$\alpha=0.05$\</span>
+<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a>$P&gt;\alpha$ therefore we fail to reject $H_0$ and there is a $16.44\%$ probability that this result is random chance.</span>
+<span id="cb22-264"><a href="#cb22-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-265"><a href="#cb22-265" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question `r Q &lt;- Q+1; Q`</span></span>
+<span id="cb22-266"><a href="#cb22-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
+<span id="cb22-268"><a href="#cb22-268" aria-hidden="true" tabindex="-1"></a><span class="in">q &lt;- 0</span></span>
+<span id="cb22-269"><a href="#cb22-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-270"><a href="#cb22-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-271"><a href="#cb22-271" aria-hidden="true" tabindex="-1"></a>Navigate to the following website: <span class="ot">&lt;https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/&gt;</span> On this website, you should see the following options:</span>
+<span id="cb22-272"><a href="#cb22-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-273"><a href="#cb22-273" aria-hidden="true" tabindex="-1"></a>&lt;ol&gt;</span>
+<span id="cb22-274"><a href="#cb22-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-275"><a href="#cb22-275" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Parameter: keep this as &quot;Average Temperature&quot;.</span>
+<span id="cb22-276"><a href="#cb22-276" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Time Scale: keep this as &quot;1-Month&quot;.</span>
+<span id="cb22-277"><a href="#cb22-277" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Month: set this to your birth month.</span>
+<span id="cb22-278"><a href="#cb22-278" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Start Year: set this to your birth year.</span>
+<span id="cb22-279"><a href="#cb22-279" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>End Year: set this to &quot;2024&quot;.</span>
+<span id="cb22-280"><a href="#cb22-280" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>State: set this to the state you were born in. If you were not born in the United States, choose the first state in which you lived.</span>
+<span id="cb22-281"><a href="#cb22-281" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>County: set this to the county you were born in (or the first county you lived in).</span>
+<span id="cb22-282"><a href="#cb22-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-283"><a href="#cb22-283" aria-hidden="true" tabindex="-1"></a>&lt;/ol&gt;</span>
+<span id="cb22-284"><a href="#cb22-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-285"><a href="#cb22-285" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Once these options are set, click the &quot;Plot&quot; button, scroll down below the generated plot, and right-click on the &quot;CSV&quot; download button. Copy the hyperlink address, and read it into R using <span class="in">`read.csv()`</span>. (**2 Points**)</span>
+<span id="cb22-286"><a href="#cb22-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-289"><a href="#cb22-289" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-290"><a href="#cb22-290" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/WV-039/tavg/1/7/1986-2024.csv?base_prd=true&amp;begbaseyear=1901&amp;endbaseyear=2000&quot;</span>)</span>
+<span id="cb22-291"><a href="#cb22-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-292"><a href="#cb22-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-293"><a href="#cb22-293" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Clean the data so it appears more like a &quot;normal&quot; <span class="in">`data.frame`</span>. (**4 Points**) For example, using <span class="in">`head(temp)`</span>, the output is:</span>
+<span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-297"><a href="#cb22-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-298"><a href="#cb22-298" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rownames</span>(temp),temp)</span>
+<span id="cb22-299"><a href="#cb22-299" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(temp) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb22-300"><a href="#cb22-300" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> temp[<span class="sc">-</span><span class="dv">1</span><span class="sc">:-</span><span class="dv">3</span>,] </span>
+<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(temp) <span class="ot">&lt;-</span> temp[<span class="dv">1</span>,]</span>
+<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> temp[<span class="sc">-</span><span class="dv">1</span>,]</span>
+<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Recreate the plot on the website. You may ignore the right-hand celsius axis, the &quot;° F&quot; on the left-hand axis, the background grid, the &quot;NOAA&quot; logo, and the shaded area beneath the time series. (**4 Points**) However, **extra credit** (**5 *Bonus* Points**) will be given to the person who can get the closest to an exact replication.</span>
+<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a><span class="co">#In order to attempt a close replication I needed to relearn how to plot by</span></span>
+<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a><span class="co">#using some libraries I previously had no experience with. I&#39;ll try to document </span></span>
+<span id="cb22-312"><a href="#cb22-312" aria-hidden="true" tabindex="-1"></a><span class="co">#this heavily to show what I was doing, and why I did it. Using ggplot2, I</span></span>
+<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a><span class="co">#got a lot more disciplined with indentation. Without it, the code</span></span>
+<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a><span class="co">#gets hard to follow very quickly. </span></span>
+<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-316"><a href="#cb22-316" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#I chose to use this package because it seemed to allow for </span></span>
+<span id="cb22-317"><a href="#cb22-317" aria-hidden="true" tabindex="-1"></a><span class="co">#more control (at the expense of user friendliness), I did, however, find a </span></span>
+<span id="cb22-318"><a href="#cb22-318" aria-hidden="true" tabindex="-1"></a><span class="co">#great deal more resources online for doing the more complicated graphics  </span></span>
+<span id="cb22-319"><a href="#cb22-319" aria-hidden="true" tabindex="-1"></a><span class="co">#manipulation that I wanted to implement.</span></span>
+<span id="cb22-320"><a href="#cb22-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-321"><a href="#cb22-321" aria-hidden="true" tabindex="-1"></a><span class="co">#This library was needed to scale the axes properly and add units to the axes</span></span>
+<span id="cb22-322"><a href="#cb22-322" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb22-323"><a href="#cb22-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-324"><a href="#cb22-324" aria-hidden="true" tabindex="-1"></a><span class="co">#These were needed to add the NOAA image to the plot.</span></span>
+<span id="cb22-325"><a href="#cb22-325" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggimage)</span>
+<span id="cb22-326"><a href="#cb22-326" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(png)</span>
+<span id="cb22-327"><a href="#cb22-327" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span>
+<span id="cb22-328"><a href="#cb22-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-329"><a href="#cb22-329" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to convert F to C for the right x-axis</span></span>
+<span id="cb22-330"><a href="#cb22-330" aria-hidden="true" tabindex="-1"></a>celcius <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb22-331"><a href="#cb22-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> ((<span class="dv">5</span><span class="sc">/</span><span class="dv">9</span>)<span class="sc">*</span>(x<span class="dv">-32</span>))</span>
+<span id="cb22-332"><a href="#cb22-332" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-333"><a href="#cb22-333" aria-hidden="true" tabindex="-1"></a><span class="co">#The data came with extra digits for the month. Since they are all July, I </span></span>
+<span id="cb22-334"><a href="#cb22-334" aria-hidden="true" tabindex="-1"></a><span class="co">#removed the extra digits.</span></span>
+<span id="cb22-335"><a href="#cb22-335" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">substr</span>(temp<span class="sc">$</span>Date,<span class="dv">1</span> ,<span class="dv">4</span>)</span>
+<span id="cb22-336"><a href="#cb22-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-337"><a href="#cb22-337" aria-hidden="true" tabindex="-1"></a><span class="co">#This reads the image into R, the image itself is the NOAA logo on the</span></span>
+<span id="cb22-338"><a href="#cb22-338" aria-hidden="true" tabindex="-1"></a><span class="co">#website&#39;s plot, pulled from the page source.</span></span>
+<span id="cb22-339"><a href="#cb22-339" aria-hidden="true" tabindex="-1"></a>img <span class="ot">&lt;-</span> <span class="fu">readPNG</span>(<span class="st">&quot;noaa-logo.png&quot;</span>, <span class="at">native =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-340"><a href="#cb22-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-341"><a href="#cb22-341" aria-hidden="true" tabindex="-1"></a><span class="co">#This converts the image into a matrix which was the most straightforward </span></span>
+<span id="cb22-342"><a href="#cb22-342" aria-hidden="true" tabindex="-1"></a><span class="co">#implementation to add transparency to the NOAA image by multiplying it by 0.3.</span></span>
+<span id="cb22-343"><a href="#cb22-343" aria-hidden="true" tabindex="-1"></a>noaaimg <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rgb</span>(img[,,<span class="dv">1</span>],img[,,<span class="dv">2</span>],img[,,<span class="dv">3</span>], img[,,<span class="dv">4</span>] <span class="sc">*</span> <span class="fl">0.3</span>), </span>
+<span id="cb22-344"><a href="#cb22-344" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nrow=</span><span class="fu">dim</span>(img)[<span class="dv">1</span>])</span>
+<span id="cb22-345"><a href="#cb22-345" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>Value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(temp<span class="sc">$</span>Value)</span>
+<span id="cb22-346"><a href="#cb22-346" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(temp<span class="sc">$</span>Date)</span>
+<span id="cb22-347"><a href="#cb22-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-348"><a href="#cb22-348" aria-hidden="true" tabindex="-1"></a><span class="co">#Using ggplot as opposed to base R. There may some redundant code in here, </span></span>
+<span id="cb22-349"><a href="#cb22-349" aria-hidden="true" tabindex="-1"></a><span class="co">#but honestly, I&#39;m afraid to change anything.</span></span>
+<span id="cb22-350"><a href="#cb22-350" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temp, <span class="fu">aes</span>(<span class="at">x=</span>Date, </span>
+<span id="cb22-351"><a href="#cb22-351" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y=</span>Value, </span>
+<span id="cb22-352"><a href="#cb22-352" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ymin=</span><span class="dv">70</span>, </span>
+<span id="cb22-353"><a href="#cb22-353" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ymax=</span>temp<span class="sc">$</span>Value, </span>
+<span id="cb22-354"><a href="#cb22-354" aria-hidden="true" tabindex="-1"></a>                 <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb22-355"><a href="#cb22-355" aria-hidden="true" tabindex="-1"></a>  <span class="co">#ggplot2 comes with some nice themes, but some of the elements needed to be</span></span>
+<span id="cb22-356"><a href="#cb22-356" aria-hidden="true" tabindex="-1"></a>  <span class="co">#removed for a decent reproduction</span></span>
+<span id="cb22-357"><a href="#cb22-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb22-358"><a href="#cb22-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb22-359"><a href="#cb22-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Kanawha County, West Virginia Average Temperature&quot;</span>, </span>
+<span id="cb22-360"><a href="#cb22-360" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;July&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-361"><a href="#cb22-361" aria-hidden="true" tabindex="-1"></a>  <span class="co">#the axes aren&#39;t labeled on the website, so they aren&#39;t here either</span></span>
+<span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a>  <span class="co">#used Mac&#39;s Digital Color Meter to get the colors</span></span>
+<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;#FF8109&quot;</span>) <span class="sc">+</span> <span class="co">#The line</span></span>
+<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">fill =</span> <span class="st">&quot;#FF8109&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span> <span class="co">#The shaded area under the curve</span></span>
+<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#FF8109&quot;</span>) <span class="sc">+</span> <span class="co">#The points</span></span>
+<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(temp<span class="sc">$</span>Value)) <span class="sc">+</span> <span class="co">#the mean line</span></span>
+<span id="cb22-370"><a href="#cb22-370" aria-hidden="true" tabindex="-1"></a>  <span class="co">#labeling the mean line</span></span>
+<span id="cb22-371"><a href="#cb22-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, </span>
+<span id="cb22-372"><a href="#cb22-372" aria-hidden="true" tabindex="-1"></a>           <span class="at">x=</span><span class="dv">1992</span>, </span>
+<span id="cb22-373"><a href="#cb22-373" aria-hidden="true" tabindex="-1"></a>           <span class="at">y=</span><span class="fu">mean</span>(temp<span class="sc">$</span>Value)<span class="sc">+</span><span class="fl">0.25</span>, </span>
+<span id="cb22-374"><a href="#cb22-374" aria-hidden="true" tabindex="-1"></a>           <span class="at">label=</span><span class="st">&quot;1901-2000 Mean: 74.6 \u00B0F&quot;</span>,</span>
+<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a>           ) <span class="sc">+</span></span>
+<span id="cb22-377"><a href="#cb22-377" aria-hidden="true" tabindex="-1"></a>  <span class="co">#scales the x axis</span></span>
+<span id="cb22-378"><a href="#cb22-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(temp<span class="sc">$</span>Date), </span>
+<span id="cb22-379"><a href="#cb22-379" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">max</span>(temp<span class="sc">$</span>Date), </span>
+<span id="cb22-380"><a href="#cb22-380" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">2</span>), </span>
+<span id="cb22-381"><a href="#cb22-381" aria-hidden="true" tabindex="-1"></a>                   <span class="at">limits=</span><span class="dv">1986</span><span class="sc">:</span><span class="dv">2024</span>, </span>
+<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a>                   <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> <span class="co">#ggplot2 puts some white space between</span></span>
+<span id="cb22-383"><a href="#cb22-383" aria-hidden="true" tabindex="-1"></a>                                       <span class="co">#the axes and the data, this removes it</span></span>
+<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">70</span>,<span class="dv">79</span>), </span>
+<span id="cb22-385"><a href="#cb22-385" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), </span>
+<span id="cb22-386"><a href="#cb22-386" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="dv">70</span><span class="sc">:</span><span class="dv">79</span>,</span>
+<span id="cb22-387"><a href="#cb22-387" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span><span class="fu">celcius</span>(.), </span>
+<span id="cb22-388"><a href="#cb22-388" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">breaks =</span> <span class="fu">celcius</span>(<span class="dv">70</span><span class="sc">:</span><span class="dv">79</span>),</span>
+<span id="cb22-389"><a href="#cb22-389" aria-hidden="true" tabindex="-1"></a>                                         <span class="co">#This adds labels to the right axis</span></span>
+<span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">labels =</span> <span class="fu">unit_format</span>(<span class="at">unit =</span> <span class="st">&quot;\u00B0C&quot;</span>,</span>
+<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a>                                                              <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a>                                         ),</span>
+<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a>                     <span class="co">#This adds labels to the left axis</span></span>
+<span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">unit_format</span>(<span class="at">unit =</span> <span class="st">&quot;\u00B0F&quot;</span>,</span>
+<span id="cb22-395"><a href="#cb22-395" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">accuracy =</span> <span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a>  <span class="co">#this adds the NOAA graphic to the plot</span></span>
+<span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_custom</span>(<span class="fu">rasterGrob</span>(noaaimg), </span>
+<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a>                    <span class="at">xmin =</span> <span class="dv">1988</span>, </span>
+<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymin =</span> <span class="dv">77</span>, </span>
+<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> <span class="dv">79</span>, </span>
+<span id="cb22-402"><a href="#cb22-402" aria-hidden="true" tabindex="-1"></a>                    <span class="at">xmax =</span> <span class="dv">1992</span>)</span>
+<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-404"><a href="#cb22-404" aria-hidden="true" tabindex="-1"></a><span class="co"># I&#39;m reasonably happy with how this turned out, I would have liked to</span></span>
+<span id="cb22-405"><a href="#cb22-405" aria-hidden="true" tabindex="-1"></a><span class="co"># make the x axis a bit shorter, and perhaps get into correcting the fonts to</span></span>
+<span id="cb22-406"><a href="#cb22-406" aria-hidden="true" tabindex="-1"></a><span class="co"># a more faithful recreation but if someone else earned the five bonus points, </span></span>
+<span id="cb22-407"><a href="#cb22-407" aria-hidden="true" tabindex="-1"></a><span class="co"># they earned it. This was far more work than I had anticipated just learning</span></span>
+<span id="cb22-408"><a href="#cb22-408" aria-hidden="true" tabindex="-1"></a><span class="co"># the package, but ggplot2 is a nice tool to have knowledge of. </span></span>
+<span id="cb22-409"><a href="#cb22-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-410"><a href="#cb22-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-411"><a href="#cb22-411" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-412"><a href="#cb22-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-413"><a href="#cb22-413" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Make a new column that is the z-score for each observation. Use the 1901-2000 average as the mean in the calculation. (**2 Points**)</span>
+<span id="cb22-414"><a href="#cb22-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-417"><a href="#cb22-417" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-418"><a href="#cb22-418" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(temp)){</span>
+<span id="cb22-419"><a href="#cb22-419" aria-hidden="true" tabindex="-1"></a>temp[i,<span class="st">&quot;Z&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">zscr</span>(temp<span class="sc">$</span>Value[i], <span class="fu">mean</span>(temp<span class="sc">$</span>Value), <span class="fu">sd</span>(temp<span class="sc">$</span>Value))</span>
+<span id="cb22-420"><a href="#cb22-420" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-421"><a href="#cb22-421" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-422"><a href="#cb22-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-423"><a href="#cb22-423" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Print the row with the largest z-score. (**2 Points**)</span>
+<span id="cb22-424"><a href="#cb22-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-427"><a href="#cb22-427" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-428"><a href="#cb22-428" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Largest z-score &gt;0:&quot;</span>)</span>
+<span id="cb22-429"><a href="#cb22-429" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(temp[temp<span class="sc">$</span>Z<span class="sc">==</span><span class="fu">max</span>(temp<span class="sc">$</span>Z),])</span>
+<span id="cb22-430"><a href="#cb22-430" aria-hidden="true" tabindex="-1"></a><span class="co">#print(&quot;Largest absolute value of z-score:&quot;)</span></span>
+<span id="cb22-431"><a href="#cb22-431" aria-hidden="true" tabindex="-1"></a><span class="co">#print(temp[abs(temp$Z)==max(abs(temp$Z)),])</span></span>
+<span id="cb22-432"><a href="#cb22-432" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-433"><a href="#cb22-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-434"><a href="#cb22-434" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Assuming temperatures come from a normal distribution, what is the probability of observing a temperature this high (or higher)? (**2 Points**)</span>
+<span id="cb22-435"><a href="#cb22-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-438"><a href="#cb22-438" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-439"><a href="#cb22-439" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;Probability of temperature greater than or equal to &quot;</span>,</span>
+<span id="cb22-440"><a href="#cb22-440" aria-hidden="true" tabindex="-1"></a>       temp<span class="sc">$</span>Value[<span class="fu">max</span>(temp<span class="sc">$</span>Z)<span class="sc">==</span>temp<span class="sc">$</span>Z],</span>
+<span id="cb22-441"><a href="#cb22-441" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;\u00B0F: &quot;</span>,</span>
+<span id="cb22-442"><a href="#cb22-442" aria-hidden="true" tabindex="-1"></a>       <span class="fu">round</span>((<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">max</span>(temp<span class="sc">$</span>Z)</span>
+<span id="cb22-443"><a href="#cb22-443" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb22-444"><a href="#cb22-444" aria-hidden="true" tabindex="-1"></a>              )<span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb22-445"><a href="#cb22-445" aria-hidden="true" tabindex="-1"></a>             <span class="at">digits =</span> <span class="dv">2</span></span>
+<span id="cb22-446"><a href="#cb22-446" aria-hidden="true" tabindex="-1"></a>             ),</span>
+<span id="cb22-447"><a href="#cb22-447" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;%&quot;</span></span>
+<span id="cb22-448"><a href="#cb22-448" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb22-449"><a href="#cb22-449" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

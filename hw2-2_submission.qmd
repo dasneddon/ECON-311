@@ -397,17 +397,32 @@ ggplot(temp, aes(x=Date,
 `r q <- q+1; letters[q]`. Make a new column that is the z-score for each observation. Use the 1901-2000 average as the mean in the calculation. (**2 Points**)
 
 ```{r}
-# Your code here...
+
+for (i in 1:nrow(temp)){
+temp[i,"Z"] <- zscr(temp$Value[i], mean(temp$Value), sd(temp$Value))
+}
 ```
 
 `r q <- q+1; letters[q]`. Print the row with the largest z-score. (**2 Points**)
 
 ```{r}
-# Your code here...
+print("Largest z-score >0:")
+print(temp[temp$Z==max(temp$Z),])
+#print("Largest absolute value of z-score:")
+#print(temp[abs(temp$Z)==max(abs(temp$Z)),])
 ```
 
 `r q <- q+1; letters[q]`. Assuming temperatures come from a normal distribution, what is the probability of observing a temperature this high (or higher)? (**2 Points**)
 
 ```{r}
-# Your code here...
+paste0("Probability of temperature greater than or equal to ",
+       temp$Value[max(temp$Z)==temp$Z],
+       "\u00B0F: ",
+       round((1 - pnorm(max(temp$Z)
+                        )
+              )*100,
+             digits = 2
+             ),
+       "%"
+       )
 ```
