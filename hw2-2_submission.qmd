@@ -399,7 +399,7 @@ ggplot(temp, aes(x=Date,
 ```{r}
 
 for (i in 1:nrow(temp)){
-temp[i,"Z"] <- zscr(temp$Value[i], mean(temp$Value), sd(temp$Value))
+temp[i,"Z"] <- zscr(temp$Value[i], 74.6, sd(temp$Value))
 }
 ```
 
@@ -408,8 +408,6 @@ temp[i,"Z"] <- zscr(temp$Value[i], mean(temp$Value), sd(temp$Value))
 ```{r}
 print("Largest z-score >0:")
 print(temp[temp$Z==max(temp$Z),])
-#print("Largest absolute value of z-score:")
-#print(temp[abs(temp$Z)==max(abs(temp$Z)),])
 ```
 
 `r q <- q+1; letters[q]`. Assuming temperatures come from a normal distribution, what is the probability of observing a temperature this high (or higher)? (**2 Points**)

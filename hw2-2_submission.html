@@ -3744,7 +3744,7 @@ Plot
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(temp)){</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>temp[i,<span class="st">&quot;Z&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">zscr</span>(temp<span class="sc">$</span>Value[i], <span class="fu">mean</span>(temp<span class="sc">$</span>Value), <span class="fu">sd</span>(temp<span class="sc">$</span>Value))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>temp[i,<span class="st">&quot;Z&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">zscr</span>(temp<span class="sc">$</span>Value[i], <span class="fl">74.6</span>, <span class="fu">sd</span>(temp<span class="sc">$</span>Value))</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
@@ -3755,9 +3755,7 @@ Plot
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Largest z-score &gt;0:&quot;</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(temp[temp<span class="sc">$</span>Z<span class="sc">==</span><span class="fu">max</span>(temp<span class="sc">$</span>Z),])</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#print(&quot;Largest absolute value of z-score:&quot;)</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#print(temp[abs(temp$Z)==max(abs(temp$Z)),])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(temp[temp<span class="sc">$</span>Z<span class="sc">==</span><span class="fu">max</span>(temp<span class="sc">$</span>Z),])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary>
@@ -3766,7 +3764,7 @@ Output
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Largest z-score &gt;0:&quot;
    Date Value Anomaly        Z
-39 2020  78.6     4.0 1.797338</code></pre>
+39 2020  78.6     4.0 2.033247</code></pre>
 </div>
 </details>
 </div>
@@ -3792,7 +3790,7 @@ Output
 Output
 </summary>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;Probability of temperature greater than or equal to 78.6°F: 3.61%&quot;</code></pre>
+<pre><code>[1] &quot;Probability of temperature greater than or equal to 78.6°F: 2.1%&quot;</code></pre>
 </div>
 </details>
 </div>
@@ -4684,7 +4682,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-414"><a href="#cb22-414" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-417"><a href="#cb22-417" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb22-418"><a href="#cb22-418" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(temp)){</span>
-<span id="cb22-419"><a href="#cb22-419" aria-hidden="true" tabindex="-1"></a>temp[i,<span class="st">&quot;Z&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">zscr</span>(temp<span class="sc">$</span>Value[i], <span class="fu">mean</span>(temp<span class="sc">$</span>Value), <span class="fu">sd</span>(temp<span class="sc">$</span>Value))</span>
+<span id="cb22-419"><a href="#cb22-419" aria-hidden="true" tabindex="-1"></a>temp[i,<span class="st">&quot;Z&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">zscr</span>(temp<span class="sc">$</span>Value[i], <span class="fl">74.6</span>, <span class="fu">sd</span>(temp<span class="sc">$</span>Value))</span>
 <span id="cb22-420"><a href="#cb22-420" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb22-421"><a href="#cb22-421" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-422"><a href="#cb22-422" aria-hidden="true" tabindex="-1"></a></span>
@@ -4693,24 +4691,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-427"><a href="#cb22-427" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb22-428"><a href="#cb22-428" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Largest z-score &gt;0:&quot;</span>)</span>
 <span id="cb22-429"><a href="#cb22-429" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(temp[temp<span class="sc">$</span>Z<span class="sc">==</span><span class="fu">max</span>(temp<span class="sc">$</span>Z),])</span>
-<span id="cb22-430"><a href="#cb22-430" aria-hidden="true" tabindex="-1"></a><span class="co">#print(&quot;Largest absolute value of z-score:&quot;)</span></span>
-<span id="cb22-431"><a href="#cb22-431" aria-hidden="true" tabindex="-1"></a><span class="co">#print(temp[abs(temp$Z)==max(abs(temp$Z)),])</span></span>
-<span id="cb22-432"><a href="#cb22-432" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-430"><a href="#cb22-430" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-431"><a href="#cb22-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-432"><a href="#cb22-432" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Assuming temperatures come from a normal distribution, what is the probability of observing a temperature this high (or higher)? (**2 Points**)</span>
 <span id="cb22-433"><a href="#cb22-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-434"><a href="#cb22-434" aria-hidden="true" tabindex="-1"></a><span class="in">`r q &lt;- q+1; letters[q]`</span>. Assuming temperatures come from a normal distribution, what is the probability of observing a temperature this high (or higher)? (**2 Points**)</span>
-<span id="cb22-435"><a href="#cb22-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-438"><a href="#cb22-438" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-439"><a href="#cb22-439" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;Probability of temperature greater than or equal to &quot;</span>,</span>
-<span id="cb22-440"><a href="#cb22-440" aria-hidden="true" tabindex="-1"></a>       temp<span class="sc">$</span>Value[<span class="fu">max</span>(temp<span class="sc">$</span>Z)<span class="sc">==</span>temp<span class="sc">$</span>Z],</span>
-<span id="cb22-441"><a href="#cb22-441" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;\u00B0F: &quot;</span>,</span>
-<span id="cb22-442"><a href="#cb22-442" aria-hidden="true" tabindex="-1"></a>       <span class="fu">round</span>((<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">max</span>(temp<span class="sc">$</span>Z)</span>
-<span id="cb22-443"><a href="#cb22-443" aria-hidden="true" tabindex="-1"></a>                        )</span>
-<span id="cb22-444"><a href="#cb22-444" aria-hidden="true" tabindex="-1"></a>              )<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb22-445"><a href="#cb22-445" aria-hidden="true" tabindex="-1"></a>             <span class="at">digits =</span> <span class="dv">2</span></span>
-<span id="cb22-446"><a href="#cb22-446" aria-hidden="true" tabindex="-1"></a>             ),</span>
-<span id="cb22-447"><a href="#cb22-447" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;%&quot;</span></span>
-<span id="cb22-448"><a href="#cb22-448" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb22-449"><a href="#cb22-449" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-436"><a href="#cb22-436" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-437"><a href="#cb22-437" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;Probability of temperature greater than or equal to &quot;</span>,</span>
+<span id="cb22-438"><a href="#cb22-438" aria-hidden="true" tabindex="-1"></a>       temp<span class="sc">$</span>Value[<span class="fu">max</span>(temp<span class="sc">$</span>Z)<span class="sc">==</span>temp<span class="sc">$</span>Z],</span>
+<span id="cb22-439"><a href="#cb22-439" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;\u00B0F: &quot;</span>,</span>
+<span id="cb22-440"><a href="#cb22-440" aria-hidden="true" tabindex="-1"></a>       <span class="fu">round</span>((<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">max</span>(temp<span class="sc">$</span>Z)</span>
+<span id="cb22-441"><a href="#cb22-441" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb22-442"><a href="#cb22-442" aria-hidden="true" tabindex="-1"></a>              )<span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb22-443"><a href="#cb22-443" aria-hidden="true" tabindex="-1"></a>             <span class="at">digits =</span> <span class="dv">2</span></span>
+<span id="cb22-444"><a href="#cb22-444" aria-hidden="true" tabindex="-1"></a>             ),</span>
+<span id="cb22-445"><a href="#cb22-445" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;%&quot;</span></span>
+<span id="cb22-446"><a href="#cb22-446" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb22-447"><a href="#cb22-447" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
