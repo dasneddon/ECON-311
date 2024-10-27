@@ -105,6 +105,7 @@ We would expect $\beta_0 = 0$ and $\beta_1 = 0.18$.
 `r q <- q+1; letters[q]`. Plot `total_bill` vs `tip`. Make the figure presentable with labeled axes, colored points (with some opacity), etc. (**2 Points**)
 
 ```{r}
+library(scales)
 plot(x = tips$total_bill, 
      y = tips$tip,
      main = "Total Bill vs Tip",
@@ -113,7 +114,8 @@ plot(x = tips$total_bill,
      las = 1,
      type = "p",
      pch = 20,
-     col = "blue")
+     col = alpha("blue",0.2)
+)
 ```
 
 `r q <- q+1; letters[q]`. Estimate the parameters in the model.  Interpret the value of each coefficient in words. (**2 Points**)
@@ -139,7 +141,7 @@ plot(x = tips$total_bill,
      las = 1,
      type = "p",
      pch = 20,
-     col = "black",
+     col = alpha("black", 0.25),
      xlim = c(0, max(tips$total_bill)+1),
      ylim = c(0, max(tips$tip)+1),
      xaxs = "i",
@@ -201,21 +203,42 @@ modelsummary(regz,
 `r q <- q+1; letters[q]`. Suppose you are a commuter who wants to live as far as possible from their job which is in the middle of a city center (and thus subject to pollution, crime, noise, and everything else you don't like). However, you also don't like commuting; each minute in traffic is torture to you. If you are willing to spend 30 minutes in traffic, how far from work, in miles, should you live? Use the parameters from the level-level model to inform your decision. (**2 Points**)
 
 Given $Y_{Time}=30$ and $\hat{Y}_{Time} = 9.705 + 1.145X_{Dist}$.\
-We want to find $X_{Dist} \ni 9.705 + 1.145X_{Dist} = 30$ so we can solve for $X_{Dist}$ and get $X_{Dist} = 17.7249$
+We want to find $X_{Dist} : \hat{Y}_{Time} = 30$ so we can solve for $X_{Dist}$ and get $X_{Dist} = 17.7249$
 
 `r q <- q+1; letters[q]`. Estimate the level-level model for each city in the data.  Display the coefficients in a single table. (**4 Points**)
 
 ```{r}
-# Your code here...
+
+citiez <- unique(metrocommutes$City)
+ll_cities <- list()
+level_level <- function (cityframe, city) {
+  cityframe <- as.data.frame(cityframe)
+  colnames(cityframe) <- colnames(metrocommutes)
+   return (lm(formula = Time ~ Distance,
+              data = cityframe,
+              subset = cityframe$City == city
+              ))
+
+}
+
+for (x in unique(metrocommutes$City)){
+  ll_cities <- append(ll_cities, list(level_level(metrocommutes, x)))
+}
+names(ll_cities) <- citiez
+modelsummary(ll_cities,
+             title = "Effect of Distance on Commute - by City - level-level",
+             estimate = "{estimate}{stars}",
+             coef_map = coefz,
+             gof_map = gofz)
 ```
 
 `r q <- q+1; letters[q]`. Compare the coefficients for Boston, the highest density city in the sample, to Houston, the lowest density city in the sample.^[Persons (in 2016) per Square Mile: Boston (13,943), Houston (3,842), Minneapolis (7,664), and Washington (11,158).] (**2 Points**)
 
-*Your answer here...*
+Boston shows a slightly lower effect of distance on time than Houston.
 
 `r q <- q+1; letters[q]`. Following from the previous question, why do you think a city's density appears to be related to its $R^2$ in the models above? (**2 Points**)
 
-*Your answer here...*
+A city's density appears to have an effect on commute time. The greater the density, the greater the effect on the single variable regression. The model would be more accurate with density as a regressor.
 
 
 
@@ -230,35 +253,71 @@ Infant birth weight is an often used measure in health economics, serving as a v
 `r q <- q+1; letters[q]`. Read in the data. Convert birth weight to pounds and gestation to weeks, both as new variables. Use the `floor()` function to round gestation down to the nearest whole week. (**2 Points**)
 
 ```{r}
-# Your code here...
+birth_data <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/mosaicData/Gestation.csv")
+birth_data$gestation_weeks <- floor(birth_data$gestation/7)
+birth_data$wt_lb <- birth_data$wt/16
 ```
 
 `r q <- q+1; letters[q]`. Plot the distribution of gestation (in weeks). Be sure to label the axes, etc. What are some things you notice about the distribution? (**3 Points**)
 
 ```{r}
-# Your code here...
+plot(table(birth_data$gestation_weeks[!is.na(birth_data$gestation_weeks)]),
+     main = "Distribution of Gestation Time",
+     xlab = "Gestation in Weeks",
+     ylab = "Frequency",
+     las = 1)
 ```
 
-*Your answer here...*
+This appears to approximate a normal distribution with a median at around 39-40 weeks.
 
 `r q <- q+1; letters[q]`. Create a visualization of average birth weight by weeks of gestation. What are some things you notice about the figure? (**3 Points**)
 
 ```{r}
-# Your code here...
+plot(birth_data$gestation_weeks[!is.na(birth_data$gestation_weeks) & !is.na(birth_data$wt_lb)],
+     birth_data$wt_lb[!is.na(birth_data$gestation_weeks) & !is.na(birth_data$wt_lb)],
+     pch = 16,
+     cex = 0.75,
+     col = alpha("blue", 0.25),
+     main = "Birth Weight by Weeks of Gestation",
+     xlab = "Weeks of Gestation",
+     ylab = "Birth Weight in Pounds",
+     las = 1)
 ```
 
-*Your answer here...*
+Most babies in the sample are born between 38-41 weeks and weigh between 6-8 pounds and there appears to be a positive correlation between gestation time and birth weight.
 
 `r q <- q+1; letters[q]`. Estimate models to explain birth weight in pounds using gestation in weeks. The first model should be level-level and the second model should be log-level. You should eliminate any outliers you might have identified from the data. Present the coefficients in a table. (**2 Points**)
 
 ```{r}
-# Your code here...
+levlev <- as.formula(wt_lb ~ gestation_weeks)
+loglog <- as.formula(log(wt_lb) ~ log(gestation_weeks))
+ol_rm <- function (datah, formulah){
+  reg <- lm(formulah, datah)
+  cookz <- cooks.distance(reg)
+  thresh <- 4 / (nrow(datah) - length(coef(reg)) - 1)
+  outz <- cookz > thresh
+  return(datah[!outz,])
+  
+}
+
+reg_levlev <- lm(formula = levlev,
+                 data = birth_data)
+reg_loglog <- lm(formula = loglog,
+                 data = birth_data)
+reg_levlev_c <- lm(formula = levlev,
+                 data = ol_rm(birth_data,levlev))
+reg_loglog_c <- lm(formula = loglog,
+                 data = ol_rm(birth_data,loglog))
+regz <- list(reg_levlev,reg_loglog,reg_levlev_c,reg_loglog_c)
+names(regz) <- c("Level-Level", "Log-Log", "Level-Level-Clean", "Log-Log-Clean")
+modelsummary(regz,
+             gof_map = gofz)
+
 ```
 
 `r q <- q+1; letters[q]`. Interpret each coefficient from each model in words. (**4 Points**)
 
-*Your answer here...*
-
+Each week of gestation results in a 0.205 lb. increase in birth weight and a 1% increase in gestation time results in a 1.129% increase in birth weight.
 
 
 

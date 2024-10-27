@@ -1,0 +1,432 @@
+---
+title: "Homework 2.2"
+author: "David Sneddon"
+institute: "Old Dominion University"
+format: 
+  html:
+    theme: lux # Check here for more themes: https://quarto.org/docs/output-formats/html-themes.html
+    code-tools: true
+    code-fold: true
+    code-summary: "Code"
+    code-copy: hover
+    link-external-newwindow: true
+    tbl-cap-location: top
+    fig-cap-location: bottom
+
+self-contained: true
+editor: source
+---
+
+```{r setup, include=FALSE}
+# DO NOT EDIT THIS
+
+knitr::opts_chunk$set(fig.align = 'center')
+knitr::opts_chunk$set(out.width = '90%')
+knitr::opts_chunk$set(results = 'hold')
+knitr::opts_chunk$set(fig.show = 'hold')
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+par(mar = c(4.1, 4.1, 1.1, 4.1))
+
+hooks = knitr::knit_hooks$get()
+hook_foldable = function(type) {
+  force(type)
+  function(x, options) {
+    res = hooks[[type]](x, options)
+    
+    if (is.na(as.logical(options[[paste0("fold.", type)]]))) {
+      
+      res
+    } else if (isFALSE(as.logical(options[[paste0("fold.", type)]]))){
+      
+      # return(res)
+      
+      paste0(
+      "<details open><summary>", gsub("^p", "P", gsub("^o", "O", type)), "</summary>\n\n",
+      res,
+      "\n\n</details>"
+      )
+    } else {
+      
+      paste0(
+      "<details><summary>", gsub("^p", "P", gsub("^o", "O", type)), "</summary>\n\n",
+      res,
+      "\n\n</details>"
+      )
+    }
+  }
+}
+
+knitr::knit_hooks$set(
+  output = hook_foldable("output"),
+  plot = hook_foldable("plot")
+)
+knitr::opts_chunk$set(fold.output=TRUE)
+knitr::opts_chunk$set(fold.plot=TRUE)
+
+Q <- 0
+```
+
+## Question `r Q <- Q+1; Q`
+
+```{r include=FALSE}
+q <- 0
+```
+
+`r q <- q+1; letters[q]`. How are hypothesis testing and confidence intervals related? (**4 Points**)
+
+Confidence intervals, is how likely a true population parameter falls within a range near the sample parameter.
+
+The formula is:
+
+$$
+CI = \bar{X} \pm Z \left(\frac{s}{\sqrt{n}}\right) 
+$$
+
+Where $CI$ is the confidence interval, $\bar{X}$ is the sample mean, $Z$ is the Z-Score, $s$ is the standard deviation of the sample, and $n$ is the number of observations in the sample.
+
+So if
+
+$\mu \in \mathbb{R}$\
+$H_0: \mu=0$\
+$H_1: \mu \ne 0$\
+$\alpha/2=0.25\therefore Z= 1.96$\
+$n=30$\
+$s=1.0$\
+$\bar{X}=5.0$\
+
+...then the confidence interval is:
+
+$$
+\begin{equation}
+CI = 5.0 \pm 1.96 \left(\frac{1}{\sqrt{30}}\right) = 5.0 \pm 0.358
+\end{equation}
+$$
+
+Since $0$ does not fall within the confidence interval then we can reject $H_0$ since there is evidence that $\mu \ne 0$.
+
+`r q <- q+1; letters[q]`. Suppose I calculate a p-value of 0.08. What is there an 8% probability of? (**4 Points**)
+
+There is an $8\%$ probability that the result was random chance and $H_0$ is correct.
+
+## Question `r Q <- Q+1; Q`
+
+```{r include=FALSE}
+q <- 0
+```
+
+For the following question, use [data on the heights and weights of the 2022-23 NBA and WNBA all-stars](https://alexcardazzi.github.io/econ311/data/bball_allstars.csv).
+
+`r q <- q+1; letters[q]`. Read data into R. Call the dataset `bball`. (**2 Points**)
+
+```{r}
+bball <- read.csv("https://alexcardazzi.github.io/econ311/data/bball_allstars.csv")
+```
+
+`r q <- q+1; letters[q]`. Remove any columns with missing data. (**2 Points**)
+
+```{r}
+#for (i in ncol(bball):1){
+#  if(sum(is.na(bball[,i]))>0){
+#    bball[,i] <- NULL
+#  }
+#}
+
+bball <- bball[,!colSums(is.na(bball))]
+```
+
+`r q <- q+1; letters[q]`. Print the row of the youngest player. (**2 Points**)
+
+```{r}
+bball[bball$AGE==min(bball$AGE),]
+```
+
+`r q <- q+1; letters[q]`. Create two summary statistics tables -- one for the NBA players, and one for the WNBA players. Include only variables for age, height, and weight. Comment on the differences. (**4 Points**)
+
+```{r results='hold'}
+##I copy pasted this from course notes
+# use this every time you want to use 'modelsummary'
+library("modelsummary")
+# add this line when loading 'modelsummary', too
+options("modelsummary_factory_default" = "kableExtra")
+####################################################
+
+outputtr <- function(i){
+ title <- paste("Summary Statistics -",i)
+  frmla <- AGE + HEIGHT + WEIGHT ~ (`N` = length) + Mean + (`St. Dev.` = sd) + (`Min` = min) + (`Max` = max)
+  return(datasummary(frmla, data=bball[bball$LEAGUE==i,], title=title, fmt = fmt_significant(2)))
+}
+###This is what I wanted to do, it should work, at least in theory. The output html file won't
+###render the the html on the template, just outputs raw html code.
+###Slightly better using {r results='asis'} but puts the title at the bottom for each table. 
+# }
+# for (x in unique(bball$LEAGUE)){
+#   print(outputtr(x))
+# }
+outputtr("NBA")
+outputtr("WNBA")
+```
+
+The average age is higher in the WNBA, while average height and weight is higher in the NBA. The heights and weights are also more varied in the NBA.
+
+`r q <- q+1; letters[q]`. Which player(s) is taller relative to their respective league: the tallest NBA player(s) or the tallest WNBA player(s)? *Hint*: use Z-Scores! It might even be helpful to write a function to calculate Z-Scores to minimize the total amount of code you need to write. (**4 Points**)
+
+::: aside
+Do not manually type the player names / heights, use code to select the player's info.
+:::
+
+```{r results='hold'}
+zscr <- function(x){
+  return((x-mean(x))/sd(x))
+}
+bball_league <- split(bball, bball$LEAGUE)
+
+
+# for (c in unique(bball$LEAGUE)){
+#   for (i in 1:nrow(bball)){
+#     if(bball$LEAGUE[i]==c){
+#       bball$ZSCORE_LEAGUE[i] <- zscr(bball$HEIGHT[i], mean(bball$HEIGHT[bball$LEAGUE==c]),
+#                                      sd(bball$HEIGHT[bball$LEAGUE==c]))
+#     }
+#   }
+# }
+# bball$HIGHEST <- 0
+# for (c in unique(bball$LEAGUE)){
+#   for (i in 1:nrow(bball)){
+#     if(bball$ZSCORE_LEAGUE[i]==max(bball$ZSCORE_LEAGUE[bball$LEAGUE==c]) &
+#        bball$LEAGUE[i]==c){
+#       bball$HIGHEST[i] <- 1
+#     }
+#   }
+# }
+
+bball$ZSCORE_LEAGUE <- zscr(bball$HEIGHT, )
+
+print(bball[bball$HIGHEST==1,])
+```
+
+The tallest players relative to their leagues are shown above, with the NBA having the relatively even taller players with the highest z-scores overall.
+
+`r q <- q+1; letters[q]`. Create and print a 95% confidence interval for WNBA heights. (**4 Points**)
+
+```{r results='hold'}
+bballw <- bball[bball$LEAGUE=="WNBA",]
+wnba_summy <- c(mean(bballw$HEIGHT),1.96,sd(bballw$HEIGHT),sqrt(nrow(bballw)))
+ci <- function(summy){
+  upr <- wnba_summy[1] + wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])
+  lowr <- wnba_summy[1] - wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])
+  return(paste0("(",round(lowr,digits=2),", ",round(upr,digits=2),")"))
+}
+
+paste0("CI=",ci(wnba_summy))
+```
+
+`r q <- q+1; letters[q]`. What percentage of WNBA observations fall inside this confidence interval? Is there a percentage of observations we should *expect* to fall inside this interval? (**4 Points**)
+
+```{r}
+ci_2 <- function(summy){
+  upr <- wnba_summy[1] + wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])
+  lowr <- wnba_summy[1] - wnba_summy[2]*(wnba_summy[3]/wnba_summy[4])
+  return(c(lowr,upr))
+}
+ci_w <- ci_2(wnba_summy)
+bballw$inconf <- 0
+for (i in 1:nrow(bballw)){
+  if(bballw$HEIGHT[i]>=ci_w[1] & bballw$HEIGHT[i]<=ci_w[2])
+    bballw$inconf[i] <- 1
+}
+paste0("Percentage of Observations in CI = ",round(sum(bballw$inconf)/nrow(bballw)*100,digits=2),"%")
+```
+
+There is no percentage of observations that we can expect to be inside the CI. The CI is how confident we are that the true population mean falls within that interval.
+
+`r q <- q+1; letters[q]`. I have a hypothesis that older players are heavier than younger players.[^1] Use `t.test()` to preform a hypothesis test comparing weights of young and old players. What is the conclusion of the test? Interpret the test's p-value *in words*. (**4 Points**)
+
+[^1]: Define "young" as 25 or younger.
+
+```{r}
+t.test(bball$WEIGHT[bball$AGE>25], bball$WEIGHT[bball$AGE<=25], "greater")
+```
+
+Let $\bar{W}$ be average player weight in the sample:\
+$\bar{W} \in \mathbb{R}^+$\
+$H_0: \bar{W}_{old} \le \bar{W}_{young}$\
+$H_1: \bar{W}_{old} > \bar{W}_{young}$\
+$p=0.1644$\
+$\alpha=0.05$\
+
+$P>\alpha$ therefore we fail to reject $H_0$ and there is a $16.44\%$ probability that this result is random chance.
+
+## Question `r Q <- Q+1; Q`
+
+```{r include=FALSE}
+q <- 0
+```
+
+Navigate to the following website: <https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/> On this website, you should see the following options:
+
+<ol>
+
+-   Parameter: keep this as "Average Temperature".
+-   Time Scale: keep this as "1-Month".
+-   Month: set this to your birth month.
+-   Start Year: set this to your birth year.
+-   End Year: set this to "2024".
+-   State: set this to the state you were born in. If you were not born in the United States, choose the first state in which you lived.
+-   County: set this to the county you were born in (or the first county you lived in).
+
+</ol>
+
+`r q <- q+1; letters[q]`. Once these options are set, click the "Plot" button, scroll down below the generated plot, and right-click on the "CSV" download button. Copy the hyperlink address, and read it into R using `read.csv()`. (**2 Points**)
+
+```{r}
+temp <- read.csv("https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/county/time-series/WV-039/tavg/1/7/1986-2024.csv?base_prd=true&begbaseyear=1901&endbaseyear=2000")
+```
+
+`r q <- q+1; letters[q]`. Clean the data so it appears more like a "normal" `data.frame`. (**4 Points**) For example, using `head(temp)`, the output is:
+
+```{r}
+temp <- cbind(rownames(temp),temp)
+rownames(temp) <- NULL
+temp <- temp[-1:-3,] 
+colnames(temp) <- temp[1,]
+temp <- temp[-1,]
+```
+
+`r q <- q+1; letters[q]`. Recreate the plot on the website. You may ignore the right-hand celsius axis, the "° F" on the left-hand axis, the background grid, the "NOAA" logo, and the shaded area beneath the time series. (**4 Points**) However, **extra credit** (**5 *Bonus* Points**) will be given to the person who can get the closest to an exact replication.
+
+```{r}
+#In order to attempt a close replication I needed to relearn how to plot by
+#using some libraries I previously had no experience with. I'll try to document 
+#this heavily to show what I was doing, and why I did it. Using ggplot2, I
+#got a lot more disciplined with indentation. Without it, the code
+#gets hard to follow very quickly. 
+
+library(ggplot2) #I chose to use this package because it seemed to allow for 
+#more control (at the expense of user friendliness), I did, however, find a 
+#great deal more resources online for doing the more complicated graphics  
+#manipulation that I wanted to implement.
+
+#This library was needed to scale the axes properly and add units to the axes
+library(scales)
+
+#These were needed to add the NOAA image to the plot.
+library(ggimage)
+library(png)
+library(grid)
+
+#Function to convert F to C for the right x-axis
+celcius <- function(x){
+  return ((5/9)*(x-32))
+}
+#The data came with extra digits for the month. Since they are all July, I 
+#removed the extra digits.
+temp$Date <- substr(temp$Date,1 ,4)
+
+#This reads the image into R, the image itself is the NOAA logo on the
+#website's plot, pulled from the page source.
+img <- readPNG("noaa-logo.png", native = FALSE)
+
+#This converts the image into a matrix which was the most straightforward 
+#implementation to add transparency to the NOAA image by multiplying it by 0.3.
+noaaimg <- matrix(rgb(img[,,1],img[,,2],img[,,3], img[,,4] * 0.3), 
+                  nrow=dim(img)[1])
+temp$Value <- as.numeric(temp$Value)
+temp$Date <- as.numeric(temp$Date)
+
+#Using ggplot as opposed to base R. There may some redundant code in here, 
+#but honestly, I'm afraid to change anything.
+ggplot(temp, aes(x=Date, 
+                 y=Value, 
+                 ymin=70, 
+                 ymax=temp$Value, 
+                 group = 1)) +
+  #ggplot2 comes with some nice themes, but some of the elements needed to be
+  #removed for a decent reproduction
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  labs(title = "Kanawha County, West Virginia Average Temperature", 
+       subtitle = "July") +
+  #the axes aren't labeled on the website, so they aren't here either
+  xlab(NULL) +
+  ylab(NULL) +
+  #used Mac's Digital Color Meter to get the colors
+  geom_line(color = "#FF8109") + #The line
+  geom_ribbon(fill = "#FF8109", alpha = 0.4) + #The shaded area under the curve
+  geom_point(color = "#FF8109") + #The points
+  
+  geom_hline(yintercept = mean(temp$Value)) + #the mean line
+  #labeling the mean line
+  annotate("text", 
+           x=1992, 
+           y=mean(temp$Value)+0.25, 
+           label="1901-2000 Mean: 74.6 \u00B0F",
+           size = 3
+           ) +
+  #scales the x axis
+  scale_x_discrete(breaks = seq(min(temp$Date), 
+                                max(temp$Date), 
+                                2), 
+                   limits=1986:2024, 
+                   expand = c(0, 0)) + #ggplot2 puts some white space between
+                                       #the axes and the data, this removes it
+  scale_y_continuous(limits=c(70,79), 
+                     expand = c(0,0), 
+                     breaks = 70:79,
+                     sec.axis = sec_axis(~celcius(.), 
+                                         breaks = celcius(70:79),
+                                         #This adds labels to the right axis
+                                         labels = unit_format(unit = "\u00B0C",
+                                                              accuracy = 0.1)
+                                         ),
+                     #This adds labels to the left axis
+                     labels = unit_format(unit = "\u00B0F",
+                                          accuracy = 0.1)) +
+  
+  #this adds the NOAA graphic to the plot
+  annotation_custom(rasterGrob(noaaimg), 
+                    xmin = 1988, 
+                    ymin = 77, 
+                    ymax = 79, 
+                    xmax = 1992)
+
+# I'm reasonably happy with how this turned out, I would have liked to
+# make the x axis a bit shorter, and perhaps get into correcting the fonts to
+# a more faithful recreation but if someone else earned the five bonus points, 
+# they earned it. This was far more work than I had anticipated just learning
+# the package, but ggplot2 is a nice tool to have knowledge of. 
+
+
+```
+
+`r q <- q+1; letters[q]`. Make a new column that is the z-score for each observation. Use the 1901-2000 average as the mean in the calculation. (**2 Points**)
+
+```{r}
+
+for (i in 1:nrow(temp)){
+temp[i,"Z"] <- zscr(temp$Value[i], 74.6, sd(temp$Value))
+}
+```
+
+`r q <- q+1; letters[q]`. Print the row with the largest z-score. (**2 Points**)
+
+```{r}
+print("Largest z-score >0:")
+print(temp[temp$Z==max(temp$Z),])
+```
+
+`r q <- q+1; letters[q]`. Assuming temperatures come from a normal distribution, what is the probability of observing a temperature this high (or higher)? (**2 Points**)
+
+```{r}
+paste0("Probability of temperature greater than or equal to ",
+       temp$Value[max(temp$Z)==temp$Z],
+       "\u00B0F: ",
+       round((1 - pnorm(max(temp$Z)
+                        )
+              )*100,
+             digits = 2
+             ),
+       "%"
+       )
+```
