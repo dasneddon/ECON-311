@@ -1,6 +1,6 @@
 ---
 title: "Homework 4.1"
-author: "Your Name Here"
+author: "David Sneddon"
 institute: "Old Dominion University"
 format: 
   html:
@@ -79,36 +79,63 @@ For this question, you will have to put together two sets of data.  First, you w
 `r q <- q+1; letters[q]`. Read in the US News and World Report data.  Save it as a data frame called `usnwr`. (**2 Points**)
 
 ```{r}
-# Your code here...
+usnwr <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/ISLR/College.csv")
 ```
 
 `r q <- q+1; letters[q]`. Read in the College Scorecard data into a data frame called `scorecard`. (**2 Points**)
 
 ```{r}
-# Your code here...
+scorecard <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/causaldata/scorecard.csv")
 ```
 
 `r q <- q+1; letters[q]`. Remove all observations from `scorecard` that do not come from 2007. Next, merge `earnings_med` from `scorecard` into `usnwr` by institution. (**4 Points**)
 
 ```{r}
-# Your code here...
+scorecard <- scorecard[scorecard$year != 2007,]
 ```
 
 `r q <- q+1; letters[q]`. Generate a summary statistics table for median student earnings, whether the school is private, the acceptance rate, size of the student body, student/faculty ratio, and instructional expenditure per student. **Note**: you will need to modify/create some of these variables. (**4 Points**)
 
 ```{r, warning=FALSE, message=FALSE}
-# Your code here...
+colnames(usnwr)[1] <- "inst_name"
+scorecard <- merge(usnwr,scorecard, by="inst_name")
+scorecard$AcceptRate <- scorecard$Accept / scorecard$Apps * 100
+scorecard$StudentBody <- scorecard$F.Undergrad + scorecard$P.Undergrad
+scorecard <- na.omit(scorecard)
+scorecard$Private <- ifelse(scorecard$Private == "Yes", 1, 0)
+library("modelsummary")
+options("modelsummary_factory_default" = "kableExtra")
+title <- "Summary Statistics"
+frmla <- earnings_med + Private + AcceptRate + StudentBody + S.F.Ratio + Expend ~ 
+  (`N` = length) + Mean + (`St. Dev.` = sd) + (`Min` = min) + (`Max` = max)
+datasummary(frmla, 
+            data=scorecard, 
+            title=title, 
+            fmt = fmt_significant(2))
+
+
 ```
 
 `r q <- q+1; letters[q]`. Estimate a regression where median student earnings (log) are explained by whether the school is private, the acceptance rate, size of the student body (log), student/faculty ratio, and instructional expenditure per student (log). Display the coefficient estimates (using `summary()` is fine). (**3 Points**)
 
 ```{r}
-# Your code here...
+options(scipen=999)
+reg1 <- lm(log(earnings_med) 
+           ~ Private 
+           + AcceptRate 
+           + log(StudentBody) 
+           + S.F.Ratio
+           + log(Expend),
+           data = scorecard)
+summary(reg1)
 ```
 
 `r q <- q+1; letters[q]`. Interpret the coefficients. (**5 Points**)
 
-*Your answer here...*
+* Students from private schools have, on average, a $21.9\%$ higher median salary.
+* A $1\%$ increase in the acceptance rate correlates to a $0.0965\%$ lower median salary. (Note that this is still log-linear acceptance rate is expressed as a percentage)
+* A $1\%$ increase in the size of the student body correlates to a $0.130\%$ higher median salary.
+* A $1\%$ increase in per student expenditure correlates to a $0.253\%$ higher median salary.
 
 
 
@@ -124,15 +151,17 @@ $$\text{Grade} = \beta_0 + \beta_1\text{Sleep} + \beta_2\text{Study}$$
 
 `r q <- q+1; letters[q]`. Interpret each coefficient in words. (**3 Points**)
 
-*Your answer here...*
+* $\beta_0$: Expected grade with no time spent sleeping or studying.
+* $\beta_1$: For every hour spent sleeping Grade will increase by $\beta_1$.
+* $\beta_2$: For every hour spent studying Grade will increase by $\beta_2$.
 
 `r q <- q+1; letters[q]`. Suppose I am interested in how time spent doing other things will impact exam grades.  How will the regression be effected if I add another variable named "Other" defined as $\text{Other} = 24 - \text{Sleep} - \text{Study}$? (**2 Points**)
 
-*Your answer here...*
+This would introduce multicollinearity. $\beta_3$ would be redundant to $\beta_1+\beta_2$ hindering precision.
 
 `r q <- q+1; letters[q]`. What would you expect to happen to $\beta_2$ if I added a new variable called $\text{IQ}$ to the model above? (**2 Points**)
 
-*Your answer here...*
+First, I'd be interested to know how endogenous IQ is to Study. Assuming it isn't, I would expect $\beta_2$ have a lower magnitude.
 
 
 
@@ -147,39 +176,77 @@ The quality of wine is highly subjective.  In any case, having a wine that is hi
 `r q <- q+1; letters[q]`. Read both datasets into R. (**2 Points**)
 
 ```{r}
-# Your code here...
+reds <- read.csv("https://alexcardazzi.github.io/econ311/data/winequality-red.csv")
+reds$color <- "Red"
+whites <- read.csv("https://alexcardazzi.github.io/econ311/data/winequality-white.csv")
+whites$color <- "White"
+winez <- rbind(reds,whites)
 ```
 
 `r q <- q+1; letters[q]`. Create summary statistics tables for `quality`, `pH`, and `residual.sugar` for red and white wine separately. (**4 Points**)
 
 ```{r}
-# Your code here...
+winestats <- function (wtype) {
+  titlew <- paste("Summary Statistics -", wtype, "Wine")
+  frmlaw <- quality + pH + residual.sugar ~ 
+  (`N` = length) + Mean + (`St. Dev.` = sd) + (`Min` = min) + (`Max` = max)
+datasummary(frmlaw, 
+            data= winez[winez$color==wtype,], 
+            title= titlew, 
+            fmt = fmt_significant(2))
+}
+
+winestats("Red")
+winestats("White")
 ```
 
 `r q <- q+1; letters[q]`. Create a new column in both datasets called `red`.  For red wines, this should be equal to one and for white wine this should be equal to zero. (**1 Point**)
 
 ```{r}
-# Your code here...
+#I already did what your about to ask me to do, but i'll do it this way too.
+winez$red <- ifelse(winez$color=="Red", 1, 0) #Add my categorical variable to winez
+reds$red <- 1
+whites$red <- 0
 ```
 
 `r q <- q+1; letters[q]`. Merge the two datasets and call the result `wine`. (**2 Points**)
 
 ```{r}
-# Your code here...
+wine <- rbind(reds,whites) #and then there were two
 ```
 
 `r q <- q+1; letters[q]`. Plot the average quality by alcohol content^[For this question, round alcohol content to the nearest tenths place.] for both wine types on the same set of axes.  Include a legend, axis labels, etc.  What does this plot suggest to you? (**4 Points**)
 
 ```{r}
-# Your code here...
+library(scales)
+plot(x = round(wine$alcohol, 1), 
+     y = wine$quality,
+     xlab = "Alcohol Content",
+     ylab = "Quality Rating",
+     pch = 16,
+     col = ifelse(wine$red==1, alpha("red",0.3), alpha("green",0.1)),
+     las = 1,
+     main = "Quality Rating by Alcohol Content",
+     bty = "l"
+     )
+legend("bottomright", 
+       legend = c("White Wine","Red Wine"),
+       bty = "o",
+       col = c("green","red"),
+       pch = 16,
+       cex = 0.75)
 ```
 
-*Your answer here...*
+First, there are far more observations of white wine than red wine. Roughly triple so I tried to compensate by making the alpha for red wine triple the alpha for red wine, but red wine appears to still get lost with the white wine wine. In spite of this, I would say that there is a modest positive correlation between alcohol content and the quality rating and there may be more variance in the red wine and white. 
 
 `r q <- q+1; letters[q]`. The `pH` variable measures the acidity of the wine.  The pH scale runs from 0 to 14 with lower numbers being more acidic and 7 being neutral (e.g. [water](https://www.qmul.ac.uk/chesswatch/media/chesswatch/ph-range-chalk-rivers.jpg){preview-link=true}).  Convert `pH` into a variable called `acidity` where higher numbers mean higher acidity. (**2 Points**)
 
+
+Given that $pH + pOH = 14$ we can just convert $pH$ to $pOH$ for "acidity".
+
+
 ```{r}
-# Your code here...
+wine$acidity <- 14 - wine$pH
 ```
 
 `r q <- q+1; letters[q]`. Estimate the following model for red and white wines separately, and present the parameters in a table. (**2 Points**)
@@ -187,14 +254,127 @@ The quality of wine is highly subjective.  In any case, having a wine that is hi
 $$Q_i = \beta_0 + \beta_1 \text{Alcohol}_i + \beta_2\text{Acidity}_i + \beta_3 \text{Sugar}_i + \epsilon_i$$
 
 ```{r, warning=FALSE, message=FALSE}
-# Your code here...
+reg_wine <- function(wtype){
+  reg <- lm(quality ~ alcohol + acidity + residual.sugar,
+            data = wine[wine$red==wtype,])
+  return(reg)
+}
+wregz <- list(`White Wine` = reg_wine(0),`Red Wine` = reg_wine(1))
+coefz <- list("(Intercept)" = "Constant",
+              "alcohol" = "EtOH Content",
+              "acidity" = "pOH",
+              "residual.sugar" = "Sugar")
+gofz <- c("nobs", "r.squared")
+modelsummary(wregz,
+             title = "Influences on Quality Ratings",
+             estimate = "{estimate}{stars}",
+             coef_map = coefz,
+             gof_map = gofz)
 ```
 
 `r q <- q+1; letters[q]`. Discuss the similarities and differences in the model outputs. How would you interpret the coefficients? *Hint*: what type of variable is quality? (**6 Points**)
 
-*Your answer here...*
+Using OLS here was not very satisfying as $Q_i$ is ordinal, however it seems like a $1\%$ increase in ABV increases the average quality rating by $0.352$ and $0.387$ for white and red wines, respectively. It appears that acidity is undesirable in a white wine with an average impact of an increase in $pOH$ of $1$ to the quality rating being $-0.389$ however it appears to be very desirable in a red wine with an average increase of $0.861$. Residual sugar appears to have a slight positive effect on quality rating with a white wine, however while sugar appears to have a negative effect on the quality of a red wine, we fail to reject $H_0 : \alpha=0.1$.
+
+As I said, OLS didn't feel right here since $Q_i$ is ordinal. Since it's going to bother me, I'm going to try to use a probit regression.
+
+The quality ratings seem to somewhat follow a normal distribution with some skew to the left so probit seems reasonable.
+
+```{r}
+hist(wine$quality,
+     xlab = "Quality Rating",
+     main = "Distribution of Quality Ratings",
+     breaks = 6)
+```
 
 
+$$
+P(Q_i \leq j | X) = \Phi(\beta_0 + 
+\beta_1 \text{Alcohol}_i + 
+\beta_2 \text{Acidity}_i +
+\beta_3 \text{Sugar}_i -
+\tau_j)
+$$
 
+$P(Q_i \leq j | X)$ :
+The probability that the actual quality rating $Q_i$ is less than or equal to some quality rating $j$ given $X:X=\{\text{Alcohol},\text{Acidity},\text{Sugar}\}$
 
+$\Phi$:
+The cumulative distribution function. When applied to the calculated quality score it arrives at a probability that a $\text{Wine}_i$ will achieve a given quality rating $j$.
 
+$\beta_1$:
+For white wine a $1\%$ increase in ABV will afford a $0.479$ increase to the calculated quality score with a $0.600$ for red wines.
+
+$\beta_2$:
+For white wine an increase in $pOH$ of $1$ will result in an impact to the calculated quality score of $-0.532$ meaning that acidity is likely undesirable in white wines, however acidity is likely desirable in red wines with an increase of $1.351$. 
+
+$\beta_3$:
+White wine sees a modest increase of $0.032$ if sugar (units of measure are unclear) increases by $1$, while red wine sees an impact of $-0.022$, similar to OLS sugar appears to be statistically insignificant with red wine.
+
+$\tau_j$
+These are the impacts of the intercepts for a given $j$. The intercepts are subtracted from $\beta_i X$ to produce the calculated quality score to which the CDF will apply.
+
+```{r, warning=FALSE, message=FALSE}
+library(MASS)
+prob_red <- polr(as.ordered(quality) ~ alcohol + acidity + residual.sugar,
+            data = wine[wine$red==1,], method = "probit")
+prob_white <- polr(as.ordered(quality) ~ alcohol + acidity + residual.sugar,
+            data = wine[wine$red==0,], method = "probit")
+probz <- list(`White Wine` = prob_white, `Red Wine` = prob_red)
+coefz_p <- list("alcohol" = "EtOH Content",
+                "acidity" = "pOH",
+                "residual.sugar" = "Sugar")
+intz_p <- list("3|4" = "3|4",
+               "4|5" = "4|5",
+               "5|6" = "5|6",
+               "6|7" = "6|7",
+               "7|8" = "7|8")
+modelsummary(probz,
+             title = "Probit Model for Wine Quality - Coefficients",
+             coef_map = coefz_p)
+modelsummary(probz,
+             title = "Probit Model for Wine Quality - Intercepts",
+             coef_map = intz_p,
+             gof_map = "")
+```
+
+How do the predictions compare?
+
+```{r}
+
+wine$OLSPred[wine$red==0] <- round(predict(wregz$`White Wine`), 0)
+wine$OLSPred[wine$red==1] <- round(predict(wregz$`Red Wine`), 0)
+wine$OLSVar <- abs(wine$quality-wine$OLSPred)
+wine$ProbitPred[wine$red==0] <- predict(probz$`White Wine`)
+wine$ProbitPred[wine$red==1] <- predict(probz$`Red Wine`)
+wine$ProbitVar <- abs(wine$quality-wine$ProbitPred)
+datasummary(OLSVar + ProbitVar
+            ~ (`N` = length)
+            + Mean
+            + (`St. Dev.` = sd)
+            + (`Min` = min)
+            + (`Max` = max),
+            data = wine,
+            fmt = fmt_significant(2),
+            title = "All Wines")
+datasummary(OLSVar + ProbitVar
+            ~ (`N` = length)
+            + Mean
+            + (`St. Dev.` = sd)
+            + (`Min` = min)
+            + (`Max` = max),
+            data = wine[wine$red==0,],
+            fmt = fmt_significant(2),
+            title = "White Wines")
+datasummary(OLSVar + ProbitVar
+            ~ (`N` = length)
+            + Mean
+            + (`St. Dev.` = sd)
+            + (`Min` = min)
+            + (`Max` = max),
+            data = wine[wine$red==1,],
+            fmt = fmt_significant(2),
+            title = "Red Wines")
+```
+
+It appears that OLS did a better job of accurately predicting the quality rating than probit looking at the average variance between the predicted and observed ratings. So my doubts about OLS seem to be misplaced. It was fun going outside the sandbox nevertheless!
