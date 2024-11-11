@@ -219,14 +219,16 @@ wine <- rbind(reds,whites) #and then there were two
 
 ```{r}
 library(scales)
-plot(x = round(wine$alcohol, 1), 
-     y = wine$quality,
+
+agg_etoh_rating <- aggregate(x = list(quality = wine$quality), by=list(alcohol = wine$alcohol, red = wine$red), FUN = mean)
+plot(x = round(agg_etoh_rating$alcohol, 1), 
+     y = agg_etoh_rating$quality,
      xlab = "Alcohol Content",
-     ylab = "Quality Rating",
-     pch = 16,
-     col = ifelse(wine$red==1, alpha("red",0.3), alpha("green",0.1)),
+     ylab = "Average Quality Rating",
+     pch = 20,
+     col = ifelse(agg_etoh_rating$red==1, alpha("red",1), alpha("green",1)),
      las = 1,
-     main = "Quality Rating by Alcohol Content",
+     main = "Average Quality Rating by Alcohol Content",
      bty = "l"
      )
 legend("bottomright", 
@@ -237,7 +239,7 @@ legend("bottomright",
        cex = 0.75)
 ```
 
-First, there are far more observations of white wine than red wine. Roughly triple so I tried to compensate by making the alpha for red wine triple the alpha for red wine, but red wine appears to still get lost with the white wine wine. In spite of this, I would say that there is a modest positive correlation between alcohol content and the quality rating and there may be more variance in the red wine and white. 
+There appears to be a moderate positive correlation ($r=0.653$) between quality and alcohol content.
 
 `r q <- q+1; letters[q]`. The `pH` variable measures the acidity of the wine.  The pH scale runs from 0 to 14 with lower numbers being more acidic and 7 being neutral (e.g. [water](https://www.qmul.ac.uk/chesswatch/media/chesswatch/ph-range-chalk-rivers.jpg){preview-link=true}).  Convert `pH` into a variable called `acidity` where higher numbers mean higher acidity. (**2 Points**)
 
@@ -259,6 +261,8 @@ reg_wine <- function(wtype){
             data = wine[wine$red==wtype,])
   return(reg)
 }
+
+
 wregz <- list(`White Wine` = reg_wine(0),`Red Wine` = reg_wine(1))
 coefz <- list("(Intercept)" = "Constant",
               "alcohol" = "EtOH Content",
@@ -377,4 +381,5 @@ datasummary(OLSVar + ProbitVar
             title = "Red Wines")
 ```
 
-It appears that OLS did a better job of accurately predicting the quality rating than probit looking at the average variance between the predicted and observed ratings. So my doubts about OLS seem to be misplaced. It was fun going outside the sandbox nevertheless!
+It appears that OLS did a better job of accurately predicting the quality rating than probit looking at the average variance between the predicted and observed ratings. So my doubts about OLS seem to be misplaced. It was fun going outside the sandbox nevertheless! 
+
