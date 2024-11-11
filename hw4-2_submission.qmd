@@ -1,0 +1,290 @@
+---
+title: "Homework 4.2"
+author: "David Sneddon"
+institute: "Old Dominion University"
+format: 
+  html:
+    theme: lux # Check here for more themes: https://quarto.org/docs/output-formats/html-themes.html
+    code-tools: true
+    code-fold: true
+    code-summary: "Code"
+    code-copy: hover
+    link-external-newwindow: true
+    tbl-cap-location: top
+    fig-cap-location: bottom
+
+self-contained: true
+editor: source
+---
+
+```{r setup, include=FALSE}
+# DO NOT EDIT THIS
+
+knitr::opts_chunk$set(fig.align = 'center')
+knitr::opts_chunk$set(out.width = '90%')
+knitr::opts_chunk$set(results = 'hold')
+knitr::opts_chunk$set(fig.show = 'hold')
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+par(mar = c(4.1, 4.1, 1.1, 4.1))
+
+hooks = knitr::knit_hooks$get()
+hook_foldable = function(type) {
+  force(type)
+  function(x, options) {
+    res = hooks[[type]](x, options)
+    
+    if (is.na(as.logical(options[[paste0("fold.", type)]]))) {
+      
+      res
+    } else if (isFALSE(as.logical(options[[paste0("fold.", type)]]))){
+      
+      # return(res)
+      
+      paste0(
+      "<details open><summary>", gsub("^p", "P", gsub("^o", "O", type)), "</summary>\n\n",
+      res,
+      "\n\n</details>"
+      )
+    } else {
+      
+      paste0(
+      "<details><summary>", gsub("^p", "P", gsub("^o", "O", type)), "</summary>\n\n",
+      res,
+      "\n\n</details>"
+      )
+    }
+  }
+}
+
+knitr::knit_hooks$set(
+  output = hook_foldable("output"),
+  plot = hook_foldable("plot")
+)
+knitr::opts_chunk$set(fold.output=TRUE)
+knitr::opts_chunk$set(fold.plot=TRUE)
+
+Q <- 0
+```
+
+## Question `r Q <- Q+1; Q`
+
+```{r include=FALSE}
+q <- 0
+```
+
+In the early 2000s, two economists ran an experiment where they sent fictitious resumes in response to job ads in Chicago and Boston. The authors randomly varied the qualities of the fictitious resumes as well as the applicants' names.  Some resumes were randomly given stereotypically white-sounding names (Emily, Brendan) and others African-American-sounding names (Lakisha, Jamal).^[The process of determining which names are stereotypically black/white is described in detail in [the published draft](https://www.aeaweb.org/articles?id=10.1257/0002828042002561).] Intrigued students may read [a non-technical summary of the paper here.](https://www.ala.org/ala/hrdr/placementservice/hrpractice2.pdf)^[In addition, [similar research on ban-the-box](https://insights.grcglobalgroup.com/ban-the-box-an-effective-component-of-reintegration-efforts/) finds that these policies *increase* racial discrimination.]
+
+In this part of the homework, you are going to investigate whether employers engage in racial discrimination when sifting through resumes using data collected by these researchers ([data](https://vincentarelbundock.github.io/Rdatasets/csv/AER/ResumeNames.csv); [documentation](https://vincentarelbundock.github.io/Rdatasets/doc/AER/ResumeNames.html)).
+
+`r q <- q+1; letters[q]`. Read the data into a data frame called `resume`. (**2 Points**)
+
+```{r}
+resume <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/AER/ResumeNames.csv")
+```
+
+
+`r q <- q+1; letters[q]`. Create the following binary variables (**4 Points**):
+    - A variable called `chicago` that is equal to one if `city` is equal to "chicago" and zero otherwise.
+    - A variable called `female` that is equal to one if `gender` is equal to "female" and zero otherwise.
+    - A variable called `black` that is equal to one if `ethnicity` is equal to "afam" and zero otherwise.
+    - A variable called `callback` equal to one if `call` is equal to "yes" and zero otherwise.
+
+```{r}
+resume$chicago <- ifelse(resume$city == "chicago", 1, 0)
+resume$female <- ifelse(resume$gender == "female", 1, 0)
+resume$black <- ifelse(resume$ethnicity == "afam", 1, 0)
+resume$callback <- ifelse(resume$call == "yes", 1, 0)
+```
+
+
+`r q <- q+1; letters[q]`. Estimate and display the coefficients (using `summary()` is fine) of the following regression (**2 Points**):
+
+$$\begin{aligned}\text{Callback}_i = \ &\beta_0 + \beta_1 \text{Jobs}_i + \beta_2 \text{Experience}_i + \beta_3 \text{Female}_i \\&+ \beta_4 \text{Chicago}_i + \beta_5 \text{Black}_i+ \epsilon_i\end{aligned}$$
+
+```{r}
+cbfrmla <- callback ~ jobs + experience + female + chicago + black
+callbacklm <- lm(cbfrmla, resume)
+summary(callbacklm)
+```
+
+`r q <- q+1; letters[q]`. Interpret each coefficient in words. (**4 Points**)
+
+$\beta_0$ : The expected chance of a callback for an applicant with no prior jobs, no work experience, a male, not from Chicago, and not African American is $11.2\%$. \
+$\beta_1$ : Each additional job on the resume results in a $0.09\%$ negative impact to the chance of a callback. \
+$\beta_2$ : Each additional year of experience on the resume results in a $0.03\%$ greater chance of receiving a callback. \
+$\beta_3$ : Females have a $1.75\%$ greater chance of receiving a callback. \
+$\beta_4$ : Chicago residents are $3.71\%$ less likely to receive a callback. \
+$\beta_5$ : African Americans are $3.22\%$ less likely to receive a callback.
+
+
+
+`r q <- q+1; letters[q]`. Estimate and display the coefficients (using `summary()` is fine) of the following regression (**2 Points**):
+
+$$\begin{aligned}\text{Callback}_i = \ &\beta_0 + \beta_1 \text{Jobs}_i + \beta_2 \text{Experience}_i + \beta_3 \text{Female}_i \\&+ \beta_4 \text{Chicago}_i + \beta_5 \text{Black}_i + \beta_6 (\text{Chicago}_i \times \text{Black}_i)+ \epsilon_i\end{aligned}$$
+
+```{r}
+cbfrmla <- callback ~ jobs + experience + female + chicago + black + chicago * black
+callbacklm <- lm(cbfrmla, resume)
+summary(callbacklm)
+```
+
+`r q <- q+1; letters[q]`. Interpret the estimates for $\beta_4$, $\beta_5$, and $\beta_6$ from the previous regression. (**4 Points**)
+
+$\beta_4$ : Chicago residents are $4.35\%$ less likely to receive a callback. \
+$\beta_5$ : African Americans are $3.94\%$ less likely to receive a callback. \
+$\beta_6$ : African Americans from Chicago are $1.29\%$ less likely to receive a callback, however we fail to reject $H_0 : \alpha=0.10$. 
+
+`r q <- q+1; letters[q]`. Re-estimate the regression once using data only from Chicago, and another using data only from Boston.  Report the coefficients using `modelsummary`.  Discuss any coefficients that result in different conclusions for the two cities. (**4 Points**)
+
+
+```{r, warning=F, message = F}
+resume$city_ <- as.factor(resume$city)
+resume$city_ <- relevel(resume$city_, ref="boston")
+callbacklm_chicago <- lm(callback ~ jobs + experience + female + city_ + black + city_ * black, resume)
+resume$city_ <- relevel(resume$city_, ref="chicago")
+callbacklm_boston <- lm(callback ~ jobs + experience + female + city_ + black + city_ * black, resume)
+callbacklm <- list(callbacklm_chicago, callbacklm_boston)
+library("modelsummary")
+options("modelsummary_factory_default" = "kableExtra")
+names(callbacklm) <- c("Chicago", "Boston")
+coefz <- list("(Intercept)" = "Constant",
+              "jobs" = "Num. Prior Jobs",
+              "experience" = "Years of Work Experience",
+              "female" = "Female",
+              "city_chicago" = "Chicago Resident",
+              "city_boston" = "Boston Resident",
+              "black" = "African American",
+              "city_chicago:black" = "Af. Am. from Chicago",
+              "city_boston:black" = "Af. Am. from Boston"
+              )
+gofz <- c("nobs", "r.squared")
+modelsummary(callbacklm,
+             fmt_significant = 2,
+             coef_map = coefz,
+             gof_map = gofz,
+             stars = TRUE,
+             title = "OLS for Resume Callbacks"
+)
+             
+```
+When the treatment group for $\text{City}$ is Chicago: \
+
+$\beta_0$ : \
+When the treatment group for $\text{City}$ is Chicago: \
+
+The expected chance of a callback for an applicant with no prior jobs, no work experience, a male, not from Chicago, and not African American is $11.6\%$. \
+
+When the treatment group for $\text{City}$ is Boston: \
+
+The expected chance of a callback for an applicant with no prior jobs, no work experience, a male, not from Boston, and not African American is $7.2\%$. \
+$\beta_4$ : As $\text{City}$ is binary $\beta_4$ for both Chicago and Boston are opposites.\
+$\beta_5$ : In Chicago there is a lesser chance, by $3.9\%$ with a high degree of certainty at $\alpha=0.001$ that an African American will receive a callback whereas in Boston the chance drops by $2.6%$ with a lesser degree of significance at $\alpha = 0.05$. \
+$\beta_6$ : Being either an African American from Chicago or Boston affects the chances by $\pm1.3\%$ however this is statistically insignificant and we fail to reject $H_0:\alpha=0.1$.
+
+
+
+
+
+
+
+
+
+
+
+## Question `r Q <- Q+1; Q`
+
+```{r include=FALSE}
+q <- 0
+```
+
+For this question, you will explore a sample of crash records ([data](https://vincentarelbundock.github.io/Rdatasets/csv/DAAG/nassCDS.csv); [documentation](https://vincentarelbundock.github.io/Rdatasets/doc/DAAG/nassCDS.html)) reported by police across the country from 1997-2002. Each record in these data contains information about the individual and vehicle involved in the crash, as well as some information about the circumstances and outcomes of the crash.
+
+`r q <- q+1; letters[q]`. As a first step, read the data into a data.frame called `crash`. Subset the data to include only drivers. (**2 Points**)
+
+```{r}
+crash <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/DAAG/nassCDS.csv")
+crash <- crash[crash$occRole=="driver",]
+```
+
+`r q <- q+1; letters[q]`. Review the data documentation, especially for the variable `injSeverity`. Remove observations where `injSeverity` is either missing (`NA`), `unknown`, or `prior death`. Then, create a new variable called `y` that is equal to one if the individual sustained an incapacitating injury or worse, and zero otherwise. This variable will represent the crash causing a substantial injury. (**2 Points**)
+
+```{r}
+crash <- crash[crash$injSeverity==0:4 
+               & !is.na(crash$injSeverity),]
+crash$y <- ifelse(crash$injSeverity >= 3, 1, 0)
+```
+
+`r q <- q+1; letters[q]`. There is another variable in the dataset called `dvcat`, which estimates impact speeds in km/h. Convert this to a `factor` variable, and re-level it such that the reference level is the slowest impact speed. (**2 Points**)
+
+```{r}
+crash$dvcat_ <- as.factor(crash$dvcat)
+crash$dvcat_ <- relevel(crash$dvcat_,ref = min(crash$dvcat))
+```
+
+`r q <- q+1; letters[q]`. Re-define the seatbelt and airbag variables to binary indicators. (**2 Points**)
+
+```{r}
+crash$seatbelt <- ifelse(crash$seatbelt=="belted", 1, 0)
+crash$airbag <- ifelse(crash$airbag=="airbag", 1, 0)
+```
+
+`r q <- q+1; letters[q]`. Estimate a basic regression where major injury is explained by the estimated impact speed, age of the occupant, and year of the vehicle. Interpret the coefficients of the model. *Note*: you do not need to interpret the coefficients for impact speed. Rather, discuss the pattern of the coefficients for that variable. (**4 Points**)
+
+```{r}
+crashreg <- lm(y ~ dvcat_ + ageOFocc + yearVeh, crash, na.action = na.exclude)
+summary(crashreg)
+```
+
+`Intercept`: Not meaningful, the year of the vehicle would have to be 0, which is impossible.
+
+`dvcat`: Increased speed has makes the driver more prone to serious injury.
+
+`aceOFocc`: Each additional year of age causes a $0.29\%$ increase in the likelihood of serious injury at a high level of significance where $\alpha = 0.001$.
+
+`yearVeh`: Each successive model year decreases the chance for serious injury by $0.32\%$. 
+
+
+
+
+
+`r q <- q+1; letters[q]`. Re-estimate the model above, but include the variables for the vehicle's safety features (`seatbelt` and `airbag`). What changes about the model? Why do you think you see these changes? (**4 Points**)
+
+```{r}
+crashreg <- lm(y ~ dvcat_ + ageOFocc + yearVeh + seatbelt + airbag, crash, na.action = na.exclude)
+summary(crashreg)
+```
+
+We now fail to reject the null hypothesis for the `yearVeh` at $\alpha=0.1$. This is likely because `seatbelt` and `airbag` are collinear with the age of the vehicle. There is omitted variable bias before adding seatbelt and airbag to the model. This is especially the case with seatbelts as there is a great deal of evidence that seatbelts reduce the chance of a severe injury by $18.0\%$ as $\alpha=0.001$. There is also some evidence that airbags reduce the chance of severe injury by $4.2\%$ where $\alpha=0.1$
+
+`r q <- q+1; letters[q]`. Add the variable `deploy` to the model, and output the coefficients. What does this variable measure? How does this variable change the interpretation of the model? (**4 Points**)
+
+```{r}
+crashreg <- lm(y ~ dvcat_ + ageOFocc + yearVeh + seatbelt + airbag + deploy, crash, na.action = na.exclude)
+summary(crashreg)
+```
+
+`deploy` indicates whether or not an airbag deployed whereas airbag indicates whether or not an airbag is equipped. Including this variable increased the level of significance for `airbag`, however `deploy` is likely collinear to `dvcat` higher speed crashes are more likely to involve deployed airbags. 
+
+`r q <- q+1; letters[q]`. Finally, in addition to what is already in the model, incorporate an interaction between `deploy` and `seatbelt`. Again, how does the interpretation of the model change? (**4 Points**)
+
+```{r}
+crashreg <- lm(y ~ dvcat_ + ageOFocc + yearVeh + seatbelt + airbag + deploy + seatbelt * deploy, crash, na.action = na.exclude)
+summary(crashreg)
+```
+
+We now fail to reject the null hypothesis for `deploy` at $\alpha=0.1$. There is now evidence that wearing a seatbelt with a deployed airbag increases the chance of serious injury by $5.5\%$ with $\alpha=0.1$. This can be interpreted to mean that there isn't evidence that a deployed airbag makes a difference on injury outcomes. However this still doesn't tell us the efficacy of an airbag in reducing injury. `deploy` is collinear with `dvcat` an interaction between them might be helpful.
+
+```{r}
+crashreg <- lm(y ~ dvcat_ + ageOFocc + yearVeh + seatbelt + airbag + deploy + seatbelt * deploy + dvcat_ * deploy, crash, na.action = na.exclude)
+summary(crashreg)
+
+```
+
+`r q <- q+1; letters[q]`. What, if anything, surprised you about the results in the analysis above? (**4 Points**)
+
+
+I was surprised that adding `deploy` increased the level of significance for `airbag`. I suspect that deploy is multicollinear with both `airbag` and `dvcat`. I was even more surprised when I interacted `dvcat` with `deploy`. I knew that increased speed would make airbags more likely to deploy and that speed more than anything increases the likelihood of an injury. I am, after all, a auto liability claims adjuster. I also know that airbags can cause injuries themselves. Nevertheless, I did expect deployed airbags to have better outcomes in an accident with the same conditions where they didn't deploy. However, there doesn't appear to be evidence for this as we fail to reject the null hypothesis at any speed. The statistical significance of an airbag being equipped seems to be robust nevertheless, however there may be omitted variables for safety features that came standard alongside airbags. 
+
+
